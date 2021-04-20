@@ -1,0 +1,18 @@
+<div class="search__bar">
+
+    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+        <mat-label>Search</mat-label>
+        <input id="search" matInput placeholder="eg. Stuff of Life">
+    </mat-form-field>
+    <section class="checked">
+        <mat-checkbox [checked]="true" >Podcasts</mat-checkbox>
+        <mat-checkbox >Episodes</mat-checkbox>
+    </section>
+    
+</div>
+<div class="pods">
+    <div *ngFor ="let pod of podcasts" class="podcast">
+        <img src="{{pod.image}}" alt="">
+        <h2>{{pod.title}}</h2>
+    </div>
+</div>

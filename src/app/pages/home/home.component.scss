@@ -1,0 +1,26 @@
+
+p{
+    font-family: mr-eaves-sans,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+div.content{
+    display: fles;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+    div.podcast{
+    width: 20%;
+    margin: 1%;
+    img{
+        width: 100%;
+    }
+    h2{
+        font-family: highgate, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+}
