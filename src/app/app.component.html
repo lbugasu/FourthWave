@@ -1,8 +1,14 @@
 <mat-toolbar>
-  <span><h1>Eycho</h1></span>
+  
+     <button mat-mini-fab aria-label="Menu toggle button"
+     (click)="drawer.toggle()"
+     >
+    	<mat-icon>menu</mat-icon>
+  </button>
+  <div class="eycho"><h1>Eycho</h1></div>
 </mat-toolbar>
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened>
+  <mat-drawer  #drawer mode="side" opened>
     
     <div class="menu__item">
       <button mat-button (click)="navigate('')">
@@ -43,4 +49,4 @@
   
   </mat-drawer-content>
 </mat-drawer-container>
-
+<app-player></app-player>

@@ -6,11 +6,11 @@ import { PodcastPreviewComponent } from './podcast-preview/podcast-preview.compo
 
 @NgModule({
   declarations: [
-    PodcastPreviewComponent
+    PodcastPreviewComponent,
   ],
   imports: [
     CommonModule
   ], 
-  exports:[PodcastPreviewComponent]
+  exports:[PodcastPreviewComponent,]
 })
 export class ComponentsModule { }

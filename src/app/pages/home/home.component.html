@@ -1,4 +1,30 @@
+<div class="body">
+    <div class="menu">
+        
+        
+        
+    </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>list</mat-icon>
+                <span>Compact list</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>view_list</mat-icon>
+                <span>List</span>
+            </button>
+            <button mat-menu-item>
+                	<mat-icon>apps</mat-icon>
+                <span>Tiled</span>
+            </button>
+            
+        </mat-menu>
+</div>
 <div class="content">
+    
     <div *ngFor="let podcast of podcasts" class="podcast"
     >
     <a [routerLink]="['/podcast', podcast.slug]"  routerLinkActive="active" [state]=podcast>

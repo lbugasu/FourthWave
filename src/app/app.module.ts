@@ -1,3 +1,4 @@
+import { ComponentsModule } from './components/components.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -10,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './shared/graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
+import { SharedModule } from './shared/shared.module';
+import { PlayerComponent } from './shared/player/player.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,8 @@ import { RouterModule } from "@angular/router";
     RouterModule,
     GraphQLModule,
     HttpClientModule,
+    ComponentsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],

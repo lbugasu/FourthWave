@@ -6,11 +6,17 @@ import { PodcastComponent } from './podcast/podcast.component';
 import { ComponentsModule } from '../components/components.module';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from "@angular/router";
-
-
+import { DiscoverComponent } from "./discover/discover.component";
+import { YourLibraryComponent } from './your-library/your-library.component';
 
 @NgModule({
-  declarations: [HomeComponent, PodcastComponent, SearchComponent],
+  declarations: [
+    HomeComponent,
+    PodcastComponent,
+    SearchComponent,
+    DiscoverComponent,
+    YourLibraryComponent,
+  ],
   imports: [CommonModule, Material, RouterModule, ComponentsModule],
   exports: [HomeComponent, PodcastComponent],
 })

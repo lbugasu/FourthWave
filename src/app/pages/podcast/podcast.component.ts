@@ -4,6 +4,7 @@ import { Podcast } from "src/app/shared/Models/Podcast";
 import { Location } from "@angular/common";
 import { tap, pluck, first } from 'rxjs/operators'
 import { Episode } from "src/app/shared/Models/Episode";
+import { Howl, Howler } from "howler";
 
 @Component({
   selector: "app-podcast",
@@ -13,7 +14,7 @@ import { Episode } from "src/app/shared/Models/Episode";
 export class PodcastComponent implements OnInit {
   podcast!: Podcast;
   slug!: string;
-  episodes:Episode[] = []
+  episodes: Episode[] = [];
   constructor(
     private podcastService: PodcastService,
     private location: Location
@@ -38,22 +39,56 @@ export class PodcastComponent implements OnInit {
       console.log(this.location.getState());
       this.podcast = history.state;
       this.slug = this.podcast.slug;
-      this.getPodcastEpisodes(this.slug)
+      this.getPodcastEpisodes(this.slug);
     }
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   getPodcastEpisodes(slug: string) {
-    const req$ = this.podcastService.getEpisodes(slug).valueChanges
+    const req$ = this.podcastService.getEpisodes(slug).valueChanges;
     req$.pipe(pluck("data", "getPodcastEpisodes")).subscribe((episodes) => {
       //@ts-ignore
-      this.episodes = episodes
-    })
+      this.episodes = episodes;
+      const episode = (this.episodes[0]);
+      
+    });
   }
   getNiceDate(date: Date) {
     return new Date(date).toDateString();
+  }
+  getNiceDuration(duration: string) {
+    if (duration.split(':').length == 1) {
+      return new Date(+duration * 1000).toISOString().substr(11, 8);
+    }
+    return duration
+  }
+
+  play(episode: Episode) {
+    console.log('playing')
+    const sound = new Howl({
+      html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
+      src: [episode.sourceUrl],
+    });
+    // console.log(sound)
+    sound.play();
+    Howler.volume(0.5);
+    
+    // console.log(episode.sourceUrl)
+    // const audioEl:any = document.querySelector('audio')
+    // audioEl.src = episode.sourceUrl
+
+    // audioEl.play()
+  }
+  toHHMMSS (secs: string) {
+    var sec_num = parseInt(secs, 10);
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor(sec_num / 60) % 60;
+    var seconds = sec_num % 60;
+
+    return [hours, minutes, seconds]
+      .map((v) => (v < 10 ? "0" + v : v))
+      .filter((v, i) => v !== "00" || i > 0)
+      .join(":");
   }
 }

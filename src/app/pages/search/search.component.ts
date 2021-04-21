@@ -41,7 +41,6 @@ export class SearchComponent implements OnInit {
       pluck("target", "value"),
       debounceTime(200),
       distinctUntilChanged(),
-
       switchMap((value) => {
         console.log(value);
         //@ts-ignore

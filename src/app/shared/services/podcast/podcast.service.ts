@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { Episode } from '../../Models/Episode';
 
 const GET_PODCASTS_QUERY = gql`
   query {
@@ -68,9 +69,9 @@ export class PodcastService {
   }
 
   getEpisodes(slug: string) {
-    return this.apollo.watchQuery({
+    return this.apollo.watchQuery<Episode[]>({
       query: PODCAST_EPISODES_QUERY,
       variables:  {  slug: slug  },
-    });;
+    });
   }
 }
