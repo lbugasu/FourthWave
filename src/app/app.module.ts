@@ -9,22 +9,22 @@ import { PagesModule } from './pages/pages.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './shared/graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
-  declarations: [
-    AppComponent, 
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     PagesModule,
     ReactiveFormsModule,
     Material,
+    RouterModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

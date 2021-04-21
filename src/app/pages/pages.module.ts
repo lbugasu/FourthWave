@@ -5,20 +5,13 @@ import { Material } from 'src/libs';
 import { PodcastComponent } from './podcast/podcast.component';
 import { ComponentsModule } from '../components/components.module';
 import { SearchComponent } from './search/search.component';
+import { RouterModule } from "@angular/router";
 
 
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    PodcastComponent,
-    SearchComponent
-  ],
-  imports: [
-    CommonModule,
-    Material, 
-    ComponentsModule,
-  ], 
-  exports:[HomeComponent, PodcastComponent]
+  declarations: [HomeComponent, PodcastComponent, SearchComponent],
+  imports: [CommonModule, Material, RouterModule, ComponentsModule],
+  exports: [HomeComponent, PodcastComponent],
 })
-export class PagesModule { }
+export class PagesModule {}

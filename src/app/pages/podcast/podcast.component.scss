@@ -1,0 +1,65 @@
+h2, h3, h4, p{
+    font-family: highgate, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+div.header{
+    display: flex;
+    // height: 50%;
+    padding: 2.5%;
+
+    mat-card.podcast__image{
+        height: 100%;
+        width: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 100%;
+        }
+    }
+    div.podcast__data{
+        width: 75%;
+        margin-left: 2.5%;
+        div.container{
+            display: table-cell;
+            .mat-button-base {
+                margin: 24pt 24pt 24pt 0;
+            }
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            mat-icon{
+                font-size: 36pt;
+            }
+            
+        }
+        
+    }
+}
+div.content{
+    padding-top: 1.5%;
+    div.single__episode{
+        div.play{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 5%;
+            height: 100%;
+        }
+        div.episode__details{
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 95%;
+            h3{
+                line-height: 0.5em;
+                font-weight: 600;
+            }
+        }
+        padding: 1% 2.5% 1% 2.5%;
+
+    }
+
+}

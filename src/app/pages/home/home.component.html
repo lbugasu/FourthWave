@@ -1,7 +1,9 @@
 <div class="content">
-    <div *ngFor="let pod of podcasts" class="podcast">
-        <img src="{{pod.image}}" alt="">
-        <h2>{{pod.title}}</h2>
-        
+    <div *ngFor="let podcast of podcasts" class="podcast"
+    >
+    <a [routerLink]="['/podcast', podcast.slug]"  routerLinkActive="active" [state]=podcast>
+    <img src="{{podcast.image}}" alt="">
+        <h2>{{podcast.title}}</h2>
+    </a>
     </div>
 </div>

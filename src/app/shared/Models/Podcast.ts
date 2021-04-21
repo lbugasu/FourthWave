@@ -1,25 +1,25 @@
 import { Episode } from "./Episode";
 
-export class Podcast{
+export class Podcast {
+  public title!: string;
 
-    public title!: string;
+  public publisher!: string;
 
-    public publisher!: string;
+  public rssFeed!: string;
 
-    public rssFeed!: string;
+  public link!: string;
 
-    public link!: string;
+  public image!: string;
 
-    public image!: string;
+  public description!: string;
 
-    public description!: string;
+  public lastRssBuildDate!: Date;
 
-    public lastRssBuildDate!: Date;
+  public slug!: string;
 
-    public slug!: string;
+  public categories!: string[];
 
-    public categories!: string[];
+  public episodes!: Episode[];
 
-    public episodes!: Episode[];
-    
+  public palette!: string[];
 }

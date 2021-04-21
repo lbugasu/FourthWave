@@ -13,17 +13,19 @@ import { ajax } from 'rxjs/ajax';
 import { SearchService } from 'src/app/shared/services/search/search.service';
 import { Podcast } from 'src/app/shared/Models/Podcast';
 import { ApolloQueryResult } from '@apollo/client/core';
+import { Episode } from "src/app/shared/Models/Episode";
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
   options: FormGroup;
   hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto');
+  floatLabelControl = new FormControl("auto");
 
   podcasts: Podcast[] = [];
+  episodes: Episode[] = [];
   constructor(private fb: FormBuilder, private searchService: SearchService) {
     this.options = this.fb.group({
       hideRequired: this.hideRequiredControl,
@@ -32,11 +34,11 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const inputElement = document.getElementById('search') || document;
-    const input$ = fromEvent(inputElement, 'keyup');
+    const inputElement = document.getElementById("search") || document;
+    const input$ = fromEvent(inputElement, "keyup");
 
     const search$ = input$.pipe(
-      pluck('target', 'value'),
+      pluck("target", "value"),
       debounceTime(200),
       distinctUntilChanged(),
 
@@ -46,7 +48,7 @@ export class SearchComponent implements OnInit {
         const string: string = value;
         return this.searchService.searchPodcast(string).valueChanges;
       }),
-      pluck('data', 'findPodcasts')
+      pluck("data", "findPodcasts")
     );
 
     search$.subscribe((results) => {

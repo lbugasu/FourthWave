@@ -35,6 +35,8 @@ mat-drawer-container{
     }
     mat-drawer-content{
         background-color: #FEFCFD;
-        min-height: 92vh;
+        height: 92vh;
+        overflow: auto; 
+        
     }
 }
