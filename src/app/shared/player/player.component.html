@@ -1,4 +1,53 @@
-<mat-toolbar class="player">
+<div class="player">
   
-     Player goes here
-</mat-toolbar>
+     <div class="audio__info">
+          <div class="image">
+          <img src="{{getImage()}}" alt="{{getTitle()}}">
+
+          </div>
+          <div class="title">
+          <h3>{{getTitle()}}</h3>
+
+          </div>
+     </div>
+
+     <div class="controls">
+          <div class="control__actions">
+                    <button mat-icon-button  color="primary" aria-label="previous">
+                         <mat-icon>skip_previous</mat-icon>
+                    </button>
+                    <button mat-icon-button  color="accent" aria-label="Rewind">
+                              <mat-icon>replay_30</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="playPause()" color="warn" aria-label="play pause button">
+                         <mat-icon>{{getPlayingState()}}</mat-icon>
+                    </button>
+                    <button mat-icon-button  color="accent" aria-label="Rewind">
+                              <mat-icon>forward_30</mat-icon>
+                    </button>
+                    <button mat-icon-button  aria-label="Next">
+                         <mat-icon>skip_next</mat-icon>
+                    </button>
+          </div>
+          <div class="slider">
+               <mat-slider  color="primary" id="slider" aria-label="audio slider"></mat-slider>
+          </div>
+     </div>
+     <div class="options">
+          	<mat-icon>playlist_play</mat-icon>
+          <div class="volume__slider">
+               <mat-icon>volume_down</mat-icon>
+               <mat-slider 
+               #volumeSlider
+               [max]="1"
+               [min]="0"
+               [step]="0.001"
+               (change)="onVolChange"
+               (input)="onInputChange"
+               [tickInterval]="changeVol()"
+               color="primary" 
+               [(ngModel)]="volume"
+               aria-label="volume slider"></mat-slider>
+          </div>
+     </div>
+</div>

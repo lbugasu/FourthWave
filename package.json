@@ -1,6 +1,6 @@
 {
   "name": "eycho",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "UNLICENSED",
   "scripts": {
     "ng": "ng",
@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "~11.2.10",
     "@angular/cdk": "^11.2.9",
     "@angular/common": "~11.2.10",
@@ -25,6 +26,7 @@
     "@apollo/client": "^3.3.15",
     "apollo-angular": "2.4.0",
     "graphql": "^15.5.0",
+    "howler": "^2.2.1",
     "ngx-audio-player": "^11.0.4",
     "rxjs": "~6.6.0",
     "subscriptions-transport-ws": "^0.9.18",

@@ -1,3 +1,4 @@
+import { PlayerStore, playerStore} from './../../store/player';
 import { PodcastService } from "./../../shared/services/podcast/podcast.service";
 import { Component, OnInit } from "@angular/core";
 import { Podcast } from "src/app/shared/Models/Podcast";
@@ -5,7 +6,6 @@ import { Location } from "@angular/common";
 import { tap, pluck, first } from 'rxjs/operators'
 import { Episode } from "src/app/shared/Models/Episode";
 import { Howl, Howler } from "howler";
-
 @Component({
   selector: "app-podcast",
   templateUrl: "./podcast.component.html",
@@ -15,10 +15,12 @@ export class PodcastComponent implements OnInit {
   podcast!: Podcast;
   slug!: string;
   episodes: Episode[] = [];
+  player!: PlayerStore
   constructor(
     private podcastService: PodcastService,
     private location: Location
   ) {
+    this.player = new PlayerStore({})
     // This data is passed on the router
     // If the data isn't loaded, load from the server
     const state: any = this.location.getState();
@@ -65,21 +67,28 @@ export class PodcastComponent implements OnInit {
   }
 
   play(episode: Episode) {
-    console.log('playing')
-    const sound = new Howl({
-      html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
-      src: [episode.sourceUrl],
-    });
-    // console.log(sound)
-    sound.play();
-    Howler.volume(0.5);
+    console.log("playing");
+    playerStore.updateState({ queue: [episode] })
     
-    // console.log(episode.sourceUrl)
-    // const audioEl:any = document.querySelector('audio')
-    // audioEl.src = episode.sourceUrl
-
-    // audioEl.play()
+    
   }
+  amPlaying(episode: Episode) {
+    let state = false
+    const ep = playerStore.store.value.queue[0] 
+    if (!!ep) {
+      // console.log(ep)
+      state = (episode.sourceUrl == ep.sourceUrl);
+      
+      
+      if (state) {
+        console.log(ep);
+      }
+    }
+    return state?'pause_circle_filled':'play_circle_filled'
+  
+    // console.log(episode.sourceUrl)
+  }
+
   toHHMMSS (secs: string) {
     var sec_num = parseInt(secs, 10);
     var hours = Math.floor(sec_num / 3600);

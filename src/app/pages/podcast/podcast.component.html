@@ -18,9 +18,10 @@
 <div class="content">
     
     <div class="single__episode" *ngFor="let episode of episodes, let i = index">
+       
         <div class="play">
             <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                <mat-icon (click)="play(episode)" style.color="#{{podcast.palette[4]}}">play_circle_filled</mat-icon>
+                <mat-icon (click)="play(episode)" style.color="#{{podcast.palette[4]}}">{{amPlaying(episode)}}</mat-icon>
             </button>
             
         </div>
