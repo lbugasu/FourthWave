@@ -90,10 +90,9 @@ export class PlayerComponent implements OnInit {
     }
     return "";
   }
- 
+
   changeVol(): number | "auto" {
-    console.log(this.volume)
-    Howler.volume(this.volume)
+    Howler.volume(this.volume);
     return 0;
   }
 }
