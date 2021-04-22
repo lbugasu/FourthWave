@@ -37,6 +37,9 @@ mat-drawer-container{
             }
             padding-top: 10%;
         }
+        @media (max-width: 700px) {
+            width: 12vw;
+        }
     }
     mat-drawer-content{
         background-color: var(--background-light);

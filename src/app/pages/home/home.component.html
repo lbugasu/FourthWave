@@ -8,15 +8,15 @@
             <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button (click)="changeView(2)" mat-menu-item>
                 <mat-icon>list</mat-icon>
                 <span>Compact list</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="changeView(2)" mat-menu-item>
                 <mat-icon>view_list</mat-icon>
                 <span>List</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="changeView(2)" mat-menu-item>
                 	<mat-icon>apps</mat-icon>
                 <span>Tiled</span>
             </button>

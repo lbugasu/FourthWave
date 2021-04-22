@@ -1,11 +1,9 @@
 import { distinctUntilChanged, tap } from "rxjs/operators";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Options } from "@angular-slider/ngx-slider";
 import { Howl, Howler} from "howler";
 
-import { PlayerStore, playerStore } from "../../store/player";
+import { playerStore } from "../../store/player";
 import { Episode } from "../Models/Episode";
-import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { MatSliderChange } from "@angular/material/slider";
 @Component({
   selector: "app-player",
@@ -24,6 +22,10 @@ export class PlayerComponent implements OnInit {
   howler!: Howl;
   playing: boolean = false;
   volume: number = 0.5;
+  trackProgress: number = 0;;
+  totalDuration = 0;
+  currentTime = 0;
+  somethingInQueue: boolean = false
   constructor() {
     this.howler = new Howl({
       html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
@@ -32,12 +34,13 @@ export class PlayerComponent implements OnInit {
         console.log("playing");
       },
     });
+    playerStore.updateState({ playingState: false });
   }
 
   ngOnInit(): void {
-    playerStore.selectState("queue").subscribe((items: Episode[]) => {
-      console.log(items);
-      console.log(this.howler.state());
+    playerStore.selectState("queue").pipe(
+      distinctUntilChanged()
+    ).subscribe((items: Episode[]) => {
 
       !!this.howler.state() ? this.howler.pause() : console.log("pausing");
       items.length > 0
@@ -49,32 +52,52 @@ export class PlayerComponent implements OnInit {
       console.log(value);
     });
     vol$
-      .pipe(tap(console.log), distinctUntilChanged(), tap(console.log))
+      .pipe(tap(console.log),
+        distinctUntilChanged(),
+        tap(console.log)
+      )
       .subscribe((value) => console.log(value));
 
     this.onInputChange.subscribe(console.log);
-    console.log(this.onVolChange);
+    
+    playerStore.selectState("somethingInPlayingQueue")
+      .pipe(distinctUntilChanged())
+      .subscribe((state: boolean) => {
+      console.log('something in playing queue')
+    })
+
   }
 
   defineNewState(items: Episode[]) {
-    console.log("new state");
     this.howler = new Howl({
       html5: true,
       src: items.map((item) => item.sourceUrl),
+      preload:'metadata',
       onplay: () => {
         this.playing = true;
+        requestAnimationFrame(this.step);
       },
       onpause: () => {
         this.playing = false;
       },
+      onseek: () => {
+        this.step();
+      },
     });
-    console.log((this.currentEp = items[0]));
+    playerStore.updateState({ 'somethingInPlayingQueue': true })
+    playerStore.updateState({'playingState': true})
+    this.somethingInQueue = true;
     this.howler.play();
+
+    const position$ = this.howler.seek();
+    console.log(position$);
   }
 
   playPause() {
+    playerStore.updateState({'playingState': !this.howler.playing()})
     this.howler.playing() ? this.howler.pause() : this.howler.play();
   }
+  
   getPlayingState() {
     return this.playing ? "pause_circle_filled" : "play_circle_filled";
   }
@@ -91,8 +114,37 @@ export class PlayerComponent implements OnInit {
     return "";
   }
 
-  changeVol(): number | "auto" {
-    Howler.volume(this.volume);
+  changeVol($event: MatSliderChange) {
+    Howler.volume($event.value as number);
+  }
+  step = () => {
+    if (!!this.howler) {
+      this.totalDuration = Math.floor(this.howler.duration());
+      this.currentTime = Math.floor(this.howler.seek() as number);
+      if (this.howler.playing()) {
+        requestAnimationFrame(this.step);
+      }
+    }
+  };
+  seek() {    
+    const goTo = this.trackProgress * this.totalDuration
+    this.howler.pause()
+    this.howler.seek(goTo)
+    this.howler.play()
+  }
+  seekTrack(): number | "auto" {
+    this.trackProgress = this.currentTime / this.totalDuration;
     return 0;
+  }
+  getVolumeIcon() {
+    if (this.volume == 0) {
+      return "volume_off";
+    }
+    if (this.volume < 0.5) {
+      return "volume_down";
+    }
+    else {
+      return 'volume_up';
+    }
   }
 }

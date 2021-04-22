@@ -32,4 +32,4 @@ export class PlayerStore {
   }
 }
 
-export const playerStore = new PlayerStore({ queue: [] });
+export const playerStore = new PlayerStore({ queue: [], playingState: false });

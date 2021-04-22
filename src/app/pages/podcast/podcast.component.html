@@ -27,10 +27,8 @@
         </div>
         <div class="episode__details">
             <h3>{{episode.title}}</h3>
-            <p>{{getNiceDate(episode.datePublished)}} | {{getNiceDuration(episode.duration)}}</p>
+            <p>{{episode.datePublished | date}} | {{getNiceDuration(episode.duration)}}</p>
         </div>
          <mat-divider style.color="#{{podcast.palette[4]}}"></mat-divider>
     </div>
 </div>
-
-<audio></audio>

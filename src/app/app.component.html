@@ -7,19 +7,21 @@
   </button>
   <div class="eycho"><h1>Eycho</h1></div>
 </mat-toolbar>
-<mat-drawer-container class="example-container">
+<mat-drawer-container [ngStyle]="{height: somethingPlaying?'84vh':'93vh'}" class="example-container">
   <mat-drawer  #drawer mode="side" opened>
     
     <div class="menu__item">
       <button mat-button (click)="navigate('')">
-        Home
+          {{getWindowWidth()>1200?'Home':''}}
+
          <mat-icon >home</mat-icon>
       </button>
       
     </div>
     <div class="menu__item">
       <button mat-button (click)="navigate('search')">
-        Search
+          {{getWindowWidth()>1200?'Search':''}}
+
          <mat-icon >search</mat-icon>
       </button>
       
@@ -27,7 +29,9 @@
 
     <div class="menu__item">
       <button mat-button (click)="navigate('discover')">
-        Discover
+        
+        {{getWindowWidth()>1200?'Discover':''}}
+
          	<mat-icon>explore</mat-icon>
       </button>
       
@@ -35,7 +39,7 @@
 
     <div class="menu__item">
       <button mat-button (click)="navigate('library')">
-        Library
+        {{getWindowWidth()>1200?'Library':''}}
          <mat-icon>library_books</mat-icon>
       </button>
       

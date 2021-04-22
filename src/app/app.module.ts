@@ -12,8 +12,7 @@ import { GraphQLModule } from './shared/graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 import { SharedModule } from './shared/shared.module';
-import { PlayerComponent } from './shared/player/player.component';
-import { NgxSliderModule } from "@angular-slider/ngx-slider";
+import { PlayerComponent } from "./shared/player/player.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +28,6 @@ import { NgxSliderModule } from "@angular-slider/ngx-slider";
     HttpClientModule,
     ComponentsModule,
     SharedModule,
-    NgxSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
