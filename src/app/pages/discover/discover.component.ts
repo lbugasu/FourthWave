@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { BehaviorSubject, fromEvent, Subscription } from "rxjs";
 import { Podcast } from "src/app/shared/Models/Podcast";
-import { pluck, tap } from "rxjs/operators";
+import { pluck, switchMap, tap } from "rxjs/operators";
 import { PodcastService } from "./../../shared/services/podcast/podcast.service";
+import { Subject } from "rxjs";
 @Component({
   selector: "app-discover",
   templateUrl: "./discover.component.html",
@@ -12,17 +13,31 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   podcasts: Podcast[] = [];
   viewState = 3;
-
+  pageNo = 0;;
+  page = new BehaviorSubject<number>(this.pageNo);
   constructor(private podcastService: PodcastService) {}
 
   ngOnInit(): void {
-    const obs$ = this.podcastService.getAllPodcasts().valueChanges;
+    this.page
+      .asObservable()
+      .pipe(
+        switchMap((value: number) => {
+          console.log(value);
+          return this.podcastService.getPodcasts(value).valueChanges;
+        })
+      )
+      .pipe(pluck("data", "getPodcasts"))
+      .subscribe((data: any) => {
+        console.log(data);;
+        this.podcasts = [...this.podcasts, ...data];;
+        });
+  }
 
-    const newObs$ = obs$.pipe( pluck("data", "getPodcasts"));
-
-    this.subscription = newObs$.subscribe((res: any) => {
-      this.podcasts = res;
-    });
+  onScroll() {
+    console.log("scrolled!!");
+    // fetch more pods
+    this.pageNo += 1;;
+    this.page.next(this.pageNo);
   }
 
   changeView(view: number): void {

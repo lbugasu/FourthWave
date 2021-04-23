@@ -44,7 +44,7 @@ mat-drawer-container{
     mat-drawer-content{
         background-color: var(--background-light);
         height: 100%;
-        overflow: auto; 
+        overflow: hidden; 
         
     }
 }
