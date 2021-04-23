@@ -65,6 +65,14 @@ export class PlayerComponent implements OnInit {
       },
       onplayerror: () => {
         console.log(new Error('playback error'))
+      },
+      onend: () => {
+        playerStore.updateState({ playingState: false });
+        this.playing = true;
+      },
+      onstop: () => {
+        this.playing = true;
+        
       }
     });
     playerStore.updateState({ somethingInPlayingQueue: true });
