@@ -11,10 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './shared/graphql/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
-import { SharedModule } from './shared/shared.module';
-import { PlayerComponent } from "./shared/player/player.component";
-import { TimePipe } from "./shared/pipes/time/time.pipe";
-
+import { SharedModule } from "./shared/shared.module";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -29,8 +27,9 @@ import { TimePipe } from "./shared/pipes/time/time.pipe";
     HttpClientModule,
     ComponentsModule,
     SharedModule,
+    InfiniteScrollModule,
   ],
-  providers: [TimePipe],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { SearchComponent } from "./search/search.component";
 import { RouterModule } from "@angular/router";
 import { DiscoverComponent } from "./discover/discover.component";
 import { YourLibraryComponent } from "./your-library/your-library.component";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { YourLibraryComponent } from "./your-library/your-library.component";
     RouterModule,
     ComponentsModule,
     SharedModule,
+    InfiniteScrollModule,
   ],
-  exports: [HomeComponent, PodcastComponent],
+  exports: [HomeComponent, PodcastComponent,],
 })
 export class PagesModule {}

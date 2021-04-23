@@ -3,8 +3,8 @@ import { Apollo, gql } from 'apollo-angular';
 import { Episode } from '../../Models/Episode';
 
 const GET_PODCASTS_QUERY = gql`
-  query {
-    getPodcasts {
+  query GetPodcasts($page: Float!) {
+    getPodcasts(page: $page) {
       title
       publisher
       rssFeed
@@ -55,9 +55,10 @@ const PODCAST_EPISODES_QUERY = gql`
 export class PodcastService {
   constructor(private apollo: Apollo) {}
 
-  getAllPodcasts() {
+  getPodcasts(page: number) {
     return this.apollo.watchQuery({
       query: GET_PODCASTS_QUERY,
+      variables: {  page: page  },
     });
   }
 
@@ -71,7 +72,7 @@ export class PodcastService {
   getEpisodes(slug: string) {
     return this.apollo.watchQuery<Episode[]>({
       query: PODCAST_EPISODES_QUERY,
-      variables:  {  slug: slug  },
+      variables: { slug: slug },
     });
   }
 }

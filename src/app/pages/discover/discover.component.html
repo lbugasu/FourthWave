@@ -23,7 +23,14 @@
             
         </mat-menu>
 </div>
-<div class="content">
+<div id="content" class="content"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollUpDistance]="1.5 "
+    [scrollWindow]="false"
+    (scrolled)="onScroll()"
+>
     
     <div *ngFor="let podcast of podcasts" class="podcast"
     >
