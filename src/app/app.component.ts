@@ -22,9 +22,8 @@ export class AppComponent implements OnInit {
       )
     
     sth$.subscribe((anything: boolean) => {
-        console.log(anything);
-        this.somethingPlaying = anything;
-      });
+      this.somethingPlaying = anything;
+    });
   }
   getWindowWidth() {
     return window.innerWidth;

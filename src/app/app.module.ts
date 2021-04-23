@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 import { SharedModule } from './shared/shared.module';
 import { PlayerComponent } from "./shared/player/player.component";
+import { TimePipe } from "./shared/pipes/time/time.pipe";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,7 @@ import { PlayerComponent } from "./shared/player/player.component";
     ComponentsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [TimePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

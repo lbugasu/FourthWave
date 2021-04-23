@@ -32,4 +32,8 @@ export class PlayerStore {
   }
 }
 
-export const playerStore = new PlayerStore({ queue: [], playingState: false });
+export const playerStore = new PlayerStore({
+  queue: [],
+  playingState: false,
+  currentTracks: [],
+});

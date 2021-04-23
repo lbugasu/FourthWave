@@ -29,13 +29,12 @@ export class PodcastComponent implements OnInit {
   this.subscriptions = playerStore
     .selectState("playingState")
     .subscribe((status: boolean) => {
-      console.log("another :", status);
-
       this.playingState = status;
     });
+
     const state: any = this.location.getState();
     if (!!state.navigationId) {
-      console.log(this.location.path());;
+      console.log(this.location.path());
       const slug = this.location.path().substr(9);
       this.slug = slug;
       this.getPodcastEpisodes(this.slug);
@@ -49,7 +48,6 @@ export class PodcastComponent implements OnInit {
           this.podcast = res;
         }))
     } else {
-      console.log(this.location.getState());
       this.podcast = history.state;
       this.slug = this.podcast.slug;
       this.getPodcastEpisodes(this.slug);
@@ -57,12 +55,7 @@ export class PodcastComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.subscriptions)
-   
-    
-      
-    
-    
+    // console.log(this.subscriptions);
   }
 
   getPodcastEpisodes(slug: string) {
@@ -70,7 +63,6 @@ export class PodcastComponent implements OnInit {
     req$.pipe(pluck("data", "getPodcastEpisodes")).subscribe((episodes) => {
       //@ts-ignore
       this.episodes = episodes;
-      const episode = this.episodes[0];
     });
   }
   getNiceDate(date: Date) {
@@ -84,7 +76,6 @@ export class PodcastComponent implements OnInit {
   }
 
   play(episode: Episode) {
-    console.log("playing");
     playerStore.updateState({ queue: [episode] });
   }
   amPlaying(episode: Episode) {

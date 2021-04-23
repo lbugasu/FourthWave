@@ -11,10 +11,6 @@ import { MatSliderChange } from "@angular/material/slider";
   styleUrls: ["./player.component.scss"],
 })
 export class PlayerComponent implements OnInit {
-  @Output()
-  onVolChange = new EventEmitter<MatSliderChange>();
-  @Output()
-  onInputChange = new EventEmitter<MatSliderChange>();
 
   palette!: number;
 
@@ -34,47 +30,31 @@ export class PlayerComponent implements OnInit {
         console.log("playing");
       },
     });
-    playerStore.updateState({ playingState: false });
+    // playerStore.updateState({ playingState: false });
   }
 
   ngOnInit(): void {
-    playerStore.selectState("queue").pipe(
-      distinctUntilChanged()
-    ).subscribe((items: Episode[]) => {
-
-      !!this.howler.state() ? this.howler.pause() : console.log("pausing");
-      items.length > 0
-        ? this.defineNewState(items)
-        : console.log("nothing to play");
-    });
-    const vol$ = this.onVolChange.asObservable();
-    this.onVolChange.subscribe((value) => {
-      console.log(value);
-    });
-    vol$
-      .pipe(tap(console.log),
-        distinctUntilChanged(),
-        tap(console.log)
-      )
-      .subscribe((value) => console.log(value));
-
-    this.onInputChange.subscribe(console.log);
-    
-    playerStore.selectState("somethingInPlayingQueue")
+    playerStore
+      .selectState("queue")
       .pipe(distinctUntilChanged())
-      .subscribe((state: boolean) => {
-      console.log('something in playing queue')
-    })
-
+      .subscribe((items: Episode[]) => {
+        if(!!this.howler.state())
+          this.howler.pause()
+        
+        if (items.length > 0)
+          this.defineNewState(items)
+      });
   }
 
   defineNewState(items: Episode[]) {
     this.howler = new Howl({
       html5: true,
       src: items.map((item) => item.sourceUrl),
-      preload:'metadata',
+      preload: "metadata",
       onplay: () => {
         this.playing = true;
+        playerStore.updateState({ playingState: true });
+
         requestAnimationFrame(this.step);
       },
       onpause: () => {
@@ -83,14 +63,18 @@ export class PlayerComponent implements OnInit {
       onseek: () => {
         this.step();
       },
+      onplayerror: () => {
+        console.log(new Error('playback error'))
+      }
     });
-    playerStore.updateState({ 'somethingInPlayingQueue': true })
-    playerStore.updateState({'playingState': true})
+    playerStore.updateState({ somethingInPlayingQueue: true });
+    playerStore.updateState({ currentTracks: items });
+
+    this.currentEp = items[0]
+
     this.somethingInQueue = true;
     this.howler.play();
 
-    const position$ = this.howler.seek();
-    console.log(position$);
   }
 
   playPause() {
