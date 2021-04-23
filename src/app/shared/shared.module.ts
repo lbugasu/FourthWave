@@ -11,6 +11,6 @@ import { DatePipe } from "./pipes/date/date.pipe";
 @NgModule({
   declarations: [PlayerComponent, TimePipe, DatePipe],
   imports: [CommonModule, Material, FormsModule, ReactiveFormsModule],
-  exports: [PlayerComponent],
+  exports: [PlayerComponent, TimePipe, DatePipe],
 })
 export class SharedModule {}

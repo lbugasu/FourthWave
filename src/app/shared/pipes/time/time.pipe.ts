@@ -4,12 +4,16 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "time",
 })
 export class TimePipe implements PipeTransform {
-  transform(value: number): string {
-    return this.toHHMMSS(value);
+  transform(value: string | number): string {
+    return this.toHHMMSS(value as string);
   }
 
-  toHHMMSS(secs: number) {
-    var hours = Math.floor(secs / 3600);
+  toHHMMSS(duration: string) {
+    if (`${duration}`.split(":").length > 1) {
+      return duration;
+    }
+      const secs: number = +duration;;
+      var hours = Math.floor(secs / 3600);
     var minutes = Math.floor(secs / 60) % 60;
     var seconds = secs % 60;
 

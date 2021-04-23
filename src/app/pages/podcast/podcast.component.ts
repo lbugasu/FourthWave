@@ -56,6 +56,8 @@ export class PodcastComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.subscriptions);
+    const element = document.querySelector("#content");
+    console.log(element);
   }
 
   getPodcastEpisodes(slug: string) {
