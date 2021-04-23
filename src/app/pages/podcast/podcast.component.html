@@ -1,3 +1,4 @@
+<div class="page">
 <div style.background-color="#{{podcast.palette[0]}}36" class="header">
     <mat-card class="podcast__image" style.background-color="#{{podcast.palette[4]}}66">
         <img id="podcast__image" src="{{podcast.image}}" alt="">
@@ -27,8 +28,9 @@
         </div>
         <div class="episode__details">
             <h3>{{episode.title}}</h3>
-            <p>{{episode.datePublished | date}} | {{"getNiceDuration(episode.duration)"}}</p>
+            <p>{{episode.datePublished | date}} | {{getNiceDuration(episode.duration)}}</p>
         </div>
          <mat-divider style.color="#{{podcast.palette[4]}}"></mat-divider>
     </div>
+</div>
 </div>
