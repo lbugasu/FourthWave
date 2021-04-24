@@ -13,7 +13,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   podcasts: Podcast[] = [];
   viewState = 3;
-  pageNo = 0;;
+  pageNo = 0;
   page = new BehaviorSubject<number>(this.pageNo);
   constructor(private podcastService: PodcastService) {}
 
@@ -28,15 +28,14 @@ export class DiscoverComponent implements OnInit, OnDestroy {
       )
       .pipe(pluck("data", "getPodcasts"))
       .subscribe((data: any) => {
-        console.log(data);;
-        this.podcasts = [...this.podcasts, ...data];;
-        });
+        console.log(data);
+        this.podcasts = [...this.podcasts, ...data];
+      });
   }
 
   onScroll() {
-    console.log("scrolled!!");
     // fetch more pods
-    this.pageNo += 1;;
+    this.pageNo += 1;
     this.page.next(this.pageNo);
   }
 

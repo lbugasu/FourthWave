@@ -45,9 +45,12 @@ div.results{
     
     div.episodes{
         width: 37.5%;
-        padding: 2.5%;
-        display: inline-flex;
-        align-items: flex-start;
+        padding: 0 2.5% 0 2.5%;
+        display: inline-block;
+        div.eps__list{
+            display: flex;
+            flex-direction: row;
+        }
 
     }
 }

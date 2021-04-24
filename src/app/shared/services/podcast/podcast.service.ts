@@ -37,8 +37,8 @@ const SINGLE_PODCAST_QUERY = gql`
 `;
 
 const PODCAST_EPISODES_QUERY = gql`
-  query GetPodcastEpisodes($slug: String!) {
-    getPodcastEpisodes(slug: $slug) {
+  query GetPodcastEpisodes($slug: String!, $page: Float!) {
+    getPodcastEpisodes(slug: $slug, page: $page) {
       title
       datePublished
       description
@@ -69,10 +69,10 @@ export class PodcastService {
     });
   }
 
-  getEpisodes(slug: string) {
+  getEpisodes(slug: string, page: number) {
     return this.apollo.watchQuery<Episode[]>({
       query: PODCAST_EPISODES_QUERY,
-      variables: { slug: slug },
+      variables: { slug: slug , page: page},
     });
   }
 }

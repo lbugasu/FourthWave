@@ -27,9 +27,8 @@ div.player{
             height: 100%;
             align-items: center;
             h3{
-            font-size: 10pt;
-                font-family: highgate, sans-serif;
-                font-weight: 400;
+                font-size: 10pt;
+                font-weight: 600;
                 font-style: normal;
             }
         }
@@ -76,6 +75,8 @@ div.player{
                 text-align: center;
                 span{
                     width: 100%;
+                    font-family: "Sailec Light";
+
                 }
             }
             mat-slider{

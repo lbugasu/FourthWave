@@ -1,12 +1,19 @@
-<div class="page">
+<div class="page"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollUpDistance]="1.5 "
+    [scrollWindow]="false"
+    (scrolled)="loadMoreEpisodes()"
+>
 <div style.background-color="#{{podcast.palette[0]}}36" class="header">
     <mat-card class="podcast__image" style.background-color="#{{podcast.palette[4]}}66">
         <img id="podcast__image" src="{{podcast.image}}" alt="">
     </mat-card>
     <div class="podcast__data">
         
-        <h1 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h1>
-        <h2 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h2>
+        <h2 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h2>
+        <h3 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h3>
         <div class="container">
             <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
                 <mat-icon style.color="#{{podcast.palette[3]}}">play_circle_filled</mat-icon>
@@ -16,7 +23,8 @@
     </div>
 </div>
 
-<div class="content">
+<div class="content"
+    >
     
     <div class="single__episode" *ngFor="let episode of episodes, let i = index">
        
@@ -34,3 +42,4 @@
     </div>
 </div>
 </div>
+
