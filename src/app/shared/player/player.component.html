@@ -1,81 +1,78 @@
 <div [style.visibility]="somethingInQueue? 'visible':'hidden'" class="player">
-  
-     <div class="audio__info">
-          <div class="image">
-          <img src="{{getImage()}}" alt="{{getTitle()}}">
+  <div class="audio__info">
+    <div class="image">
+      <img src="{{getImage()}}" alt="{{getTitle()}}" />
+    </div>
+    <div class="title">
+      <h3>{{getTitle()}}</h3>
+    </div>
+  </div>
 
-          </div>
-          <div class="title">
-          <h3>{{getTitle()}}</h3>
+  <div class="controls">
+    <div class="control__actions">
+      <button mat-icon-button color="primary" aria-label="previous">
+        <mat-icon>skip_previous</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" aria-label="Rewind">
+        <mat-icon>replay_30</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="playPause()"
+        color="warn"
+        aria-label="play pause button"
+      >
+        <mat-icon>{{getPlayingState()}}</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" aria-label="Rewind">
+        <mat-icon>forward_30</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Next">
+        <mat-icon>skip_next</mat-icon>
+      </button>
+    </div>
+    <div class="slider">
+      <div class="duration">
+        <span>
+          {{this.currentTime | time}}
+        </span>
+      </div>
+      <mat-slider
+        [min]="0"
+        [max]="1"
+        [step]="0.001"
+        [tickInterval]="seekTrack()"
+        [(ngModel)]="trackProgress"
+        color="primary"
+        #trackSlider
+        aria-label="audio slider"
+        (change)="seek()"
+      >
+      </mat-slider>
+      <div class="duration">
+        <span>
+          {{totalDuration | time}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="options">
+    <button mat-icon-button aria-label="Rewind">
+      <mat-icon>playlist_play</mat-icon>
+    </button>
 
-          </div>
-     </div>
-
-     <div class="controls">
-          <div class="control__actions">
-               
-                    <button mat-icon-button  color="primary" aria-label="previous">
-                         <mat-icon>skip_previous</mat-icon>
-                    </button>
-                    <button mat-icon-button  color="accent" aria-label="Rewind">
-                              <mat-icon>replay_30</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="playPause()" color="warn" aria-label="play pause button">
-                         <mat-icon>{{getPlayingState()}}</mat-icon>
-                    </button>
-                    <button mat-icon-button  color="accent" aria-label="Rewind">
-                              <mat-icon>forward_30</mat-icon>
-                    </button>
-                    <button mat-icon-button  aria-label="Next">
-                         <mat-icon>skip_next</mat-icon>
-                    </button>
-                    
-
-          </div>
-          <div class="slider">
-               <div class="duration">
-                   <span>
-                    {{this.currentTime | time}}
-                   </span> 
-
-               </div>
-               <mat-slider 
-                    [min]="0" 
-                    [max]="1"
-                    [step]="0.001" 
-                    [tickInterval]="seekTrack()"
-                    [(ngModel)]="trackProgress" 
-                    color="primary" 
-                    #trackSlider 
-                    aria-label="audio slider"
-                    (change)="seek()"
-                    >
-               </mat-slider>
-               <div class="duration">
-                    <span>
-                         {{totalDuration | time}}
-
-                    </span>
-
-                    </div>
-          </div>
-     </div>
-     <div class="options">
-          <button mat-icon-button  aria-label="Rewind">
-                      <mat-icon>playlist_play</mat-icon>
-                    </button>
-          	
-          <div class="volume__slider">
-               <mat-icon>{{getVolumeIcon()}}</mat-icon>
-               <mat-slider 
-               #volumeSlider
-               [max]="1"
-               [min]="0"
-               [step]="0.001"
-               (change)="changeVol($event)"
-               color="primary" 
-               [(ngModel)]="volume"
-               aria-label="volume slider"></mat-slider>
-          </div>
-     </div>
+    <div class="volume__slider">
+      <mat-icon>{{getVolumeIcon()}}</mat-icon>
+      <mat-slider
+        #volumeSlider
+        [max]="1"
+        [min]="0"
+        [step]="0.001"
+        (change)="changeVol($event)"
+        color="primary"
+        [(ngModel)]="volume"
+        aria-label="volume slider"
+      ></mat-slider>
+    </div>
+  </div>
 </div>

@@ -1,42 +1,41 @@
 <div class="body">
-    <div class="menu">
-        
-        
-        
-    </div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
-            <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-            <button (click)="changeView(2)" mat-menu-item>
-                <mat-icon>list</mat-icon>
-                <span>Compact list</span>
-            </button>
-            <button (click)="changeView(2)" mat-menu-item>
-                <mat-icon>view_list</mat-icon>
-                <span>List</span>
-            </button>
-            <button (click)="changeView(2)" mat-menu-item>
-                	<mat-icon>apps</mat-icon>
-                <span>Tiled</span>
-            </button>
-            
-        </mat-menu>
+  <div class="menu"></div>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button (click)="changeView(2)" mat-menu-item>
+      <mat-icon>list</mat-icon>
+      <span>Compact list</span>
+    </button>
+    <button (click)="changeView(2)" mat-menu-item>
+      <mat-icon>view_list</mat-icon>
+      <span>List</span>
+    </button>
+    <button (click)="changeView(2)" mat-menu-item>
+      <mat-icon>apps</mat-icon>
+      <span>Tiled</span>
+    </button>
+  </mat-menu>
 </div>
-<div id="content" class="content"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    [infiniteScrollUpDistance]="1.5 "
-    [scrollWindow]="false"
-    (scrolled)="onScroll()"
+<div
+  id="content"
+  class="content"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  [infiniteScrollUpDistance]="1.5"
+  [scrollWindow]="false"
+  (scrolled)="onScroll()"
 >
-    
-    <div *ngFor="let podcast of podcasts" class="podcast"
+  <div *ngFor="let podcast of podcasts" class="podcast">
+    <a
+      [routerLink]="['/podcast', podcast.slug]"
+      routerLinkActive="active"
+      [state]="podcast"
     >
-    <a [routerLink]="['/podcast', podcast.slug]"  routerLinkActive="active" [state]=podcast>
-    <img src="{{podcast.image}}" alt="">
-        <h2>{{podcast.title}}</h2>
+      <img src="{{ podcast.image }}" alt="" />
+      <h2>{{ podcast.title }}</h2>
     </a>
-    </div>
+  </div>
 </div>

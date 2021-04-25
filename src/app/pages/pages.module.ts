@@ -10,6 +10,8 @@ import { RouterModule } from "@angular/router";
 import { DiscoverComponent } from "./discover/discover.component";
 import { YourLibraryComponent } from "./your-library/your-library.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { SignupComponent } from "./signup/signup.component";
+import { SigninComponent } from "./signin/signin.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     SearchComponent,
     DiscoverComponent,
     YourLibraryComponent,
+    SignupComponent,
+    SigninComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,6 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     SharedModule,
     InfiniteScrollModule,
   ],
-  exports: [HomeComponent, PodcastComponent,],
+  exports: [HomeComponent, PodcastComponent],
 })
 export class PagesModule {}
