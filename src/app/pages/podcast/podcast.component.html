@@ -10,15 +10,20 @@
       <h1 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h1>
       <h2 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h2>
       <div class="container">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
+        <button mat-icon-button color="primary" aria-label="play all episodes">
           <mat-icon style.color="#{{podcast.palette[3]}}"
             >play_circle_filled</mat-icon
           >
         </button>
+        <!-- Categories -->
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip
+            *ngFor="let category of podcast.categories, let i=index"
+            [style.backgroundColor]="getColors()[i]"
+            style.color="#{{podcast.palette[0]}}"
+            >{{category}}</mat-chip
+          >
+        </mat-chip-list>
       </div>
     </div>
   </div>

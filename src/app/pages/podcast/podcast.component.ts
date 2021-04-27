@@ -7,6 +7,8 @@ import { tap, pluck, first, take, distinctUntilChanged } from 'rxjs/operators'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Howl, Howler } from 'howler'
 import { Subscription } from 'rxjs'
+const colors = require('nice-color-palettes')
+const random = require('canvas-sketch-util/random')
 
 @Component({
   selector: 'app-podcast',
@@ -60,7 +62,6 @@ export class PodcastComponent implements OnInit {
     // console.log(this.subscriptions);
     const element = document.querySelector('#content')
     console.log(element)
-    this.getColors()
   }
 
   getPodcastEpisodes (slug: string) {
@@ -71,9 +72,8 @@ export class PodcastComponent implements OnInit {
     })
   }
 
-  async getColors () {
-    // const colorthief = new ColorThief()
-    // console.log(imageBase64)
+  getColors () {
+    return colors[66]
   }
   getNiceDate (date: Date) {
     return new Date(date).toDateString()

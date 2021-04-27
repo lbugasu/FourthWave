@@ -1,54 +1,61 @@
-
-h2{
-    font-family: highgate, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+h2 {
+  font-family: highgate, sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
-div.search__bar{
+div.search__bar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  section.checked {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    section.checked{
+    flex-direction: row;
+    mat-checkbox {
+      padding: 2.5%;
+      display: block;
+    }
+  }
+}
+div.results {
+  display: flex;
+  h2 {
+    text-align: center;
+  }
+  div.pods {
+    width: 57.5%;
+    display: inline-block;
+    div.pod__list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      div.podcast {
+        width: 20%;
+        margin: 1%;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  div.episodes {
+    width: 37.5%;
+    padding: 2.5%;
+    display: inline-flex;
+    align-items: flex-start;
+    div.eps__list {
+      display: flex;
+      flex-direction: column;
+      height: 10%;
+      div.episode {
         display: flex;
         flex-direction: row;
-        mat-checkbox{
-            padding: 2.5%;
-            display: block;
+        img {
+          height: 100%;
         }
+      }
     }
+  }
 }
-div.results{
-    display: flex;
-    h2{
-        text-align: center;
-    }
-    div.pods{
-        width: 57.5%;
-        display: inline-block;
-        div.pod__list{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            div.podcast{
-                width: 20%;
-                margin: 1%;
-                img{
-                    width: 100%;
-                }
-                
-            }
-        }
-
-    }
-    
-    div.episodes{
-        width: 37.5%;
-        padding: 2.5%;
-        display: inline-flex;
-        align-items: flex-start;
-
-    }
-}
-

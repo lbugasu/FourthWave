@@ -1,30 +1,42 @@
 <div class="search__bar">
-
-    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-        <mat-label>Search</mat-label>
-        <input id="search" matInput placeholder="eg. Stuff of Life">
-    </mat-form-field>
-    <section class="checked">
-        <mat-checkbox [checked]="true" >Podcasts</mat-checkbox>
-        <mat-checkbox >Episodes</mat-checkbox>
-    </section>
-    
+  <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+    <mat-label>Search</mat-label>
+    <input id="search" matInput placeholder="eg. Stuff of Life" />
+  </mat-form-field>
+  <section class="checked">
+    <mat-checkbox [checked]="true" (change)="checkPodcasts($event.checked)"
+      >Podcasts</mat-checkbox
+    >
+    <mat-checkbox (change)="checkEpisodes($event.checked)"
+      >Episodes</mat-checkbox
+    >
+  </section>
 </div>
 <div class="results">
-    <div class="pods">
-        <h2>Podcasts</h2>
-        <div class="pod__list">
-            <div *ngFor ="let pod of podcasts" class="podcast">
-                <a [routerLink]="['/podcast', pod.slug]"  routerLinkActive="active" [state]=pod>
-                <img src="{{pod.image}}" alt="">
-                <h2>{{pod.title}}</h2>
-                </a>
-        </div>
-        </div>
-        
+  <div class="pods">
+    <h2>Podcasts</h2>
+    <div class="pod__list">
+      <div *ngFor="let pod of podcasts" class="podcast">
+        <a
+          [routerLink]="['/podcast', pod.slug]"
+          routerLinkActive="active"
+          [state]="pod"
+        >
+          <img src="{{pod.image}}" alt="" />
+          <h2>{{pod.title}}</h2>
+        </a>
+      </div>
     </div>
-    <div class="episodes">
-        <h2>Episodes</h2>
+  </div>
+  <div class="episodes">
+    <h2>Episodes</h2>
+    <div class="eps__list">
+      <div *ngFor="let episode of episodes" class="episode">
+        <img src="{{episode.image}}" alt="{{episode.title}}" />
+        <h3>
+          {{episode.title}}
+        </h3>
+      </div>
     </div>
-
+  </div>
 </div>
