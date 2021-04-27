@@ -1,36 +1,51 @@
 <div class="page">
-<div style.background-color="#{{podcast.palette[0]}}36" class="header">
-    <mat-card class="podcast__image" style.background-color="#{{podcast.palette[4]}}66">
-        <img id="podcast__image" src="{{podcast.image}}" alt="">
+  <div style.background-color="#{{podcast.palette[0]}}36" class="header">
+    <mat-card
+      class="podcast__image"
+      style.background-color="#{{podcast.palette[4]}}66"
+    >
+      <img id="podcast__image" class="img" src="{{podcast.image}}" alt="" />
     </mat-card>
     <div class="podcast__data">
-        
-        <h1 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h1>
-        <h2 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h2>
-        <div class="container">
-            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                <mat-icon style.color="#{{podcast.palette[3]}}">play_circle_filled</mat-icon>
-            </button>
-        </div>
-       
+      <h1 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h1>
+      <h2 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h2>
+      <div class="container">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Example icon button with a home icon"
+        >
+          <mat-icon style.color="#{{podcast.palette[3]}}"
+            >play_circle_filled</mat-icon
+          >
+        </button>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="content">
-    
-    <div class="single__episode" *ngFor="let episode of episodes, let i = index">
-       
-        <div class="play">
-            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                <mat-icon (click)="play(episode)" style.color="#{{podcast.palette[4]}}">{{amPlaying(episode)}}</mat-icon>
-            </button>
-            
-        </div>
-        <div class="episode__details">
-            <h3>{{episode.title}}</h3>
-            <p>{{episode.datePublished | date}} | {{ episode.duration | time}}</p>
-        </div>
-         <mat-divider style.color="#{{podcast.palette[4]}}"></mat-divider>
+  <div class="content">
+    <div
+      class="single__episode"
+      *ngFor="let episode of episodes, let i = index"
+    >
+      <div class="play">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Example icon button with a home icon"
+        >
+          <mat-icon
+            (click)="play(episode)"
+            style.color="#{{podcast.palette[4]}}"
+            >{{amPlaying(episode)}}</mat-icon
+          >
+        </button>
+      </div>
+      <div class="episode__details">
+        <h3>{{episode.title}}</h3>
+        <p>{{episode.datePublished | date}} | {{ episode.duration | time}}</p>
+      </div>
+      <mat-divider style.color="#{{podcast.palette[4]}}"></mat-divider>
     </div>
-</div>
+  </div>
 </div>
