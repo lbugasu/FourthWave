@@ -1,56 +1,50 @@
 <mat-toolbar>
-  
-     <button mat-mini-fab aria-label="Menu toggle button"
-     (click)="drawer.toggle()"
-     >
-    	<mat-icon>menu</mat-icon>
+  <button
+    mat-mini-fab
+    aria-label="Menu toggle button"
+    (click)="drawer.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
   </button>
   <div class="eycho"><h1>Eycho</h1></div>
 </mat-toolbar>
-<mat-drawer-container [ngStyle]="{height: somethingPlaying?'84vh':'93vh'}" class="example-container">
-  <mat-drawer  #drawer mode="side" opened>
-    
+<mat-drawer-container
+  [ngStyle]="{height: playerState()?'84vh':'93vh'}"
+  class="example-container"
+>
+  <mat-drawer #drawer mode="side" opened>
     <div class="menu__item">
       <button mat-button (click)="navigate('')">
-          {{getWindowWidth()>1200?'Home':''}}
+        {{getWindowWidth()>1200?'Home':''}}
 
-         <mat-icon >home</mat-icon>
+        <mat-icon>home</mat-icon>
       </button>
-      
     </div>
     <div class="menu__item">
       <button mat-button (click)="navigate('search')">
-          {{getWindowWidth()>1200?'Search':''}}
+        {{getWindowWidth()>1200?'Search':''}}
 
-         <mat-icon >search</mat-icon>
+        <mat-icon>search</mat-icon>
       </button>
-      
     </div>
 
     <div class="menu__item">
       <button mat-button (click)="navigate('discover')">
-        
         {{getWindowWidth()>1200?'Discover':''}}
 
-         	<mat-icon>explore</mat-icon>
+        <mat-icon>explore</mat-icon>
       </button>
-      
     </div>
 
     <div class="menu__item">
       <button mat-button (click)="navigate('library')">
         {{getWindowWidth()>1200?'Library':''}}
-         <mat-icon>library_books</mat-icon>
+        <mat-icon>library_books</mat-icon>
       </button>
-      
     </div>
   </mat-drawer>
   <mat-drawer-content>
- 
     <router-outlet></router-outlet>
-
-
-  
   </mat-drawer-content>
 </mat-drawer-container>
 <app-player></app-player>

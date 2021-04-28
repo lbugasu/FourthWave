@@ -1,35 +1,42 @@
-import { distinctUntilChanged } from 'rxjs/operators';
-import { playerStore } from './store/player';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { distinctUntilChanged, tap } from 'rxjs/operators'
+import { playerStore } from './store/player'
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = "eycho";
+  title = 'eycho'
   somethingPlaying: boolean = false
-  constructor(private router: Router) {}
-  navigate(path: string) {
-    this.router.navigateByUrl(path);
+  mini = false
+  constructor (private router: Router) {}
+  navigate (path: string) {
+    this.router.navigateByUrl(path)
   }
-  ngOnInit() {
+  ngOnInit () {
     const sth$ = playerStore
-      .selectState("somethingInPlayingQueue")
-      .pipe(
-        distinctUntilChanged()
-      )
-    
+      .selectState('somethingInPlayingQueue')
+      .pipe(distinctUntilChanged())
     sth$.subscribe((anything: boolean) => {
-      this.somethingPlaying = anything;
-    });
+      this.somethingPlaying = anything
+    })
+
+    playerStore
+      .selectState('mini')
+      .pipe(distinctUntilChanged())
+      .subscribe(mini => {
+        this.mini = mini
+      })
   }
-  getWindowWidth() {
-    return window.innerWidth;
+  getWindowWidth () {
+    return window.innerWidth
   }
 
-  somethingInQueue() {
-    
+  somethingInQueue () {}
+
+  playerState () {
+    return this.somethingPlaying && !this.mini
   }
 }
