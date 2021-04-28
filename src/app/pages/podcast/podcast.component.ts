@@ -26,7 +26,6 @@ export class PodcastComponent implements OnInit {
   page = new BehaviorSubject<number>(this.pageNo)
   playingState: boolean = false
   subscriptions!: Subscription
-
   constructor (
     private podcastService: PodcastService,
     private location: Location
@@ -50,10 +49,8 @@ export class PodcastComponent implements OnInit {
 
       this.subscriptions.add(
         query$
-
-          .pipe(first(), tap(console.log), pluck('data', 'getPodcast'))
-          .subscribe((res: Podcast) => {
-            console.log(res)
+          .pipe(first(), pluck('data', 'getPodcast'))
+          .subscribe((res: any) => {
             this.podcast = res
           })
       )
@@ -66,16 +63,34 @@ export class PodcastComponent implements OnInit {
 
   ngOnInit (): void {
     // console.log(this.subscriptions);
-    const element = document.querySelector('#content')
-    console.log(element)
+    // const element = <HTMLElement>document.querySelector(".page");
+    // console.log(element);
+    // element?.addEventListener("scroll", function (e) {
+    //   console.log(this);
+    // });
   }
 
   getPodcastEpisodes (slug: string) {
-    const req$ = this.podcastService.getEpisodes(slug).valueChanges
-    req$.pipe(pluck('data', 'getPodcastEpisodes')).subscribe(episodes => {
-      //@ts-ignore
-      this.episodes = episodes
-    })
+    // const req$ = this.podcastService.getEpisodes(slug, this.pageNo).valueChanges;
+    // req$.pipe(pluck("data", "getPodcastEpisodes")).subscribe((episodes) => {
+    //   //@ts-ignore
+    //   this.episodes = episodes;
+    // });
+    this.subscriptions.add(
+      this.page
+        .asObservable()
+        .pipe(
+          switchMap((value: number) => {
+            return this.podcastService.getEpisodes(slug, value).valueChanges
+          })
+        )
+        .pipe(pluck('data', 'getPodcastEpisodes'))
+        .subscribe((episodes: any) => {
+          this.episodes = [...this.episodes, ...episodes]
+        })
+    )
+    const element = document.querySelector('#content')
+    console.log(element)
   }
 
   getColors () {

@@ -81,10 +81,10 @@ export class PodcastService {
     })
   }
 
-  getEpisodes (slug: string) {
+  getEpisodes (slug: string, page: number) {
     return this.apollo.watchQuery<Episode[]>({
       query: PODCAST_EPISODES_QUERY,
-      variables: { slug: slug }
+      variables: { slug: slug, page: page }
     })
   }
 }
