@@ -20,7 +20,7 @@ export class PlayerComponent implements OnInit {
   totalDuration = 0
   currentTime = 0
   somethingInQueue: boolean = false
-
+  mini = false
   constructor () {
     this.howler = new Howl({
       html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
@@ -88,6 +88,9 @@ export class PlayerComponent implements OnInit {
   getPlayingState () {
     return this.playing ? 'pause_circle_filled' : 'play_circle_filled'
   }
+  getMiniPlayingState () {
+    return this.playing ? 'pause' : 'play_arrow'
+  }
   getTitle () {
     if (!!this.currentEp) {
       return this.currentEp.title
@@ -101,6 +104,10 @@ export class PlayerComponent implements OnInit {
     return ''
   }
 
+  toggleMini () {
+    this.mini = !this.mini
+    playerStore.updateState({ mini: this.mini })
+  }
   changeVol ($event: MatSliderChange) {
     Howler.volume($event.value as number)
   }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { Episode } from '../../Models/Episode';
+import { Injectable } from '@angular/core'
+import { Apollo, gql } from 'apollo-angular'
+import { Episode } from '../../Models/Episode'
 
 const GET_PODCASTS_QUERY = gql`
   query GetPodcasts($page: Float!) {
@@ -15,9 +15,13 @@ const GET_PODCASTS_QUERY = gql`
       slug
       categories
       palette
+      topics {
+        type
+        name
+      }
     }
   }
-`;
+`
 
 const SINGLE_PODCAST_QUERY = gql`
   query GetPodcast($slug: String!) {
@@ -32,9 +36,13 @@ const SINGLE_PODCAST_QUERY = gql`
       slug
       categories
       palette
+      topics {
+        type
+        name
+      }
     }
   }
-`;
+`
 
 const PODCAST_EPISODES_QUERY = gql`
   query GetPodcastEpisodes($slug: String!, $page: Float!) {
@@ -46,33 +54,37 @@ const PODCAST_EPISODES_QUERY = gql`
       sourceUrl
       image
       slug
+      topics {
+        type
+        name
+      }
     }
   }
-`;
+`
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class PodcastService {
-  constructor(private apollo: Apollo) {}
+  constructor (private apollo: Apollo) {}
 
-  getPodcasts(page: number) {
+  getPodcasts (page: number) {
     return this.apollo.watchQuery({
       query: GET_PODCASTS_QUERY,
-      variables: {  page: page  },
-    });
+      variables: { page: page }
+    })
   }
 
-  getPodcast(slug: string) {
+  getPodcast (slug: string) {
     return this.apollo.watchQuery({
       query: SINGLE_PODCAST_QUERY,
-      variables: { slug: slug },
-    });
+      variables: { slug: slug }
+    })
   }
 
-  getEpisodes(slug: string, page: number) {
+  getEpisodes (slug: string) {
     return this.apollo.watchQuery<Episode[]>({
       query: PODCAST_EPISODES_QUERY,
-      variables: { slug: slug , page: page},
-    });
+      variables: { slug: slug }
+    })
   }
 }

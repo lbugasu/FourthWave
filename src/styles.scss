@@ -1,19 +1,23 @@
-@import "styles/palette.scss";
-@import "styles/fonts.scss";
+@import 'styles/palette.scss';
 
-
-html, body { height: 100%; }
-body { 
-  margin: 0; 
-  font-family: "Sailec Light";
-  }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: highgate, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 body {
   overflow: hidden; /* Hide scrollbars */
 }
-h1, h2{
-     font-family: "Sailec Medium" !important;
-
-}
-h3, h4, h5, h6, p{
-  font-family: "Sailec Light" !important;
+h2,
+h3,
+h4,
+p {
+  font-family: highgate, sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
