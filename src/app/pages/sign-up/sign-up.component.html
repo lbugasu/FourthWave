@@ -1,0 +1,107 @@
+<section>
+  <form [formGroup]="signUpForm">
+    <h2>Sign Up</h2>
+
+    <div class="sub__section">
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          formControlName="firstname"
+          matInput
+          placeholder="Magic"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          formControlName="lastname"
+          matInput
+          placeholder="Mike"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="sub__section">
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>Pick Username</mat-label>
+        <input
+          matInput
+          formControlName="firstname"
+          matInput
+          placeholder="magicmike"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="lastname"
+          matInput
+          placeholder="magic@mike.john"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="sub__section">
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          matInput
+          required
+          [type]="hidePassword ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon
+            >{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon
+          >
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" floatLabel="auto">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="repeatPassword"
+          matInput
+          required
+          [type]="hideConfirm ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideConfirm = !hideConfirm"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideConfirm"
+        >
+          <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="options">
+      <button (click)="signUp()" mat-raised-button color="primary">
+        Sign Up
+      </button>
+      <p>
+        Already have an account?
+        <a [routerLink]="['/signin',]">Sign in instead</a>
+      </p>
+    </div>
+  </form>
+</section>
