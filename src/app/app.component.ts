@@ -1,7 +1,11 @@
-import { distinctUntilChanged, tap } from 'rxjs/operators'
+import { Store } from '@ngrx/store'
+import { distinctUntilChanged } from 'rxjs/operators'
 import { playerStore } from './store/player'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { User } from './shared/services/auth/User'
+import { Observable } from 'rxjs'
+import { AppState } from './store/app.selector'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +15,13 @@ export class AppComponent implements OnInit {
   title = 'eycho'
   somethingPlaying: boolean = false
   mini = false
-  constructor (private router: Router) {}
+
+  user$!: Observable<User>
+  constructor (private router: Router, private store: Store<User>) {
+    this.user$ = this.store.select(user => {
+      return user
+    })
+  }
   navigate (path: string) {
     this.router.navigateByUrl(path)
   }
@@ -39,4 +49,5 @@ export class AppComponent implements OnInit {
   playerState () {
     return this.somethingPlaying && !this.mini
   }
+  getUser () {}
 }

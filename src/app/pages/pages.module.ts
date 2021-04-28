@@ -1,15 +1,18 @@
-import { SharedModule } from "./../shared/shared.module";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { HomeComponent } from "./home/home.component";
-import { Material } from "src/libs";
-import { PodcastComponent } from "./podcast/podcast.component";
-import { ComponentsModule } from "../components/components.module";
-import { SearchComponent } from "./search/search.component";
-import { RouterModule } from "@angular/router";
-import { DiscoverComponent } from "./discover/discover.component";
-import { YourLibraryComponent } from "./your-library/your-library.component";
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { SharedModule } from './../shared/shared.module'
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { HomeComponent } from './home/home.component'
+import { Material } from 'src/libs'
+import { PodcastComponent } from './podcast/podcast.component'
+import { ComponentsModule } from '../components/components.module'
+import { SearchComponent } from './search/search.component'
+import { RouterModule } from '@angular/router'
+import { DiscoverComponent } from './discover/discover.component'
+import { YourLibraryComponent } from './your-library/your-library.component'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+import { SignInComponent } from './sign-in/sign-in.component'
+import { SignUpComponent } from './sign-up/sign-up.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -18,15 +21,18 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     SearchComponent,
     DiscoverComponent,
     YourLibraryComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
     Material,
+    ReactiveFormsModule,
     RouterModule,
     ComponentsModule,
     SharedModule,
-    InfiniteScrollModule,
+    InfiniteScrollModule
   ],
-  exports: [HomeComponent, PodcastComponent,],
+  exports: [HomeComponent, PodcastComponent]
 })
 export class PagesModule {}
