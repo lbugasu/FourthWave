@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div
   class="page"
   infiniteScroll
@@ -28,34 +27,6 @@
             >play_circle_filled</mat-icon
           >
         </button>
-=======
-<div class="page">
-  <div style.background-color="#{{podcast.palette[0]}}36" class="header">
-    <mat-card
-      class="podcast__image"
-      style.background-color="#{{podcast.palette[4]}}66"
-    >
-      <img id="podcast__image" class="img" src="{{podcast.image}}" alt="" />
-    </mat-card>
-    <div class="podcast__data">
-      <h1 style.color="#{{podcast.palette[4]}}">{{podcast?.title}}</h1>
-      <h2 style.color="#{{podcast.palette[2]}}">{{podcast.publisher}}</h2>
-      <div class="container">
-        <button mat-icon-button color="primary" aria-label="play all episodes">
-          <mat-icon style.color="#{{podcast.palette[3]}}"
-            >play_circle_filled</mat-icon
-          >
-        </button>
-        <!-- Categories -->
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip
-            *ngFor="let category of podcast.categories, let i=index"
-            [style.backgroundColor]="getColors()[i]"
-            style.color="#{{podcast.palette[0]}}"
-            >{{category}}</mat-chip
-          >
-        </mat-chip-list>
->>>>>>> main
       </div>
     </div>
   </div>
@@ -63,11 +34,7 @@
   <div class="content">
     <div
       class="single__episode"
-<<<<<<< HEAD
-      *ngFor="let episode of episodes; let i = index"
-=======
       *ngFor="let episode of episodes, let i = index"
->>>>>>> main
     >
       <div class="play">
         <button
@@ -77,30 +44,16 @@
         >
           <mat-icon
             (click)="play(episode)"
-<<<<<<< HEAD
-            style.color="#{{ podcast.palette[4] }}"
-            >{{ amPlaying(episode) }}</mat-icon
-=======
             style.color="#{{podcast.palette[4]}}"
             >{{amPlaying(episode)}}</mat-icon
->>>>>>> main
           >
         </button>
       </div>
       <div class="episode__details">
-<<<<<<< HEAD
-        <h3>{{ episode.title }}</h3>
-        <p>
-          {{ episode.datePublished | date }} | {{ episode.duration | time }}
-        </p>
-      </div>
-      <mat-divider style.color="#{{ podcast.palette[4] }}"></mat-divider>
-=======
         <h3>{{episode.title}}</h3>
         <p>{{episode.datePublished | date}} | {{ episode.duration | time}}</p>
       </div>
       <mat-divider style.color="#{{podcast.palette[4]}}"></mat-divider>
->>>>>>> main
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { switchMap } from 'rxjs/operators'
 import { PlayerStore, playerStore } from './../../store/player'
 import { PodcastService } from './../../shared/services/podcast/podcast.service'
 import { Component, OnInit } from '@angular/core'
@@ -6,7 +7,9 @@ import { Location } from '@angular/common'
 import { tap, pluck, first, take, distinctUntilChanged } from 'rxjs/operators'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Howl, Howler } from 'howler'
-import { BehaviorSubject, Subscription } from 'rxjs'
+import { Subscription } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
+
 const colors = require('nice-color-palettes')
 const random = require('canvas-sketch-util/random')
 
@@ -23,6 +26,7 @@ export class PodcastComponent implements OnInit {
   page = new BehaviorSubject<number>(this.pageNo)
   playingState: boolean = false
   subscriptions!: Subscription
+
   constructor (
     private podcastService: PodcastService,
     private location: Location
@@ -46,6 +50,7 @@ export class PodcastComponent implements OnInit {
 
       this.subscriptions.add(
         query$
+
           .pipe(first(), tap(console.log), pluck('data', 'getPodcast'))
           .subscribe((res: Podcast) => {
             console.log(res)
