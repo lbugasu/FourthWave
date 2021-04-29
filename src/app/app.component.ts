@@ -6,6 +6,7 @@ import { Router } from '@angular/router'
 import { User } from './shared/services/auth/User'
 import { Observable } from 'rxjs'
 import { AppState } from './store/app.selector'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,12 +17,7 @@ export class AppComponent implements OnInit {
   somethingPlaying: boolean = false
   mini = false
 
-  user$!: Observable<User>
-  constructor (private router: Router, private store: Store<User>) {
-    this.user$ = this.store.select(user => {
-      return user
-    })
-  }
+  constructor (private router: Router) {}
   navigate (path: string) {
     this.router.navigateByUrl(path)
   }

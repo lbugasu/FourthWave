@@ -15,7 +15,9 @@ import { SharedModule } from './shared/shared.module'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { StoreModule } from '@ngrx/store'
 import { _userReducer } from './store/app.reducer'
-
+import { reducers } from './me/store/reducers'
+import { MeRoutingModule } from './me/me.routing'
+import { MeModule } from './me/me.module'
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,13 +27,15 @@ import { _userReducer } from './store/app.reducer'
     PagesModule,
     ReactiveFormsModule,
     Material,
+    MeModule,
     RouterModule,
+    MeRoutingModule,
     GraphQLModule,
     HttpClientModule,
     ComponentsModule,
     SharedModule,
     InfiniteScrollModule,
-    StoreModule.forRoot({ user: _userReducer })
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

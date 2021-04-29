@@ -10,8 +10,8 @@ import { RouterModule } from '@angular/router'
 import { DiscoverComponent } from './discover/discover.component'
 import { YourLibraryComponent } from './your-library/your-library.component'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
-import { SignInComponent } from './sign-in/sign-in.component'
-import { SignUpComponent } from './sign-up/sign-up.component'
+import { SignInComponent } from '../me/sign-in/sign-in.component'
+import { SignUpComponent } from '../me/sign-up/sign-up.component'
 import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
@@ -20,9 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     PodcastComponent,
     SearchComponent,
     DiscoverComponent,
-    YourLibraryComponent,
-    SignInComponent,
-    SignUpComponent
+    YourLibraryComponent
   ],
   imports: [
     CommonModule,

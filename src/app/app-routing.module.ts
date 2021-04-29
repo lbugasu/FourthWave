@@ -5,23 +5,23 @@ import { DiscoverComponent } from './pages/discover/discover.component'
 import { HomeComponent } from './pages/home/home.component'
 import { PodcastComponent } from './pages/podcast/podcast.component'
 import { SearchComponent } from './pages/search/search.component'
-import { SignInComponent } from './pages/sign-in/sign-in.component'
-import { SignUpComponent } from './pages/sign-up/sign-up.component'
+import { SignInComponent } from './me/sign-in/sign-in.component'
+import { SignUpComponent } from './me/sign-up/sign-up.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'podcast/:slug', component: PodcastComponent },
   { path: 'discover', component: DiscoverComponent },
-  { path: 'library', component: YourLibraryComponent },
-  {
-    path: 'signin',
-    component: SignInComponent
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent
-  }
+  { path: 'library', component: YourLibraryComponent }
+  // {
+  //   path: 'signin',
+  //   component: SignInComponent
+  // },
+  // {
+  //   path: 'signup',
+  //   component: SignUpComponent
+  // }
 ]
 
 @NgModule({

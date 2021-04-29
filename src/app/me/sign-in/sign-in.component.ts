@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { FormGroup } from '@angular/forms'
+import { AppState } from 'src/app/store/app.selector'
+import { Store } from '@ngrx/store'
+import * as fromStore from '../store'
 
 @Component({
   selector: 'app-sign-in',
@@ -11,14 +14,16 @@ export class SignInComponent implements OnInit {
   hidePassword = true
   hideConfirm = true
   signInForm!: FormGroup
-  constructor () {
+  constructor (private store: Store<AppState>) {
     this.signInForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.min(8)]),
       password: new FormControl('', [Validators.required, Validators.min(8)])
     })
   }
 
-  ngOnInit (): void {}
+  ngOnInit (): void {
+    this.store.select(fromStore.getUser).subscribe(state => console.log(state))
+  }
 
   signIn () {}
 }

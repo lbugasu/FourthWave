@@ -39,7 +39,8 @@ export class PodcastComponent implements OnInit {
       })
 
     const state: any = this.location.getState()
-    if (!!state.navigationId) {
+
+    if (!!history.state.navigationId) {
       console.log(this.location.path())
       const slug = this.location.path().substr(9)
       this.slug = slug
@@ -55,6 +56,10 @@ export class PodcastComponent implements OnInit {
           })
       )
     } else {
+      console.log(history)
+      console.log(this.location)
+      console.log(location)
+
       this.podcast = history.state
       this.slug = this.podcast.slug
       this.getPodcastEpisodes(this.slug)
