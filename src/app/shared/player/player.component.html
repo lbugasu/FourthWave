@@ -126,7 +126,7 @@
         [step]="0.001"
         (change)="changeVol($event)"
         color="primary"
-        [(ngModel)]="volume"
+        value="{{volume$ | async}}"
         aria-label="volume slider"
       ></mat-slider>
     </div>

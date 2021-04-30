@@ -1,19 +1,36 @@
-import { YourLibraryComponent } from './pages/your-library/your-library.component'
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { DiscoverComponent } from './pages/discover/discover.component'
-import { HomeComponent } from './pages/home/home.component'
-import { PodcastComponent } from './pages/podcast/podcast.component'
-import { SearchComponent } from './pages/search/search.component'
-import { SignInComponent } from './me/sign-in/sign-in.component'
-import { SignUpComponent } from './me/sign-up/sign-up.component'
+import { HomeComponent } from './home/home.component'
+import { PodcastComponent } from './podcast/podcast.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'podcast/:slug', component: PodcastComponent },
-  { path: 'discover', component: DiscoverComponent },
-  { path: 'library', component: YourLibraryComponent }
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('./search/search.module').then(m => m.SearchModule)
+  },
+  {
+    path: 'me',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'podcast/:slug',
+    loadChildren: () =>
+      import('./podcast/podcast.module').then(m => m.PodcastModule)
+  },
+  {
+    path: 'discover',
+    loadChildren: () =>
+      import('./discover/discover.module').then(m => m.DiscoverModule)
+  },
+  {
+    path: 'library',
+    loadChildren: () =>
+      import('./your-library/your-library.module').then(
+        m => m.YourLibraryModule
+      )
+  }
   // {
   //   path: 'signin',
   //   component: SignInComponent
