@@ -9,7 +9,7 @@ import { User } from 'src/app/shared/Models/User'
 export class UserEffects {
   constructor (private actions$: Actions, private authService: AuthService) {}
 
-  signIn$ = createEffect((): any => {
+  signIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(userActions.signInStart),
       exhaustMap(action => {
@@ -32,7 +32,7 @@ export class UserEffects {
     )
   })
 
-  signInWithtoken$ = createEffect((): any => {
+  signInWithtoken$ = createEffect(() => {
     const req$ = this.actions$.pipe(
       ofType(userActions.signInWithToken),
       exhaustMap(action => {
@@ -52,18 +52,18 @@ export class UserEffects {
     )
     return res$
   })
-  signOut$ = createEffect((): any => {
+  signOut$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(userActions.signOut),
+      ofType(userActions.signOutStart),
       exhaustMap(action => {
         return this.authService.signOut().pipe(
           pluck('data', 'signout'),
           map((result: boolean) => {
-            return userActions.signOutSuccess
+            return userActions.signOutSuccess()
           }),
           catchError(error => {
             console.log(error.message)
-            return [userActions.signOutFailure]
+            return [userActions.signOutFailure()]
           })
         )
       })

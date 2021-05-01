@@ -15,7 +15,6 @@ import { SharedModule } from './shared/shared.module'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { StoreModule } from '@ngrx/store'
 import { _userReducer } from './store/app.reducer'
-import { UserModule } from './user/user.module'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state'
@@ -27,7 +26,6 @@ import { appReducer } from './store/app.state'
     BrowserAnimationsModule,
     ReactiveFormsModule,
     Material,
-    UserModule,
     RouterModule,
     GraphQLModule,
     HttpClientModule,

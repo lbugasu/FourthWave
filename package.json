@@ -30,6 +30,7 @@
     "apollo-angular": "2.4.0",
     "canvas-sketch-util": "^1.10.0",
     "cheerio": "^0.19.0",
+    "color-scheme": "^1.0.1",
     "colorthief": "^2.3.2",
     "core.js": "^0.4.2",
     "fs": "*",

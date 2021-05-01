@@ -7,6 +7,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   <div class="eycho"><h1>Eycho</h1></div>
+  <span class="spacer"></span>
+  <button mat-mini-fab aria-label="User Icon" (click)="signIn()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-drawer-container
   [ngStyle]="{height: playing ?'84vh':'93vh'}"

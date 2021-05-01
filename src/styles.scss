@@ -1,4 +1,5 @@
 @import 'styles/palette.scss';
+@import 'styles/fonts.scss';
 
 html,
 body {
@@ -13,11 +14,15 @@ body {
 body {
   overflow: hidden; /* Hide scrollbars */
 }
+h1,
+h2 {
+  font-family: 'Sailec Medium' !important;
+}
 h2,
 h3,
 h4,
 p {
-  font-family: highgate, sans-serif;
+  font-family: 'Sailec Light' !important;
   font-weight: 400;
   font-style: normal;
 }

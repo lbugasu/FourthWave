@@ -1,7 +1,5 @@
 import * as userActions from '../actions'
 import { createReducer, on } from '@ngrx/store'
-import { User } from 'src/app/shared/services/auth/User'
-import * as fromUser from '../actions/user.actions'
 import { initialUserState, UserState } from '../state/user.state'
 
 const _userReducer = createReducer(
@@ -15,7 +13,13 @@ const _userReducer = createReducer(
   }),
   on(userActions.signInSuccess, (state: UserState, action) => {
     console.log(action)
-    return { ...state, loading: false, loaded: true, ...action.user }
+    return {
+      ...state,
+      loading: false,
+      loaded: true,
+      loggedIn: true,
+      ...action.user
+    }
   }),
   on(userActions.signInFailure, state => {
     return { ...state, loading: false, loaded: false }
@@ -32,7 +36,8 @@ const _userReducer = createReducer(
       ...state,
       ...action.user,
       loading: false,
-      loaded: true
+      loaded: true,
+      loggedIn: true
     }
   }),
   on(userActions.signUpFailure, state => {

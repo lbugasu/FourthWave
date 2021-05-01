@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { PlayerState } from './shared/player/store/state/player.state'
 import * as playerSelectors from './shared/player/store/selectors'
+import { getUserLoggedInStatus } from './user/store/selectors/user.selector'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +16,7 @@ export class AppComponent implements OnInit {
   somethingPlaying: boolean = false
   mini = false
   playing: boolean = false
+  loggedIn = false
   constructor (
     private router: Router,
     private store: Store<{ player: PlayerState }>
@@ -41,10 +44,23 @@ export class AppComponent implements OnInit {
 
       this.playing = this.somethingPlaying && !this.mini
     })
+
+    // Logged in Status
+    this.store
+      .select(getUserLoggedInStatus)
+      .subscribe(state => (this.loggedIn = state))
   }
   getWindowWidth () {
     return window.innerWidth
   }
 
   getUser () {}
+
+  signIn () {
+    if (this.loggedIn) {
+      this.router.navigateByUrl('me')
+    } else {
+      this.router.navigateByUrl('me/signin')
+    }
+  }
 }

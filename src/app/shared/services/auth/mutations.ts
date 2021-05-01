@@ -74,7 +74,6 @@ export const SIGN_IN_WITH_TOKEN = gql`
       lastname
       username
       email
-      password
       contributions
       LikedPodcasts {
         title

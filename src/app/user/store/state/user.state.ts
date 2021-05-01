@@ -1,4 +1,11 @@
 import { User } from 'src/app/shared/Models/User'
+export const USER_STATE_NAME = 'user'
+
+export interface UserState extends User {
+  loading: boolean
+  loaded: boolean
+  loggedIn: boolean
+}
 
 export const initialUserState: UserState = {
   username: 'lbugasu',
@@ -14,9 +21,6 @@ export const initialUserState: UserState = {
   volume: 0.5,
   loading: false,
   loaded: false,
-  authtoken: null
-}
-export interface UserState extends User {
-  loading: boolean
-  loaded: boolean
+  authtoken: null,
+  loggedIn: false
 }

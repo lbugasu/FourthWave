@@ -1,9 +1,14 @@
+import { DiscoverState, DISCOVER_STATE_NAME } from './store/discover.state'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs'
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 import { pluck, switchMap, tap } from 'rxjs/operators'
 import { PodcastService } from '../shared/services/podcast/podcast.service'
-import { Subject } from 'rxjs'
+import * as DiscoverSelectors from './store/discover.selectors'
+import * as DiscoverActions from './store/discover.actions'
+import { Store } from '@ngrx/store'
+const ColorScheme = require('color-scheme')
+
 @Component({
   selector: 'app-discover',
   templateUrl: './discover.component.html',
@@ -15,7 +20,12 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   viewState = 3
   pageNo = 0
   page = new BehaviorSubject<number>(this.pageNo)
-  constructor (private podcastService: PodcastService) {}
+
+  content$: Observable<DiscoverState>
+  constructor (
+    private podcastService: PodcastService,
+    private store: Store<{ discover: DiscoverState }>
+  ) {}
 
   ngOnInit (): void {
     this.page
@@ -31,6 +41,9 @@ export class DiscoverComponent implements OnInit, OnDestroy {
         console.log(data)
         this.podcasts = [...this.podcasts, ...data]
       })
+
+    this.store.dispatch(DiscoverActions.loadDiscoverStart())
+    this.content$ = this.store.select(DiscoverSelectors.getDiscover)
   }
 
   onScroll () {
@@ -43,6 +56,14 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     this.viewState = view
   }
 
+  getColors () {
+    var scheme = new ColorScheme()
+    scheme
+      .from_hue(21)
+      .scheme('tetrade')
+      .variation('default')
+    return scheme.colors()
+  }
   ngOnDestroy (): void {
     this.subscription?.unsubscribe()
   }
