@@ -4,10 +4,14 @@
     <input id="search" matInput placeholder="eg. Stuff of Life" />
   </mat-form-field>
   <section class="checked">
-    <mat-checkbox [checked]="true" (change)="checkPodcasts($event.checked)"
+    <mat-checkbox
+      [checked]="checkPodcasts$|async"
+      (change)="checkPodcasts($event.checked)"
       >Podcasts</mat-checkbox
     >
-    <mat-checkbox (change)="checkEpisodes($event.checked)"
+    <mat-checkbox
+      [checked]="checkEpisodes$ |async"
+      (change)="checkEpisodes($event.checked)"
       >Episodes</mat-checkbox
     >
   </section>
@@ -16,7 +20,7 @@
   <div class="pods">
     <h2>Podcasts</h2>
     <div class="pod__list">
-      <div *ngFor="let pod of podcasts" class="podcast">
+      <div *ngFor="let pod of (podcasts$ | async)" class="podcast">
         <a
           [routerLink]="['/podcast', pod.slug]"
           routerLinkActive="active"
@@ -31,7 +35,7 @@
   <div class="episodes">
     <h2>Episodes</h2>
     <div class="eps__list">
-      <div *ngFor="let episode of episodes" class="episode">
+      <div *ngFor="let episode of (episodes$ | async )" class="episode">
         <img src="{{episode.image}}" alt="{{episode.title}}" />
         <h3>
           {{episode.title}}

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { Apollo } from 'apollo-angular'
 import { Observable } from 'rxjs'
-import { User } from '../../Models/User'
+import { User } from '../../shared/Models/User'
 import { SIGN_IN, SIGN_IN_WITH_TOKEN, SIGN_OUT, SIGN_UP } from './mutations'
-import { NewUser } from './User'
+import { NewUser } from '../../shared/Models/User'
 
 @Injectable({
   providedIn: 'root'

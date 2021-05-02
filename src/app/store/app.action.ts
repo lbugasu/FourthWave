@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { User } from '../shared/services/auth/User'
+import { User } from '../shared/Models/User'
 
 export const setUser = createAction(
   '[SIGN IN COMPONENT] ADD USER',

@@ -1,4 +1,4 @@
-import { NewUser } from './../../../shared/services/auth/User'
+import { NewUser } from '../../../shared/Models/User'
 import { Action, createAction, props } from '@ngrx/store'
 import { User } from 'src/app/shared/Models/User'
 

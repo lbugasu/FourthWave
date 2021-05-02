@@ -1,5 +1,3 @@
-import { User } from '../shared/services/auth/User'
+import { User } from '../shared/Models/User'
 
-export interface AppState {
-  user: User
-}
+export interface AppState {}

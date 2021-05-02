@@ -1,6 +1,6 @@
 import { switchMap } from 'rxjs/operators'
 import { playerStore } from '../store/player'
-import { PodcastService } from '../shared/services/podcast/podcast.service'
+import { PodcastService } from './services/podcast.service'
 import { Component, OnInit } from '@angular/core'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 import { Location } from '@angular/common'

@@ -4,6 +4,7 @@ import { createEffect } from '@ngrx/effects'
 import { catchError, exhaustMap, map, pluck, tap } from 'rxjs/operators'
 import { DiscoverService } from '../services/discover.service'
 import * as DiscoverActions from '../store/discover.actions'
+
 @Injectable()
 export class DiscoverEffects {
   constructor (
@@ -22,7 +23,6 @@ export class DiscoverEffects {
       tap(console.log),
       pluck('data'),
       map(result => {
-        console.log(result)
         return DiscoverActions.loadDiscoverSuccess({
           featured: result.getFeatured,
           trending: result.getTrending,

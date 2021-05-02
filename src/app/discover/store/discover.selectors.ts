@@ -11,3 +11,10 @@ export const getDiscover = createSelector(
     return state
   }
 )
+
+export const getDiscoverLoaded = createSelector(
+  getDiscover,
+  (state: DiscoverState) => {
+    return state.loaded
+  }
+)

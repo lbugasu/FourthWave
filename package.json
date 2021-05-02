@@ -47,6 +47,7 @@
     "rxjs": "~6.6.0",
     "stream": "^0.0.2",
     "subscriptions-transport-ws": "^0.9.18",
+    "tailwindcss": "^2.1.2",
     "tslib": "^2.0.0",
     "ws": "^7.4.5",
     "zone.js": "~0.11.3"

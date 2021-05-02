@@ -1,4 +1,4 @@
-import { AuthService } from './../../../shared/services/auth/auth.service'
+import { AuthService } from '../../services/auth.service'
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, exhaustMap, map, pluck } from 'rxjs/operators'

@@ -42,18 +42,16 @@ div.results {
 
   div.episodes {
     width: 37.5%;
-    padding: 2.5%;
-    display: inline-flex;
-    align-items: flex-start;
+    padding-left: 2.5%;
+    display: inline-block;
     div.eps__list {
       display: flex;
       flex-direction: column;
-      height: 10%;
       div.episode {
         display: flex;
         flex-direction: row;
         img {
-          height: 100%;
+          height: 40px;
         }
       }
     }

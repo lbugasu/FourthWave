@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms'
-import { fromEvent } from 'rxjs'
+import { fromEvent, Observable } from 'rxjs'
 import {
   debounceTime,
   distinctUntilChanged,
   pluck,
   switchMap
 } from 'rxjs/operators'
-import { SearchService } from 'src/app/shared/services/search/search.service'
+import { SearchService } from './services/search.service'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 import { Episode } from 'src/app/shared/Models/Episode'
+import { Store } from '@ngrx/store'
+import { AppState } from '../store/app.state'
+import * as SearchActions from './store/search.actions'
+import * as SearchSelectors from './store/search.selectors'
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -20,12 +24,17 @@ export class SearchComponent implements OnInit {
   hideRequiredControl = new FormControl(false)
   floatLabelControl = new FormControl('auto')
 
-  podcasts: Podcast[] = []
-  episodes: Episode[] = []
+  podcasts$: Observable<Podcast[]>
+  episodes$: Observable<Episode[]>
+  searchTerm$: Observable<string>
+  checkPodcasts$: Observable<boolean>
+  checkEpisodes$: Observable<boolean>
 
-  searchPodcasts = true
-  searchEpisodes = true
-  constructor (private fb: FormBuilder, private searchService: SearchService) {
+  constructor (
+    private fb: FormBuilder,
+    private searchService: SearchService,
+    private store: Store<AppState>
+  ) {
     this.options = this.fb.group({
       hideRequired: this.hideRequiredControl,
       floatLabel: this.floatLabelControl
@@ -40,30 +49,29 @@ export class SearchComponent implements OnInit {
       pluck('target', 'value'),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap(value => {
-        console.log(value)
-        //@ts-ignore
-        const string: string = value
-        return this.searchService.searchPodcast(string).valueChanges
-      }),
-      pluck('data', 'findPodcasts')
+      switchMap((value: string) => {
+        // console.log(value)
+        this.store.dispatch(SearchActions.setSearchTerm({ searchTerm: value }))
+
+        return this.store.select(SearchSelectors.getSearchTerm)
+      })
     )
-
+    this.podcasts$ = this.store.select(SearchSelectors.getPodcastResults)
+    this.episodes$ = this.store.select(SearchSelectors.getEpisodeResults)
+    this.searchTerm$ = this.store.select(SearchSelectors.getSearchTerm)
+    this.checkEpisodes$ = this.store.select(SearchSelectors.getSearchEpisodes)
+    this.checkPodcasts$ = this.store.select(SearchSelectors.getSearchPodcasts)
     search$.subscribe(results => {
-      console.log(results)
       //@ts-ignore
-
-      this.podcasts = results
+      this.store.dispatch(SearchActions.searchStart())
     })
   }
 
   checkPodcasts (value: boolean) {
-    this.searchPodcasts = value
-    console.log(this.searchPodcasts)
+    this.store.dispatch(SearchActions.setSearchPodcasts({ search: value }))
   }
 
   checkEpisodes (value: boolean) {
-    this.searchEpisodes = value
-    console.log(this.searchEpisodes)
+    this.store.dispatch(SearchActions.setSearchEpisodes({ search: value }))
   }
 }

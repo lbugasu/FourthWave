@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 import { pluck, switchMap, tap } from 'rxjs/operators'
-import { PodcastService } from '../shared/services/podcast/podcast.service'
+import { PodcastService } from '../podcast/services/podcast.service'
 import * as DiscoverSelectors from './store/discover.selectors'
 import * as DiscoverActions from './store/discover.actions'
 import { Store } from '@ngrx/store'
@@ -28,21 +28,26 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit (): void {
-    this.page
-      .asObservable()
-      .pipe(
-        switchMap((value: number) => {
-          console.log(value)
-          return this.podcastService.getPodcasts(value).valueChanges
-        })
-      )
-      .pipe(pluck('data', 'getPodcasts'))
-      .subscribe((data: any) => {
-        console.log(data)
-        this.podcasts = [...this.podcasts, ...data]
-      })
+    // this.page
+    //   .asObservable()
+    //   .pipe(
+    //     switchMap((value: number) => {
+    //       console.log(value)
+    //       return this.podcastService.getPodcasts(value).valueChanges
+    //     })
+    //   )
+    //   .pipe(pluck('data', 'getPodcasts'))
+    //   .subscribe((data: any) => {
+    //     console.log(data)
+    //     this.podcasts = [...this.podcasts, ...data]
+    //   })
 
-    this.store.dispatch(DiscoverActions.loadDiscoverStart())
+    const loaded$ = this.store.select(DiscoverSelectors.getDiscoverLoaded)
+    loaded$.subscribe(value => {
+      if (!value) {
+        this.store.dispatch(DiscoverActions.loadDiscoverStart())
+      }
+    })
     this.content$ = this.store.select(DiscoverSelectors.getDiscover)
   }
 

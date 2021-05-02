@@ -1,5 +1,21 @@
+span.spacer {
+  flex: 1 1 auto;
+}
+h3 {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  font-weight: 500;
+  font-size: 16pt;
+}
+
 div.page {
   height: 100%;
+  overflow-y: scroll;
   div.trending {
     height: 25%;
     padding: 1%;
@@ -123,6 +139,33 @@ div.page {
     div.top__podcasts {
       width: 30%;
       div.podcast__list {
+        display: flex;
+        flex-direction: column;
+        div.podcast {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1%;
+          a {
+            text-decoration: none;
+          }
+          span.content {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+
+            img {
+              height: 40px;
+            }
+            h3.number {
+              width: 5%;
+            }
+            h3 {
+              text-align: left;
+              padding: 1%;
+            }
+          }
+        }
       }
     }
 
@@ -142,21 +185,6 @@ div.page {
   100% {
     background-position: 0% 50%;
   }
-}
-
-span.spacer {
-  flex: 1 1 auto;
-}
-h3 {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-h2 {
-  font-weight: 500;
-  font-size: 16pt;
 }
 
 // p {

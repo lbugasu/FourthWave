@@ -20,7 +20,9 @@
       </mat-chip-list>
     </div>
     <div class="description">
-      <p [innerHTML]="(content$| async).trending[0]?.description"></p>
+      <p
+        [innerHTML]="(content$| async).trending[0]?.description | wordcount"
+      ></p>
     </div>
     <!-- <span class="spacer"></span> -->
 
@@ -85,7 +87,30 @@
       <h2>
         Top Podcasts
       </h2>
-      <div class="podcast__list"></div>
+      <div class="podcast__list">
+        <div
+          class="podcast"
+          *ngFor="let podcast of (content$| async).mostPopular; let i =index"
+        >
+          <a
+            [routerLink]="['/podcast', podcast.slug]"
+            routerLinkActive="active"
+            [state]="podcast"
+            style.color="#{{(content$| async).mostPopular[i]?.palette[0]}}"
+          >
+            <span class="content">
+              <h3 class="number">{{i+1}}.</h3>
+
+              <img src="{{podcast.image}}" alt="" />
+              <h3>{{podcast.title}}</h3>
+            </span>
+          </a>
+          <mat-divider
+            *ngIf="i+1!=(content$| async).mostPopular
+.length"
+          ></mat-divider>
+        </div>
+      </div>
     </div>
     <div class="top__episodes">
       <h2>

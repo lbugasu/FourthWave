@@ -52,7 +52,6 @@ export class PlayerComponent implements OnInit {
     this.playing$ = this.store.select(playerSelectors.getPlaying)
     this.playing$.subscribe(playingState => {
       this.playing = playingState
-      console.log(this.playing)
       if (!!this.howler) {
         playingState ? this.howler.play() : this.howler.pause()
       }
@@ -60,7 +59,6 @@ export class PlayerComponent implements OnInit {
 
     const episodeQueue$ = this.store.select(playerSelectors.getQueue)
     episodeQueue$.subscribe(episodes => {
-      console.log(episodes)
       this.episodeQueue = episodes
       if (this.episodeQueue.length > 0) {
         if (!!this.howler) this.howler.pause()

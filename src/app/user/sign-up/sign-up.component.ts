@@ -1,10 +1,8 @@
-import { AuthService } from '../../shared/services/auth/auth.service'
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { pluck } from 'rxjs/operators'
 import { Store } from '@ngrx/store'
-import { setUser } from 'src/app/store/app.action'
-import { User } from 'src/app/shared/services/auth/User'
+import { AppState } from 'src/app/store/app.selector'
+import * as UserActions from '../store/actions'
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -16,7 +14,7 @@ export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup
   loading!: boolean
 
-  constructor (private authService: AuthService, private store: Store) {
+  constructor (private store: Store<AppState>) {
     this.signUpForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.min(8)]),
       firstname: new FormControl('', [Validators.required]),
@@ -46,26 +44,7 @@ export class SignUpComponent implements OnInit {
       username: username,
       password: password
     }
-    const observer = {
-      next: () => {},
-      error: () => {},
-      complete: () => {}
-    }
-    this.loading = true
-    this.authService
-      .signUp(user)
-      .pipe(pluck('data', 'signUp'))
-      .subscribe(
-        user => {
-          // this.user = user
-          console.log(user)
-          const userr: User = { username: 'lau', email: '' }
-          this.store.dispatch(setUser({ user: userr }))
-        },
-        error => console.log('#1 Error:', error),
-        () => {
-          this.loading = false
-        }
-      )
+
+    this.store.dispatch(UserActions.signUpStart({ user: user }))
   }
 }
