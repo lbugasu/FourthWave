@@ -83,7 +83,6 @@ const discoverQuery = gql`
       podcast
       epNo
       snNo
-      plays
       slug
     }
   }

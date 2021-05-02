@@ -15,6 +15,7 @@ export interface User {
   playingSpeed: number
   volume: number
   authtoken: string
+  queue: Play[]
 }
 
 export interface NewUser {

@@ -11,6 +11,14 @@ const _userReducer = createReducer(
       loaded: false
     }
   }),
+  on(userActions.signInWithToken, state => {
+    console.log('loading')
+    return {
+      ...state,
+      loading: true,
+      loaded: false
+    }
+  }),
   on(userActions.signInSuccess, (state: UserState, action) => {
     console.log(action)
     return {

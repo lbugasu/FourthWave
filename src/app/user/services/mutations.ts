@@ -20,8 +20,24 @@ export const SIGN_IN = gql`
       bookmarkedEpisodes {
         title
       }
-      plays {
-        episode
+      queue {
+        episode {
+          title
+          slug
+          datePublished
+          description
+          duration
+          image
+          snNo
+          epNo
+          sourceUrl
+          topics {
+            name
+          }
+        }
+        position
+        started
+        completed
       }
       playingSpeed
       volume
@@ -52,8 +68,24 @@ export const SIGN_UP = gql`
       bookmarkedEpisodes {
         title
       }
-      plays {
-        episode
+      queue {
+        episode {
+          title
+          slug
+          datePublished
+          description
+          duration
+          image
+          snNo
+          epNo
+          sourceUrl
+          topics {
+            name
+          }
+        }
+        position
+        started
+        completed
       }
       playingSpeed
       volume
@@ -68,7 +100,7 @@ export const SIGN_OUT = gql`
 `
 
 export const SIGN_IN_WITH_TOKEN = gql`
-  mutation {
+  mutation SignInWithToken {
     signInWithToken {
       firstname
       lastname
@@ -87,12 +119,29 @@ export const SIGN_IN_WITH_TOKEN = gql`
       bookmarkedEpisodes {
         title
       }
-      plays {
-        episode
+      queue {
+        episode {
+          title
+          slug
+          datePublished
+          description
+          duration
+          image
+          snNo
+          epNo
+          sourceUrl
+          topics {
+            name
+          }
+        }
+        position
+        started
+        completed
       }
       playingSpeed
       volume
       authtoken
+      admin
     }
   }
 `

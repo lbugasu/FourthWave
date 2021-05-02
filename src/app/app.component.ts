@@ -1,10 +1,10 @@
 import { signInWithToken } from './user/store/actions/user.actions'
+import { AudioPlayer } from './shared/player/audio/audio.player'
 import { Store } from '@ngrx/store'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { PlayerState } from './shared/player/store/state/player.state'
-import * as playerSelectors from './shared/player/store/selectors'
 import { getUserLoggedInStatus } from './user/store/selectors/user.selector'
+import { AppState } from './store/app.state'
 
 @Component({
   selector: 'app-root',
@@ -13,13 +13,14 @@ import { getUserLoggedInStatus } from './user/store/selectors/user.selector'
 })
 export class AppComponent implements OnInit {
   title = 'eycho'
-  somethingPlaying: boolean = false
+  somethingPlaying: boolean = true
   mini = false
   playing: boolean = false
   loggedIn = false
   constructor (
     private router: Router,
-    private store: Store<{ player: PlayerState }>
+    private store: Store<{ player: AppState }>,
+    public player: AudioPlayer
   ) {}
   navigate (path: string) {
     this.router.navigateByUrl(path)
@@ -28,22 +29,10 @@ export class AppComponent implements OnInit {
     // log in with token
     const token = localStorage.getItem('token')
     if (!!token) {
-      this.store.dispatch(signInWithToken())
+      setTimeout(() => {
+        this.store.dispatch(signInWithToken())
+      }, 2000)
     }
-    const sth$ = this.store.select(playerSelectors.getQueue)
-    sth$.subscribe(queue => {
-      if (queue.length > 0) {
-        this.somethingPlaying = true
-        this.playing = this.somethingPlaying && !this.mini
-      } else {
-        this.somethingPlaying = false
-      }
-    })
-    this.store.select(playerSelectors.getMini).subscribe(value => {
-      this.mini = value
-
-      this.playing = this.somethingPlaying && !this.mini
-    })
 
     // Logged in Status
     this.store

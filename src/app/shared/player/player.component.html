@@ -1,22 +1,25 @@
-<div *ngIf="mini" class="box" cdkDrag>
+<div *ngIf="mini$ | async" class="box" cdkDrag>
   <div class="audio__info">
     <div class="deets">
       <div class="image">
-        <img src="{{getImage()}}" alt="{{getTitle()}}" />
+        <img
+          src="{{(queue$|async)[0]?.episode?.image}}"
+          alt="{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}"
+        />
       </div>
       <div class="time">
         <span>
-          {{this.currentTime | time}}
+          {{player.currentTime | time}}
         </span>
         <mat-divider></mat-divider>
         <span>
-          {{totalDuration | time}}
+          {{player.totalDuration | time}}
         </span>
       </div>
     </div>
 
     <div class="title">
-      <h3>{{getTitle()}}</h3>
+      <h3>{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}</h3>
     </div>
 
     <div class="controls">
@@ -32,7 +35,7 @@
         color="warn"
         aria-label="play pause button"
       >
-        <mat-icon>{{getMiniPlayingState()}}</mat-icon>
+        <mat-icon>{{getMiniPlayingIcon()}}</mat-icon>
       </button>
       <button mat-icon-button>
         <mat-icon>minimize</mat-icon>
@@ -51,16 +54,19 @@
 </div>
 
 <div
-  *ngIf="!mini"
-  [style.visibility]="somethingInQueue? 'visible':'hidden'"
+  *ngIf="!(mini$ | async)"
+  [style.visibility]="(queue$|async).length>0?'visible':'hidden'"
   class="player"
 >
   <div class="audio__info">
     <div class="image">
-      <img src="{{getImage()}}" alt="{{getTitle()}}" />
+      <img
+        src="{{(queue$|async)[0]?.episode?.image}}"
+        alt="{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}"
+      />
     </div>
     <div class="title">
-      <h3>{{getTitle()}}</h3>
+      <h3>{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}</h3>
     </div>
   </div>
 
@@ -78,7 +84,7 @@
         color="warn"
         aria-label="play pause button"
       >
-        <mat-icon>{{getPlayingState()}}</mat-icon>
+        <mat-icon>{{getMainPlayingIcon()}}</mat-icon>
       </button>
       <button mat-icon-button color="accent" aria-label="Rewind">
         <mat-icon>forward_30</mat-icon>
@@ -90,24 +96,24 @@
     <div class="slider">
       <div class="duration">
         <span>
-          {{this.currentTime | time}}
+          {{player.currentTime | time}}
         </span>
       </div>
       <mat-slider
         [min]="0"
         [max]="1"
         [step]="0.001"
-        [tickInterval]="seekTrack()"
-        [(ngModel)]="trackProgress"
+        [tickInterval]="player.seekTrack()"
+        [(ngModel)]="player.trackProgress"
         color="primary"
         #trackSlider
         aria-label="audio slider"
-        (change)="seek()"
+        (change)="player.seek($event)"
       >
       </mat-slider>
       <div class="duration">
         <span>
-          {{totalDuration | time}}
+          {{player.totalDuration | time}}
         </span>
       </div>
     </div>
@@ -124,9 +130,9 @@
         [max]="1"
         [min]="0"
         [step]="0.001"
-        (change)="changeVol($event)"
+        (change)="player.changeVol($event)"
         color="primary"
-        value="{{volume$ | async}}"
+        value="{{player.volume}}"
         aria-label="volume slider"
       ></mat-slider>
     </div>

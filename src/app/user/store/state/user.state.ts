@@ -22,5 +22,6 @@ export const initialUserState: UserState = {
   loading: false,
   loaded: false,
   authtoken: null,
-  loggedIn: false
+  loggedIn: false,
+  queue: []
 }

@@ -1,4 +1,8 @@
+import { Episode } from './Episode'
+
 export interface Play {
-  episode: string
+  episode: Episode
   position: number
+  completed: boolean
+  started: boolean
 }

@@ -1,5 +1,4 @@
 import { switchMap } from 'rxjs/operators'
-import { playerStore } from '../store/player'
 import { PodcastService } from './services/podcast.service'
 import { Component, OnInit } from '@angular/core'
 import { Podcast } from 'src/app/shared/Models/Podcast'
@@ -9,11 +8,11 @@ import { Episode } from 'src/app/shared/Models/Episode'
 import { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 const colors = require('nice-color-palettes')
-import * as playerActions from '../shared/player/store/actions'
-import * as playerSelectors from '../shared/player/store/selectors'
 
-import { PlayerState } from 'src/app/shared/player/store/state/player.state'
 import { Store } from '@ngrx/store'
+import { AppState } from '../store/app.state'
+import * as PlayerSelectors from '../shared/player/store/player.selectors'
+import * as PlayerActions from '../shared/player/store/player.actions'
 @Component({
   selector: 'app-podcast',
   templateUrl: './podcast.component.html',
@@ -32,22 +31,11 @@ export class PodcastComponent implements OnInit {
   constructor (
     private podcastService: PodcastService,
     private location: Location,
-    private store: Store<{ player: PlayerState }>
+    private store: Store<{ player: AppState }>
   ) {
     // This data is passed on the router
     // If the data isn't loaded, load from the server
-    const playingState$ = this.store.select(playerSelectors.getPlaying)
 
-    this.subscriptions = playingState$.subscribe((status: boolean) => {
-      this.playing = status
-    })
-
-    const episodeQueue$ = this.store.select(playerSelectors.getQueue)
-    this.subscriptions.add(
-      episodeQueue$.subscribe(episodes => {
-        this.episodeQueue = episodes
-      })
-    )
     // const state: any = this.location.getState()
 
     // if (!!history.state.navigationId) {
@@ -71,19 +59,17 @@ export class PodcastComponent implements OnInit {
   ngOnInit (): void {}
 
   getPodcastEpisodes (slug: string) {
-    this.subscriptions.add(
-      this.page
-        .asObservable()
-        .pipe(
-          switchMap((value: number) => {
-            return this.podcastService.getEpisodes(slug, value).valueChanges
-          })
-        )
-        .pipe(pluck('data', 'getPodcastEpisodes'))
-        .subscribe((episodes: any) => {
-          this.episodes = [...this.episodes, ...episodes]
+    this.page
+      .asObservable()
+      .pipe(
+        switchMap((value: number) => {
+          return this.podcastService.getEpisodes(slug, value).valueChanges
         })
-    )
+      )
+      .pipe(pluck('data', 'getPodcastEpisodes'))
+      .subscribe((episodes: any) => {
+        this.episodes = [...this.episodes, ...episodes]
+      })
     const element = document.querySelector('#content')
     console.log(element)
   }
@@ -102,18 +88,12 @@ export class PodcastComponent implements OnInit {
   }
 
   play (episode: Episode) {
-    const epIndx = this.episodeQueue.findIndex(
-      ep => episode.sourceUrl == ep.sourceUrl
-    )
-    if (epIndx != 0) {
-      this.store.dispatch(playerActions.addToQueue({ episode: episode }))
-    }
-
-    this.store.dispatch(playerActions.play())
+    // check if the episode is already in the queue, otherwise, add to the top of the queue and play
+    this.store.dispatch(PlayerActions.addToQueueStart({ episode: episode }))
   }
 
   amPlaying (episode: Episode) {
-    const epIndx = this.episodeQueue.findIndex(
+    const epIndx = this.episodeQueue?.findIndex(
       ep => episode.sourceUrl == ep.sourceUrl
     )
     // epIndx == 0 ? console.log(episode) : ''
@@ -129,6 +109,6 @@ export class PodcastComponent implements OnInit {
   ngOnDestroy (): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.subscriptions.unsubscribe()
+    // this.subscriptions.unsubscribe()
   }
 }
