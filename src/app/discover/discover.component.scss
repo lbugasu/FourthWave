@@ -66,23 +66,61 @@ div.page {
   div.featured {
     height: 30%;
     margin: 1%;
+
+    position: relative;
     h2 {
       font-weight: 700;
       font-size: 18pt;
     }
     div.featured__list {
-      height: 100%;
+      height: 90%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      width: 100%;
+      overflow-y: hidden;
+      overflow-x: scroll;
+
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+
       div.podcast {
         border-radius: 5%;
-        height: 100%;
+        height: 90%;
+        padding: 1%;
         background-size: cover;
         img {
           height: 80%;
           border-radius: 5%;
         }
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 0 !important;
+    }
+
+    div.go__left {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      svg {
+        height: 30px;
+        width: 30px;
+        fill: var(--background-primary);
+        background-color: var(--text-light);
+        border-radius: 50%;
+      }
+    }
+    div.go__right {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      svg {
+        height: 30px;
+        width: 30px;
+        fill: var(--background-primary);
+        background-color: var(--text-light);
+        border-radius: 50%;
       }
     }
   }

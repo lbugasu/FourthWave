@@ -31,7 +31,6 @@ const SEARH_EPISODES_QUERY = gql`
       podcast
       epNo
       snNo
-      plays
       slug
     }
   }
@@ -49,7 +48,6 @@ const SEARCH_PODCASTS_AND_EPISODES = gql`
       podcast
       epNo
       snNo
-      plays
       slug
     }
     findPodcasts(searchString: $searchString) {

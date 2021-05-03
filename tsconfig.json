@@ -19,6 +19,7 @@
     "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
+    "types": ["node", "jest"],
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

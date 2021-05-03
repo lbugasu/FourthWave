@@ -11,7 +11,7 @@
       <h1 style.color="#{{(content$| async).trending[0]?.palette[0]}}BF">
         {{(content$| async).trending[0]?.title}}
       </h1>
-      <mat-chip-list aria-label="Fish selection">
+      <mat-chip-list aria-label="Trending play button">
         <mat-chip
           style.background-color="#{{(content$| async).trending[0]?.palette[1]}}66"
           style.margin="1%"
@@ -31,6 +31,23 @@
     </div>
   </div>
   <div class="featured">
+    <div
+      class="go__left"
+      [ngStyle]="{'visibility': !show(false)?'visible':'hidden'}"
+    >
+      <svg
+        (click)="scrollThrough('left')"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </div>
     <h2>Featured</h2>
     <div class="featured__list">
       <div class="podcast" *ngFor="let pod of (content$| async).featured">
@@ -45,6 +62,22 @@
           <h2>{{pod.title}}</h2>
         </div> -->
       </div>
+    </div>
+    <div class="go__right">
+      <svg
+        (click)="scrollThrough('right')"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        viewBox="0 0 20 20"
+        fill="black"
+        [ngStyle]="{'visibility': show(true)?'visible':'hidden'}"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+          clip-rule="evenodd"
+        />
+      </svg>
     </div>
   </div>
   <div class="collections">

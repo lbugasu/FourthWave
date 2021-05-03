@@ -72,4 +72,40 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   ngOnDestroy (): void {
     this.subscription?.unsubscribe()
   }
+  scrollThrough (direction: string) {
+    const element = <HTMLElement>document.querySelector('div.featured__list')
+    this.sideScroll(element, direction, 10, 300, 10)
+
+    console.log(element.scrollLeft)
+  }
+  show (position: boolean) {
+    const element = <HTMLElement>document.querySelector('div.featured__list')
+    const width = element.scrollWidth
+    const left = element.scrollLeft
+
+    if (!position) return left === 0
+    else {
+      return left != width
+    }
+  }
+  sideScroll (
+    element: HTMLElement,
+    direction: string,
+    speed: number,
+    distance: number,
+    step: number
+  ) {
+    let scrollAmount = 0
+    var slideTimer = setInterval(function () {
+      if (direction == 'left') {
+        element.scrollLeft -= step
+      } else {
+        element.scrollLeft += step
+      }
+      scrollAmount += step
+      if (scrollAmount >= distance) {
+        window.clearInterval(slideTimer)
+      }
+    }, speed)
+  }
 }

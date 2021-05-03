@@ -55,13 +55,13 @@
 
 <div
   *ngIf="!(mini$ | async)"
-  [style.visibility]="(queue$|async).length>0?'visible':'hidden'"
+  [style.visibility]="!!(queue$|async)?'visible':'hidden'"
   class="player"
 >
   <div class="audio__info">
     <div class="image">
       <img
-        src="{{(queue$|async)[0]?.episode?.image}}"
+        src="{{!!(queue$|async)?(queue$|async)[0]?.episode?.image:''}}"
         alt="{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}"
       />
     </div>
