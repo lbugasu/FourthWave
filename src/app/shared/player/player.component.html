@@ -61,7 +61,7 @@
   <div class="audio__info">
     <div class="image">
       <img
-        src="{{!!(queue$|async)?(queue$|async)[0]?.episode?.image:''}}"
+        src="{{(queue$|async)[0]?.episode?.image}}"
         alt="{{(queue$|async).length<=0?'':(queue$|async)[0].episode?.title}}"
       />
     </div>

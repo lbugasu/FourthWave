@@ -6,7 +6,9 @@ export const SIGN_IN_START = 'sign in start'
 export const SIGN_IN_SUCCESS = 'sign in success'
 export const SIGN_IN_FAILURE = 'sign in failure'
 
-export const SIGN_IN_WITH_TOKEN = 'sign in with token'
+export const SIGN_IN_WITH_TOKEN_START = 'sign in with token start'
+export const SIGN_IN_WITH_TOKEN_SUCCESS = 'sign in with token success'
+export const SIGN_IN_WITH_TOKEN_FAILURE = 'sign in with token failure'
 
 export const SIGN_UP_START = 'sign up start'
 export const SIGN_UP_SUCCESS = 'sign up success'
@@ -34,7 +36,13 @@ export const signUpSuccess = createAction(
   SIGN_UP_SUCCESS,
   props<{ user: User }>()
 )
-export const signInWithToken = createAction(SIGN_IN_WITH_TOKEN)
+export const signInWithTokenStart = createAction(SIGN_IN_WITH_TOKEN_START)
+export const signInWithTokenSuccess = createAction(
+  SIGN_IN_WITH_TOKEN_SUCCESS,
+  props<{ user: User }>()
+)
+export const signInWithTokenFailure = createAction(SIGN_IN_WITH_TOKEN_FAILURE)
+
 export const signUpFailure = createAction(SIGN_UP_FAILURE)
 
 export const signOutStart = createAction(

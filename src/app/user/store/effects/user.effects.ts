@@ -1,3 +1,5 @@
+import { setContext } from '@apollo/client/link/context'
+import { Apollo } from 'apollo-angular'
 import { AuthService } from '../../services/auth.service'
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
@@ -13,7 +15,8 @@ export class UserEffects {
   constructor (
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private apollo: Apollo
   ) {}
 
   signIn$ = createEffect(() => {
@@ -24,7 +27,6 @@ export class UserEffects {
           tap(console.log),
           pluck('data', 'signin'),
           map((data: User) => {
-            console.log(data)
             const user: User = data
 
             // Save the auth token to the local storage.
@@ -35,6 +37,7 @@ export class UserEffects {
             this.store.dispatch(
               PlayerActions.changeVolumeSuccess({ volume: user.volume })
             )
+
             return userActions.signInSuccess({ user: user })
           }),
           catchError(error => {
@@ -47,35 +50,33 @@ export class UserEffects {
   })
 
   signInWithtoken$ = createEffect(() => {
-    console.log('signint in with token')
     const req$ = this.actions$.pipe(
-      ofType(userActions.signInWithToken),
+      ofType(userActions.signInWithTokenStart),
       exhaustMap(action => {
-        console.log('here')
         return this.authService.signInWithToken()
       }),
       catchError(error => {
         return [userActions.signInFailure()]
       })
     )
-    console.log(req$)
-    req$.subscribe(console.log)
 
     const res$ = req$.pipe(
-      tap(data => console.log(data)),
-      pluck('data'),
+      pluck('data', 'signInWithToken'),
       map((user: User) => {
-        console.log(user)
-        return userActions.signInSuccess({ user: user })
+        this.store.dispatch(
+          PlayerActions.getPlayingQueueSuccess({ plays: user.queue })
+        )
+        this.store.dispatch(
+          PlayerActions.changeVolumeSuccess({ volume: user.volume })
+        )
+        return userActions.signInWithTokenSuccess({ user: user })
       }),
       catchError((error: Error) => {
-        console.log('failed')
-        return [userActions.signInFailure()]
+        console.log(error.message)
+        return [userActions.signInWithTokenFailure()]
       })
     )
-    console.log('here 2')
 
-    console.log(req$)
     return res$
   })
 

@@ -1,3 +1,4 @@
+import { AudioPlayer } from './../shared/player/audio/audio.player'
 import { switchMap } from 'rxjs/operators'
 import { PodcastService } from './services/podcast.service'
 import { Component, OnInit } from '@angular/core'
@@ -31,7 +32,8 @@ export class PodcastComponent implements OnInit {
   constructor (
     private podcastService: PodcastService,
     private location: Location,
-    private store: Store<{ player: AppState }>
+    private store: Store<{ player: AppState }>,
+    private player: AudioPlayer
   ) {
     // This data is passed on the router
     // If the data isn't loaded, load from the server
@@ -39,7 +41,7 @@ export class PodcastComponent implements OnInit {
     // const state: any = this.location.getState()
 
     // if (!!history.state.navigationId) {
-    console.log(this.location.path())
+    // console.log(this.location.path())
     const slug = this.location.path().substr(9)
     this.slug = slug
     this.getPodcastEpisodes(this.slug)
@@ -70,8 +72,6 @@ export class PodcastComponent implements OnInit {
       .subscribe((episodes: any) => {
         this.episodes = [...this.episodes, ...episodes]
       })
-    const element = document.querySelector('#content')
-    console.log(element)
   }
 
   getColors () {
@@ -89,15 +89,30 @@ export class PodcastComponent implements OnInit {
 
   play (episode: Episode) {
     // check if the episode is already in the queue, otherwise, add to the top of the queue and play
-    this.store.dispatch(PlayerActions.addToQueueStart({ episode: episode }))
+    // this.store.dispatch(PlayerActions.addToQueueStart({ episode: episode }))
+    if (!this.player.player) {
+      this.store.dispatch(
+        PlayerActions.addToBeginningOfQueueStart({ episode: episode })
+      )
+    } else if (this.player?.currentlyPlaying.episode.slug == episode.slug) {
+      this.store.dispatch(PlayerActions.playPause())
+    } else {
+      this.store.dispatch(
+        PlayerActions.addToBeginningOfQueueStart({ episode: episode })
+      )
+    }
   }
 
   amPlaying (episode: Episode) {
     const epIndx = this.episodeQueue?.findIndex(
       ep => episode.sourceUrl == ep.sourceUrl
     )
+    if (!this.player.currentlyPlaying) {
+      return 'play_circle_filled'
+    }
     // epIndx == 0 ? console.log(episode) : ''
-    return epIndx == 0 && this.playing
+    return this.player.currentlyPlaying.episode.slug == episode.slug &&
+      this.player.player.playing()
       ? 'pause_circle_filled'
       : 'play_circle_filled'
   }

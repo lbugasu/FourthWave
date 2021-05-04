@@ -1,9 +1,9 @@
-import { signInWithToken } from './user/store/actions/user.actions'
 import { AudioPlayer } from './shared/player/audio/audio.player'
 import { Store } from '@ngrx/store'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { getUserLoggedInStatus } from './user/store/selectors/user.selector'
+import * as UserActions from './user/store/actions/user.actions'
 import { AppState } from './store/app.state'
 
 @Component({
@@ -29,9 +29,9 @@ export class AppComponent implements OnInit {
     // log in with token
     const token = localStorage.getItem('token')
     if (!!token) {
-      setTimeout(() => {
-        this.store.dispatch(signInWithToken())
-      }, 2000)
+      // setTimeout(() => {
+      this.store.dispatch(UserActions.signInWithTokenStart())
+      // }, 1000)
     }
 
     // Logged in Status

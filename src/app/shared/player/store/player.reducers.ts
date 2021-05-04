@@ -10,15 +10,46 @@ const _playerReducer = createReducer(
   on(PlayerActions.changeVolumeSuccess, (state, action) => {
     return { ...state, volume: +action.volume }
   }),
+  on(PlayerActions.changePlayingSpeed, (state, action) => {
+    return { ...state }
+  }),
+  on(PlayerActions.changePlayingSpeedSuccess, (state, action) => {
+    return { ...state, speed: +action.speed }
+  }),
+  on(PlayerActions.changePlayingSpeedFailure, (state, action) => {
+    return { ...state }
+  }),
   on(PlayerActions.addToQueueStart, (state, action) => {
+    console.log(state)
     return { ...state }
   }),
   on(PlayerActions.addToQueueSuccess, (state, action) => {
-    return { ...state, queue: action.plays }
+    return {
+      ...state,
+      queue: !!action.plays ? [...action.plays] : [...state.queue]
+    }
   }),
   on(PlayerActions.addToQueueFailure, state => {
     // How do we deal with failure?
     return { ...state }
+  }),
+  on(PlayerActions.addToBeginningOfQueueStart, (state, action) => {
+    return { ...state }
+  }),
+  on(PlayerActions.addToBeginningOfQueueSuccess, (state, action) => {
+    console.log(state)
+
+    return {
+      ...state,
+      queue: !!action.play ? [action.play, ...state.queue] : [...state.queue]
+    }
+  }),
+  on(PlayerActions.addToBeginningOfQueueFailure, (state, action) => {
+    // How do we deal with failure?
+    return {
+      ...state,
+      queue: !!action.play ? [action.play, ...state.queue] : [...state.queue]
+    }
   }),
   on(PlayerActions.getPlayingQueueStart, state => {
     return {
@@ -31,7 +62,7 @@ const _playerReducer = createReducer(
       ...state,
       loadingPlayPlayingQueue: false,
       loadedPlayingQueue: true,
-      queue: action.plays
+      queue: [...action.plays]
     }
   }),
   on(PlayerActions.getPlayingQueueFailure, state => {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { User } from '../../shared/Models/User'
 import { SIGN_IN, SIGN_IN_WITH_TOKEN, SIGN_OUT, SIGN_UP } from './mutations'
 import { NewUser } from '../../shared/Models/User'
+import { Play } from 'src/app/shared/Models/Play'
 
 @Injectable({
   providedIn: 'root'

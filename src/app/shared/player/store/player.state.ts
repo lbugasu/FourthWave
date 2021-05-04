@@ -8,6 +8,7 @@ export interface PlayerState {
   playing: boolean
   loadingPlayingQueue: boolean
   loadedPlayingQueue: boolean
+  speed: number
 }
 
 export const initialPlayerState: PlayerState = {
@@ -16,5 +17,6 @@ export const initialPlayerState: PlayerState = {
   volume: 0.5,
   playing: false,
   loadedPlayingQueue: false,
-  loadingPlayingQueue: false
+  loadingPlayingQueue: false,
+  speed: 1
 }

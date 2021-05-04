@@ -17,6 +17,7 @@ export class AudioPlayer {
   currentTime = 0
   trackProgress = 0
   volume = 0.5
+  currentlyPlaying: Play
 
   constructor (private store: Store<AppState>) {
     this.store.select(PlayerSelectors.getQueue).subscribe(queue => {
@@ -24,7 +25,7 @@ export class AudioPlayer {
       if (this.queue?.length > 0) {
         this.active = true
         if (!this.player) {
-          this.defineNewState()
+          this.defineNewState(this.queue[0])
         }
       }
     })
@@ -34,27 +35,19 @@ export class AudioPlayer {
     })
   }
 
-  play () {
-    this.player.play()
-  }
-
-  pause () {
-    this.player.pause()
-  }
-
   changeVolume (volume: number) {
-    this.player.volume(volume)
+    if (!!this.player) this.player.volume(volume)
   }
 
   stop () {
     this.player.stop()
   }
 
-  defineNewState () {
-    console.log('new state')
+  defineNewState (item: Play) {
+    this.currentlyPlaying = item
     this.player = new Howl({
       html5: true,
-      src: [this.queue[0].episode.sourceUrl],
+      src: [item.episode.sourceUrl],
       preload: 'metadata',
       onplay: () => {
         // playerStore.updateState({ playingState: true })
@@ -77,11 +70,21 @@ export class AudioPlayer {
         // this.playing = true
       }
     })
+    this.player.seek(item.position)
   }
 
   step = () => {
     this.totalDuration = Math.floor(this.player.duration())
     this.currentTime = Math.floor(this.player.seek() as number)
+
+    if (this.player.playing()) {
+      this.store.dispatch(
+        PlayerActions.updatePlayPositionStart({
+          position: this.currentTime,
+          item: this.queue.length > 0 ? this.queue[0] : null
+        })
+      )
+    }
 
     requestAnimationFrame(this.step)
   }

@@ -21,6 +21,7 @@ export const SIGN_IN = gql`
         title
       }
       queue {
+        _id
         episode {
           title
           slug
@@ -31,9 +32,6 @@ export const SIGN_IN = gql`
           snNo
           epNo
           sourceUrl
-          topics {
-            name
-          }
         }
         position
         started
@@ -69,6 +67,7 @@ export const SIGN_UP = gql`
         title
       }
       queue {
+        _id
         episode {
           title
           slug
@@ -79,9 +78,6 @@ export const SIGN_UP = gql`
           snNo
           epNo
           sourceUrl
-          topics {
-            name
-          }
         }
         position
         started
@@ -120,6 +116,7 @@ export const SIGN_IN_WITH_TOKEN = gql`
         title
       }
       queue {
+        _id
         episode {
           title
           slug
@@ -130,9 +127,6 @@ export const SIGN_IN_WITH_TOKEN = gql`
           snNo
           epNo
           sourceUrl
-          topics {
-            name
-          }
         }
         position
         started

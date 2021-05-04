@@ -11,8 +11,7 @@ const _userReducer = createReducer(
       loaded: false
     }
   }),
-  on(userActions.signInWithToken, state => {
-    console.log('loading')
+  on(userActions.signInWithTokenStart, state => {
     return {
       ...state,
       loading: true,
@@ -20,13 +19,29 @@ const _userReducer = createReducer(
     }
   }),
   on(userActions.signInSuccess, (state: UserState, action) => {
-    console.log(action)
     return {
       ...state,
       loading: false,
       loaded: true,
       loggedIn: true,
       ...action.user
+    }
+  }),
+  on(userActions.signInWithTokenSuccess, (state: UserState, action) => {
+    return {
+      ...state,
+      loading: false,
+      loaded: true,
+      loggedIn: true,
+      ...action.user
+    }
+  }),
+  on(userActions.signInWithTokenFailure, (state: UserState, action) => {
+    return {
+      ...state,
+      loading: false,
+      loaded: false,
+      loggedIn: false
     }
   }),
   on(userActions.signInFailure, state => {

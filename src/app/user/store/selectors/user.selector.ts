@@ -11,3 +11,7 @@ export const getUserLoggedInStatus = createSelector(
   getUser,
   state => state.loggedIn
 )
+
+export const getToken = createSelector(getUser, state => {
+  return state.authtoken
+})

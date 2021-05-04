@@ -19,6 +19,10 @@ export const getQueue = createSelector(getPlayer, state => {
   return state.queue
 })
 
+export const getCurrentlyPlayingItem = createSelector(getQueue, state => {
+  return state[0]
+})
+
 export const getMini = createSelector(getPlayer, state => {
   return state.mini
 })

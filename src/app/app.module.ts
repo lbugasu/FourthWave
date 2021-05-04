@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { Material } from 'src/libs'
 import { ReactiveFormsModule } from '@angular/forms'
 import { GraphQLModule } from './shared/graphql/graphql.module'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from './shared/shared.module'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
@@ -18,6 +18,8 @@ import { _userReducer } from './store/app.reducer'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state'
+import { UserModule } from './user/user.module'
+import { GraphQLInterceptor } from './shared/graphql/interceptor.graphql'
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -32,6 +34,7 @@ import { appReducer } from './store/app.state'
     ComponentsModule,
     SharedModule,
     InfiniteScrollModule,
+    UserModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
@@ -39,7 +42,13 @@ import { appReducer } from './store/app.state'
       logOnly: environment.production
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GraphQLInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

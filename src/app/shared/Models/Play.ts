@@ -5,4 +5,5 @@ export interface Play {
   position: number
   completed: boolean
   started: boolean
+  _id: any
 }

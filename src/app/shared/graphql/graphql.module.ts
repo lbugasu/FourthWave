@@ -23,8 +23,9 @@ export function createApollo (httpLink: HttpLink): ApolloClientOptions<any> {
     }
   }))
 
+  TODO: 'Research more into this: https://medium.com/@kctang/authenticating-apollo-graphql-requests-with-angulars-httpinterceptor-bd3373782ca2'
   const auth = setContext((operation, context) => {
-    if (token === null) {
+    if (!token) {
       return {}
     } else {
       return {
