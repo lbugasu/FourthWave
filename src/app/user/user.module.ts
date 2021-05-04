@@ -11,8 +11,8 @@ import { MeComponent } from './me/me.component'
 import { USER_STATE_NAME } from './store/state/user.state'
 import { EffectsModule } from '@ngrx/effects'
 import { UserEffects } from './store/effects/user.effects'
+import { FormsModule } from '@angular/forms'
 // import { reducers } from './store'
-
 const routes: Routes = [
   {
     path: '',
@@ -27,11 +27,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     Material,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature([UserEffects]),
     StoreModule.forFeature(USER_STATE_NAME, userReducer)
   ],
-  exports: [RouterModule]
+  exports: [CommonModule, RouterModule]
 })
 export class UserModule {}

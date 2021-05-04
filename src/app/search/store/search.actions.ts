@@ -40,3 +40,21 @@ export const setPodcastSearchPage = createAction(
   SET_PODCAST_SEARCH_PAGE,
   props<{ page: number }>()
 )
+
+export const LOAD_SEARCH_RECOMMENDATIONS_START =
+  'load search recommendations start'
+export const LOAD_SEARCH_RECOMMENDATIONS_SUCCESS =
+  'load search recommendations success'
+export const LOAD_SEARCH_RECOMMENDATIONS_FAILURE =
+  'load search recommendations failure'
+
+export const loadSearchRecommendationsStart = createAction(
+  LOAD_SEARCH_RECOMMENDATIONS_START
+)
+export const loadSearchRecommendationsSuccess = createAction(
+  LOAD_SEARCH_RECOMMENDATIONS_SUCCESS,
+  props<{ categories: string[]; topics: string[] }>()
+)
+export const loadSearchRecommendationsFailure = createAction(
+  LOAD_SEARCH_RECOMMENDATIONS_FAILURE
+)

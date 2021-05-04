@@ -8,10 +8,10 @@ export interface UserState extends User {
 }
 
 export const initialUserState: UserState = {
-  username: 'lbugasu',
-  firstname: 'lbugasu',
-  lastname: 'lbugasu',
-  email: 'lbugasu',
+  username: '',
+  firstname: '',
+  lastname: '',
+  email: '',
   active: false,
   likedPodcasts: [],
   likedEpisodes: [],

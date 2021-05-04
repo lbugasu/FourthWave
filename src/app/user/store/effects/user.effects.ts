@@ -1,3 +1,4 @@
+import { Router } from '@angular/router'
 import { setContext } from '@apollo/client/link/context'
 import { Apollo } from 'apollo-angular'
 import { AuthService } from '../../services/auth.service'
@@ -16,7 +17,8 @@ export class UserEffects {
     private actions$: Actions,
     private authService: AuthService,
     private store: Store<AppState>,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private router: Router
   ) {}
 
   signIn$ = createEffect(() => {
@@ -24,7 +26,6 @@ export class UserEffects {
       ofType(userActions.signInStart),
       exhaustMap(action => {
         return this.authService.signIn(action.username, action.password).pipe(
-          tap(console.log),
           pluck('data', 'signin'),
           map((data: User) => {
             const user: User = data
@@ -37,7 +38,7 @@ export class UserEffects {
             this.store.dispatch(
               PlayerActions.changeVolumeSuccess({ volume: user.volume })
             )
-
+            this.router.navigateByUrl('')
             return userActions.signInSuccess({ user: user })
           }),
           catchError(error => {

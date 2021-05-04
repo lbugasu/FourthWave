@@ -1,1 +1,51 @@
-<p>me works!</p>
+<div class="user__profile">
+  <mat-card class="you">
+    <div class="profile__picture">
+      <div
+        class="image"
+        [ngStyle]="{backgroundImage:'url(https://cdnb.artstation.com/p/assets/images/images/023/541/587/original/janaeither-t-profile-gif.gif?1579549292)'}"
+      ></div>
+    </div>
+    <div class="details">
+      <h2>{{(user$|async).firstname}}</h2>
+    </div>
+  </mat-card>
+  <div class="tabs">
+    <div class="settings">
+      <h2>
+        Profile Settings {{' '}}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      </h2>
+      <span class="name">
+        <h3>Firstname:</h3>
+        <h4>{{(user$|async).firstname}}</h4>
+      </span>
+
+      <span class="name">
+        <h3>Lastname:</h3>
+        <h4>{{(user$|async).lastname}}</h4>
+      </span>
+      <span class="name">
+        <h3>Email:</h3>
+        <h4>{{(user$|async).email}}</h4>
+      </span>
+    </div>
+
+    <div class="user__stats">
+      <p>stats go here</p>
+    </div>
+  </div>
+</div>

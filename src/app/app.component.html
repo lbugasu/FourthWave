@@ -41,9 +41,16 @@
     </div>
 
     <div class="menu__item">
+      <button mat-button (click)="navigate('playlist')">
+        {{getWindowWidth()>1200?'Playlists':''}}
+        <mat-icon>playlist_play</mat-icon>
+      </button>
+    </div>
+
+    <div class="menu__item">
       <button mat-button (click)="navigate('library')">
         {{getWindowWidth()>1200?'Library':''}}
-        <mat-icon>library_books</mat-icon>
+        <mat-icon>library_music</mat-icon>
       </button>
     </div>
   </mat-drawer>

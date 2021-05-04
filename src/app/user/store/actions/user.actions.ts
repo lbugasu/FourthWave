@@ -52,10 +52,3 @@ export const signOutStart = createAction(
 export const signOutSuccess = createAction(SIGN_OUT_SUCCESS)
 
 export const signOutFailure = createAction(SIGN_OUT_FAILURE)
-
-// export const changeVolume = createAction(
-//   'change_volume',
-//   props<{ volume: number }>()
-// )
-
-// action types

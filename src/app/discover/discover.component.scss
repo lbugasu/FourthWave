@@ -30,16 +30,23 @@ div.page {
       align-content: center;
       width: 30%;
       height: 80%;
-      padding: 2%;
+      padding: 1%;
       h2 {
+        height: 20%;
         font-size: 16pt;
         font-family: 'Sailec Bold';
         font-weight: 900;
-        margin-bottom: 10%;
+        margin-bottom: 2.5%;
       }
       h1 {
+        height: 60%;
         font-size: 28pt;
         margin-bottom: 5%;
+      }
+      mat-chip-list {
+        mat-chip:hover {
+          cursor: pointer;
+        }
       }
     }
     div.description {
@@ -185,6 +192,7 @@ div.page {
           margin-bottom: 1%;
           a {
             text-decoration: none;
+            color: var(--background-primary);
           }
           span.content {
             height: 100%;

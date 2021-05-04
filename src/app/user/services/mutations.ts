@@ -46,8 +46,8 @@ export const SIGN_IN = gql`
 `
 
 export const SIGN_UP = gql`
-  mutation SignUp($user: NewUser!) {
-    signUp(user: $user) {
+  mutation SignUp($user: User!) {
+    signup(user: $user) {
       firstname
       lastname
       username
@@ -91,7 +91,7 @@ export const SIGN_UP = gql`
 `
 export const SIGN_OUT = gql`
   mutation {
-    signOut
+    signout
   }
 `
 

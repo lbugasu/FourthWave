@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store'
 import { forkJoin, Observable } from 'rxjs'
 import {
   catchError,
+  exhaustMap,
   map,
   mergeMap,
   pluck,
@@ -77,5 +78,29 @@ export class SearchEffects {
     )
 
     return result$
+  })
+
+  loadSearchRecommendations$ = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(SearchActions.loadSearchRecommendationsStart),
+      exhaustMap(action => {
+        return this.searchService.getSearchRecommendations()
+      })
+    )
+
+    const response$ = request$.pipe(
+      pluck('data', 'getSearchRecommendations'),
+      map((result: any) => {
+        return SearchActions.loadSearchRecommendationsSuccess({
+          categories: result.categories,
+          topics: result.topics
+        })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [SearchActions.loadSearchRecommendationsFailure()]
+      })
+    )
+    return response$
   })
 }

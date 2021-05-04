@@ -1,10 +1,11 @@
+import { Router } from '@angular/router'
 import { Component, OnInit } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { FormGroup } from '@angular/forms'
 import { AppState } from 'src/app/store/app.selector'
 import { Store } from '@ngrx/store'
-import * as fromUserStore from '../store'
-
+import * as UserSelectors from '../store/selectors/user.selector'
+import * as UserActions from '../store/actions/user.actions'
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -14,7 +15,7 @@ export class SignInComponent implements OnInit {
   hidePassword = true
   hideConfirm = true
   signInForm!: FormGroup
-  constructor (private store: Store<AppState>) {
+  constructor (private store: Store<AppState>, private router: Router) {
     this.signInForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.min(8)]),
       password: new FormControl('', [Validators.required, Validators.min(8)])
@@ -22,7 +23,12 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit (): void {
-    // this.store.select(fromStore.getUser).subscribe(state => console.log(state))
+    this.store.select(UserSelectors.getUserLoggedInStatus).subscribe(state => {
+      console.log(state)
+      if (state) {
+        this.router.navigateByUrl('')
+      }
+    })
   }
 
   signIn () {
@@ -30,6 +36,6 @@ export class SignInComponent implements OnInit {
 
     const password = this.signInForm.get('password').value
 
-    this.store.dispatch(fromUserStore.signInStart({ username, password }))
+    this.store.dispatch(UserActions.signInStart({ username, password }))
   }
 }

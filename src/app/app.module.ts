@@ -33,8 +33,8 @@ import { GraphQLInterceptor } from './shared/graphql/interceptor.graphql'
     HttpClientModule,
     ComponentsModule,
     SharedModule,
-    InfiniteScrollModule,
     UserModule,
+    InfiniteScrollModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

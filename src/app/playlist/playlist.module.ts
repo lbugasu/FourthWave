@@ -1,19 +1,19 @@
+import { RouterModule } from '@angular/router'
+import { SharedModule } from './../shared/shared.module'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { TopicComponent } from './topic.component'
-import { RouterModule } from '@angular/router'
-import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+import { PlaylistComponent } from './playlist.component'
 import { Material } from 'src/libs'
-import { SharedModule } from '../shared/shared.module'
 
 const routes = [
   {
     path: '',
-    component: TopicComponent
+    component: PlaylistComponent
   }
 ]
 @NgModule({
-  declarations: [TopicComponent],
+  declarations: [PlaylistComponent],
   imports: [
     CommonModule,
     Material,
@@ -22,4 +22,4 @@ const routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class TopicModule {}
+export class PlaylistModule {}

@@ -20,9 +20,8 @@ export class DiscoverEffects {
       })
     )
     const response$ = request$.pipe(
-      tap(console.log),
       pluck('data'),
-      map(result => {
+      map((result: any) => {
         return DiscoverActions.loadDiscoverSuccess({
           featured: result.getFeatured,
           trending: result.getTrending,

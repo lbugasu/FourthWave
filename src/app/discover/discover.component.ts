@@ -7,6 +7,7 @@ import { PodcastService } from '../podcast/services/podcast.service'
 import * as DiscoverSelectors from './store/discover.selectors'
 import * as DiscoverActions from './store/discover.actions'
 import { Store } from '@ngrx/store'
+import { Router } from '@angular/router'
 const ColorScheme = require('color-scheme')
 
 @Component({
@@ -24,7 +25,8 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   content$: Observable<DiscoverState>
   constructor (
     private podcastService: PodcastService,
-    private store: Store<{ discover: DiscoverState }>
+    private store: Store<{ discover: DiscoverState }>,
+    private router: Router
   ) {}
 
   ngOnInit (): void {
@@ -61,6 +63,9 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     this.viewState = view
   }
 
+  goToFeatured (podcast: Podcast) {
+    this.router.navigateByUrl(`podcast/${podcast.slug}`)
+  }
   getColors () {
     var scheme = new ColorScheme()
     scheme
@@ -69,9 +74,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
       .variation('default')
     return scheme.colors()
   }
-  ngOnDestroy (): void {
-    this.subscription?.unsubscribe()
-  }
+
   scrollThrough (direction: string) {
     const element = <HTMLElement>document.querySelector('div.featured__list')
     this.sideScroll(element, direction, 10, 300, 10)
@@ -107,5 +110,9 @@ export class DiscoverComponent implements OnInit, OnDestroy {
         window.clearInterval(slideTimer)
       }
     }, speed)
+  }
+
+  ngOnDestroy (): void {
+    this.subscription?.unsubscribe()
   }
 }

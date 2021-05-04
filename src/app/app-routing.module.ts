@@ -30,15 +30,22 @@ const routes: Routes = [
       import('./your-library/your-library.module').then(
         m => m.YourLibraryModule
       )
+  },
+  {
+    path: 'playlist',
+    loadChildren: () =>
+      import('./playlist/playlist.module').then(m => m.PlaylistModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () =>
+      import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./category/category.module').then(m => m.CategoryModule)
   }
-  // {
-  //   path: 'signin',
-  //   component: SignInComponent
-  // },
-  // {
-  //   path: 'signup',
-  //   component: SignUpComponent
-  // }
 ]
 
 @NgModule({

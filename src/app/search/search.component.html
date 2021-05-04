@@ -1,7 +1,12 @@
 <div class="search__bar">
   <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
     <mat-label>Search</mat-label>
-    <input id="search" matInput placeholder="eg. Stuff of Life" />
+    <input
+      id="search"
+      matInput
+      placeholder="eg. Stuff of Life"
+      value="{{searchTerm$|async}}"
+    />
   </mat-form-field>
   <section class="checked">
     <mat-checkbox
