@@ -2,7 +2,7 @@ import { AudioPlayer } from './../shared/player/audio/audio.player'
 import { switchMap } from 'rxjs/operators'
 import { PodcastService } from './services/podcast.service'
 import { Component, OnInit } from '@angular/core'
-import { Podcast. Episode } from 'src/app/shared/Models'
+import { Podcast, Episode } from 'src/app/shared/Models'
 import { Location } from '@angular/common'
 import { pluck, first } from 'rxjs/operators'
 import { Observable, Subscription } from 'rxjs'
@@ -64,7 +64,7 @@ export class PodcastComponent implements OnInit {
       .asObservable()
       .pipe(
         switchMap((value: number) => {
-          return this.podcastService.getEpisodes(slug, value).valueChanges
+          return this.podcastService.getEpisodes(slug, value)
         })
       )
       .pipe(pluck('data', 'getPodcastEpisodes'))

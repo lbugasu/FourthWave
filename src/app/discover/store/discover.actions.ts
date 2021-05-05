@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store'
-import { Category } from 'src/app/shared/Models/Category'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Category, Episode, Podcast } from 'src/app/shared/Models'
+
 export const LOAD_DISCOVER_START = 'load discover start'
 export const LOAD_DISCOVER_SUCCESS = 'load discover success'
 export const LOAD_DISCOVER_FAILURE = 'load discover failure'
