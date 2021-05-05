@@ -96,6 +96,28 @@ export const UPDATE_PLAY_POSITION = gql`
     }
   }
 `
+
+export const COMPLETE_AND_GO_TO_NEXT = gql`
+  mutation completeAndGotoNext($playId: String!) {
+    completeAndGoToNext(playId: $playId) {
+      _id
+      episode {
+        title
+        slug
+        datePublished
+        description
+        duration
+        image
+        snNo
+        epNo
+        sourceUrl
+      }
+      position
+      started
+      completed
+    }
+  }
+`
 export const UPDATE_PLAYER_QUEUE = gql`
   mutation updatePlayerQueue($queue: [String]!) {
     updatePlayerQueue(queue: $queue) {

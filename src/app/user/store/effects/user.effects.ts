@@ -114,7 +114,7 @@ export class UserEffects {
       }),
       catchError(error => {
         console.log(error.message)
-        return [userActions.signInFailure]
+        return [userActions.signUpFailure()]
       })
     )
     return result$

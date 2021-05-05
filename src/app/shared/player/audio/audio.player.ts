@@ -63,8 +63,12 @@ export class AudioPlayer {
         console.log(new Error('playback error'))
       },
       onend: () => {
-        // playerStore.updateState({ playingState: false })
-        // this.playing = true
+        console.log('ended')
+        if (this.queue.length >= 1) {
+          this.store.dispatch(PlayerActions.completeAndPlayNextStart())
+        } else {
+          this.active = false
+        }
       },
       onstop: () => {
         // this.playing = true

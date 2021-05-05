@@ -1,3 +1,4 @@
+import { Category } from 'src/app/shared/Models/Category'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 
@@ -8,7 +9,7 @@ export const DISCOVER_STATE_NAME = 'discover'
 export interface DiscoverState {
   featured: Podcast[]
   trending: Podcast[]
-  genres: string[]
+  categories: Category[]
   topEpisodes: Episode[]
   mostPopular: Podcast[]
   loading: boolean
@@ -18,7 +19,7 @@ export interface DiscoverState {
 export const initialDiscoverState: DiscoverState = {
   featured: [],
   trending: [],
-  genres: [],
+  categories: [],
   topEpisodes: [],
   mostPopular: [],
   loading: false,

@@ -66,6 +66,7 @@ export class SearchEffects {
     const result$ = request$.pipe(
       pluck('data'),
       map((result: any) => {
+        console.log(result)
         return SearchActions.searchSuccess({
           podcasts: result?.findPodcasts || [],
           episodes: result?.findEpisodes || []
@@ -89,11 +90,12 @@ export class SearchEffects {
     )
 
     const response$ = request$.pipe(
-      pluck('data', 'getSearchRecommendations'),
+      pluck('data'),
       map((result: any) => {
+        console.log(result)
         return SearchActions.loadSearchRecommendationsSuccess({
-          categories: result.categories,
-          topics: result.topics
+          categories: result.getCategorySearchRecommendations,
+          topics: result.getTopicSearchRecommendations
         })
       }),
       catchError((error: Error) => {

@@ -13,7 +13,7 @@
   </button>
 </mat-toolbar>
 <mat-drawer-container
-  [ngStyle]="{height: player.active?'84vh':'93vh'}"
+  [ngStyle]="{height: player.active&& !(mini$|async)?'84vh':'93vh'}"
   class="example-container"
 >
   <mat-drawer #drawer mode="side" opened>

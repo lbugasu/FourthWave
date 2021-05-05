@@ -14,6 +14,10 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import * as SearchActions from './store/search.actions'
 import * as SearchSelectors from './store/search.selectors'
+import { Category } from '../shared/Models/Category'
+import { Topic } from '../shared/Models/Topic'
+const ColorScheme = require('color-scheme')
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -29,6 +33,8 @@ export class SearchComponent implements OnInit {
   searchTerm$: Observable<string>
   checkPodcasts$: Observable<boolean>
   checkEpisodes$: Observable<boolean>
+  categories$: Observable<Category[]>
+  topics$: Observable<Topic[]>
 
   constructor (
     private fb: FormBuilder,
@@ -61,10 +67,17 @@ export class SearchComponent implements OnInit {
     this.searchTerm$ = this.store.select(SearchSelectors.getSearchTerm)
     this.checkEpisodes$ = this.store.select(SearchSelectors.getSearchEpisodes)
     this.checkPodcasts$ = this.store.select(SearchSelectors.getSearchPodcasts)
+    this.topics$ = this.store.select(SearchSelectors.getRecommendedTopics)
+    this.categories$ = this.store.select(
+      SearchSelectors.getRecommendedCategories
+    )
+
     search$.subscribe(results => {
       //@ts-ignore
       this.store.dispatch(SearchActions.searchStart())
     })
+
+    this.store.dispatch(SearchActions.loadSearchRecommendationsStart())
   }
 
   checkPodcasts (value: boolean) {
@@ -73,5 +86,22 @@ export class SearchComponent implements OnInit {
 
   checkEpisodes (value: boolean) {
     this.store.dispatch(SearchActions.setSearchEpisodes({ search: value }))
+  }
+
+  getTopicColors () {
+    var scheme = new ColorScheme()
+    scheme
+      .from_hue(20)
+      .scheme('triade')
+      .variation('default')
+    return scheme.colors()
+  }
+  getCategoryColors () {
+    var scheme = new ColorScheme()
+    scheme
+      .from_hue(50)
+      .scheme('tetrade')
+      .variation('pastel')
+    return scheme.colors()
   }
 }

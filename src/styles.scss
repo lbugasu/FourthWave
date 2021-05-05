@@ -26,3 +26,28 @@ p {
   font-weight: 400;
   font-style: normal;
 }
+
+// Scroll Bar
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5a5370;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #918aad;
+}
+::-webkit-scrollbar:horizontal {
+  display: none;
+}

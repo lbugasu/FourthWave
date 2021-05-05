@@ -70,6 +70,7 @@ export class PodcastComponent implements OnInit {
       )
       .pipe(pluck('data', 'getPodcastEpisodes'))
       .subscribe((episodes: any) => {
+        console.log(episodes)
         this.episodes = [...this.episodes, ...episodes]
       })
   }
@@ -113,6 +114,13 @@ export class PodcastComponent implements OnInit {
     // epIndx == 0 ? console.log(episode) : ''
     return this.player.currentlyPlaying.episode.slug == episode.slug &&
       this.player.player.playing()
+      ? 'pause_circle_filled'
+      : 'play_circle_filled'
+  }
+
+  podcastPlaying () {
+    const _slug = this.player.currentlyPlaying.episode.slug.split('?')[0]
+    return _slug == this.slug && this.player.player.playing()
       ? 'pause_circle_filled'
       : 'play_circle_filled'
   }

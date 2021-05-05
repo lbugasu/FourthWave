@@ -1,4 +1,4 @@
-import { gql } from "apollo-angular";
+import { gql } from 'apollo-angular'
 
 export const SEARCH_QUERY = gql`
   query FindPodcasts($searchString: String!) {
@@ -11,7 +11,13 @@ export const SEARCH_QUERY = gql`
       description
       lastRssBuildDate
       slug
-      categories
+      categories {
+        title
+      }
+      topics {
+        name
+        type
+      }
     }
   }
 `
@@ -46,6 +52,10 @@ export const SEARCH_PODCASTS_AND_EPISODES = gql`
       epNo
       snNo
       slug
+      topics {
+        name
+        type
+      }
     }
     findPodcasts(searchString: $searchString) {
       title
@@ -58,7 +68,24 @@ export const SEARCH_PODCASTS_AND_EPISODES = gql`
       palette
       lastRssBuildDate
       slug
-      categories
+      categories {
+        title
+      }
+      topics {
+        name
+        type
+      }
+    }
+  }
+`
+export const GET_SEARCH_RECOMMENDATIONS = gql`
+  query GetSearchRecommendations {
+    getTopicSearchRecommendations {
+      type
+      name
+    }
+    getCategorySearchRecommendations {
+      title
     }
   }
 `

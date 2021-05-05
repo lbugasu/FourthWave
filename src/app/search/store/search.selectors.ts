@@ -1,6 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
+import { Category } from 'src/app/shared/Models/Category'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Topic } from 'src/app/shared/Models/Topic'
 import { SearchState, SEARCH_STATE_NAME } from './search.state'
 
 const getSearchState = createFeatureSelector<SearchState>(SEARCH_STATE_NAME)
@@ -67,5 +69,19 @@ export const getEpisodeSearchPage = createSelector(
   getSearch,
   (state: SearchState): number => {
     return state.episodeSearchPage
+  }
+)
+
+export const getRecommendedTopics = createSelector(
+  getSearch,
+  (state: SearchState): Topic[] => {
+    return state.topicRecommendations
+  }
+)
+
+export const getRecommendedCategories = createSelector(
+  getSearch,
+  (state: SearchState): Category[] => {
+    return state.categoryRecommendations
   }
 )

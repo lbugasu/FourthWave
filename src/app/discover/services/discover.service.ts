@@ -25,7 +25,9 @@ const discoverQuery = gql`
       palette
       lastRssBuildDate
       slug
-      categories
+      categories {
+        title
+      }
       topics {
         name
         type
@@ -44,10 +46,12 @@ const discoverQuery = gql`
       palette
       lastRssBuildDate
       slug
-      categories
+      categories {
+        title
+      }
       topics {
-        type
         name
+        type
       }
       episodes
     }
@@ -63,15 +67,19 @@ const discoverQuery = gql`
       palette
       lastRssBuildDate
       slug
-      categories
+      categories {
+        title
+      }
       topics {
-        type
         name
+        type
       }
       episodes
     }
 
-    getGenres
+    getCategories {
+      title
+    }
 
     topEpisodes {
       title
@@ -84,6 +92,10 @@ const discoverQuery = gql`
       epNo
       snNo
       slug
+      topics {
+        name
+        type
+      }
     }
   }
 `

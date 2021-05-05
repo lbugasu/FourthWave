@@ -18,22 +18,47 @@
       <img id="podcast__image" src="{{ (podcast$ |async)?.image }}" alt="" />
     </mat-card>
     <div class="podcast__data">
-      <h2 style.color="#{{ (podcast$ | async)?.palette[4] }}">
-        {{ (podcast$|async)?.title }}
-      </h2>
-      <h3 style.color="#{{ (podcast$ | async)?.palette[2] }}">
-        {{ (podcast$|async)?.publisher }}
-      </h3>
+      <div class="metadata">
+        <div class="headings">
+          <h2 style.color="#{{ (podcast$ | async)?.palette[4] }}">
+            {{ (podcast$|async)?.title }}
+          </h2>
+          <h3 style.color="#{{ (podcast$ | async)?.palette[2] }}">
+            {{ (podcast$|async)?.publisher }}
+          </h3>
+        </div>
+        <div class="description">
+          <p>{{ (podcast$ | async)?.description }}</p>
+        </div>
+      </div>
+
       <div class="container">
         <button
+          class="play"
           mat-icon-button
           color="primary"
-          aria-label="Example icon button with a home icon"
+          aria-label="play"
+          disabled
         >
           <mat-icon style.color="#{{ (podcast$|async)?.palette[3] }}"
-            >play_circle_filled</mat-icon
+            >{{podcastPlaying()}}</mat-icon
           >
         </button>
+        <span class="action__buttons">
+          <button
+            [ngStyle]="{'color': 'var(--button-primary)'}"
+            mat-raised-button
+          >
+            Subscribe{{" "}}
+          </button>
+          <button
+            mat-icon-button
+            [ngStyle]="{'color': 'var(--gray-like)'}"
+            aria-label="Like this podcast"
+          >
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </span>
       </div>
     </div>
   </div>

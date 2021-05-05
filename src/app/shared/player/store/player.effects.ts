@@ -18,6 +18,7 @@ import { AppState } from 'src/app/store/app.state'
 import * as PlayerActions from './player.actions'
 import * as PlayerSelectors from './player.selectors'
 import { Episode } from '../../Models/Episode'
+import { asyncScheduler } from 'rxjs'
 
 @Injectable()
 export class PlayerEffects {
@@ -94,7 +95,7 @@ export class PlayerEffects {
         // this.player.pause()
         // this.player.defineNewState(play)
         // this.player.play()
-
+        console.log(play)
         return PlayerActions.addToBeginningOfQueueSuccess({ play: play })
       }),
       catchError((error: Error) => {
@@ -188,10 +189,11 @@ export class PlayerEffects {
       concatLatestFrom(action =>
         this.store.select(PlayerSelectors.getCurrentlyPlayingItem)
       ),
-      throttleTime(1000 * 10),
+      throttleTime(1000 * 10, asyncScheduler, {
+        leading: false,
+        trailing: true
+      }),
       exhaustMap(([action, playerState]) => {
-        console.log('updating')
-
         return this.playerService.updatePlayPosition(
           action.position,
           action.item._id
@@ -200,11 +202,11 @@ export class PlayerEffects {
     )
 
     const response$ = request$.pipe(
-      pluck('data', 'updatePlayPosition'),
+      pluck('data', 'updatePosition'),
       map((play: Play) => {
-        console.log('updated playing position')
         return PlayerActions.updatePlayPositionSuccess()
       }),
+
       catchError((error: Error) => {
         console.log(error.message)
         return [PlayerActions.updatePlayingQueueFailure()]
@@ -233,6 +235,36 @@ export class PlayerEffects {
       catchError((error: Error) => {
         console.log(error.message)
         return [PlayerActions.updatePlayingQueueFailure()]
+      })
+    )
+    return response$
+  })
+
+  goToNextInQueue = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(PlayerActions.completeAndPlayNextStart),
+      concatLatestFrom(action => this.store.select(PlayerSelectors.getQueue)),
+      exhaustMap(([action, playerState]) => {
+        const play = playerState[0]
+        return this.playerService.completeAndGoToNext(play._id)
+      })
+    )
+    const response$ = request$.pipe(
+      pluck('data', 'completeAndGoToNext'),
+      map((queue: Play[]) => {
+        console.log(queue)
+        if (queue.length > 0) {
+          this.player.defineNewState(queue[0])
+          this.player.player.play()
+        }
+
+        return PlayerActions.completeAndPlayNextSuccess({
+          queue: queue.length > 0 ? queue : []
+        })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [PlayerActions.completeAndPlayNextFailure()]
       })
     )
     return response$

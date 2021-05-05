@@ -5,7 +5,8 @@ import { Podcast } from 'src/app/shared/Models/Podcast'
 import {
   SEARCH_QUERY,
   SEARH_EPISODES_QUERY,
-  SEARCH_PODCASTS_AND_EPISODES
+  SEARCH_PODCASTS_AND_EPISODES,
+  GET_SEARCH_RECOMMENDATIONS
 } from './gql'
 
 @Injectable({
@@ -32,6 +33,11 @@ export class SearchService {
     return this.apollo.watchQuery({
       query: SEARCH_PODCASTS_AND_EPISODES,
       variables: { searchString: searchString }
+    }).valueChanges
+  }
+  getSearchRecommendations () {
+    return this.apollo.watchQuery({
+      query: GET_SEARCH_RECOMMENDATIONS
     }).valueChanges
   }
 }

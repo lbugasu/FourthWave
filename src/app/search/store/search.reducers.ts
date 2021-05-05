@@ -58,6 +58,31 @@ const _searchReducer = createReducer(
       ...state,
       searchPodcasts: action.search
     }
+  }),
+  on(SearchActions.loadSearchRecommendationsStart, (state: SearchState) => {
+    return {
+      ...state,
+      recommendationsLoading: true
+    }
+  }),
+  on(
+    SearchActions.loadSearchRecommendationsSuccess,
+    (state: SearchState, action) => {
+      return {
+        ...state,
+        recommendationsLoading: false,
+        recommendationsLoaded: true,
+        topicRecommendations: [...action.topics],
+        categoryRecommendations: [...action.categories]
+      }
+    }
+  ),
+  on(SearchActions.loadSearchRecommendationsFailure, state => {
+    return {
+      ...state,
+      recommendationsLoaded: false,
+      recommendationsLoading: false
+    }
   })
 )
 

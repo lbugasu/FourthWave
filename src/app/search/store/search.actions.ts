@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store'
+import { Category } from 'src/app/shared/Models/Category'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Topic } from 'src/app/shared/Models/Topic'
 
 export const SEARCH_START = 'search start'
 export const SEARCH_SUCCESS = 'search success'
@@ -53,7 +55,7 @@ export const loadSearchRecommendationsStart = createAction(
 )
 export const loadSearchRecommendationsSuccess = createAction(
   LOAD_SEARCH_RECOMMENDATIONS_SUCCESS,
-  props<{ categories: string[]; topics: string[] }>()
+  props<{ categories: Category[]; topics: Topic[] }>()
 )
 export const loadSearchRecommendationsFailure = createAction(
   LOAD_SEARCH_RECOMMENDATIONS_FAILURE

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store'
+import { Category } from 'src/app/shared/Models/Category'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Podcast } from 'src/app/shared/Models/Podcast'
 export const LOAD_DISCOVER_START = 'load discover start'
@@ -12,10 +13,10 @@ export const loadDiscoverSuccess = createAction(
   props<{
     featured: Podcast[]
     trending: Podcast[]
-    genres: string[]
+    categories: Category[]
     mostPopular: Podcast[]
     topEpisodes: Episode[]
   }>()
 )
 
-export const loadDiscoverFailure = createAction( LOAD_DISCOVER_FAILURE)
+export const loadDiscoverFailure = createAction(LOAD_DISCOVER_FAILURE)

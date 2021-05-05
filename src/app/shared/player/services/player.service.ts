@@ -8,7 +8,8 @@ import {
   UPDATE_PLAY_POSITION,
   CLEAR_QUEUE,
   UPDATE_PLAYER_QUEUE,
-  ADD_TO_BEGINNING_OF_QUEUE
+  ADD_TO_BEGINNING_OF_QUEUE,
+  COMPLETE_AND_GO_TO_NEXT
 } from './gql'
 import { Play } from '../../Models/Play'
 
@@ -55,6 +56,13 @@ export class PlayerService {
     return this.apollo.mutate({
       mutation: UPDATE_PLAY_POSITION,
       variables: { position: position, playId: playId }
+    })
+  }
+
+  completeAndGoToNext (playId: string) {
+    return this.apollo.mutate({
+      mutation: COMPLETE_AND_GO_TO_NEXT,
+      variables: { playId: playId }
     })
   }
 

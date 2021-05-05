@@ -183,3 +183,18 @@ export const prevFailure = createAction(PREVIOUS_FAILURE)
 const TOGGLE_MINI_PLAYER = 'toggle mini player'
 
 export const toggleMiniPlayer = createAction(TOGGLE_MINI_PLAYER)
+
+const COMPLETE_AND_PLAY_NEXT_START = 'complete and play next start'
+const COMPLETE_AND_PLAY_NEXT_SUCCESS = 'complete and play next success'
+const COMPLETE_AND_PLAY_NEXT_FAILURE = 'complete and play next failure'
+
+export const completeAndPlayNextStart = createAction(
+  COMPLETE_AND_PLAY_NEXT_START
+)
+export const completeAndPlayNextSuccess = createAction(
+  COMPLETE_AND_PLAY_NEXT_SUCCESS,
+  props<{ queue: Play[] }>()
+)
+export const completeAndPlayNextFailure = createAction(
+  COMPLETE_AND_PLAY_NEXT_FAILURE
+)

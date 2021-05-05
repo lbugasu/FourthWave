@@ -1,5 +1,7 @@
+import { Category } from 'src/app/shared/Models/Category'
 import { Episode } from 'src/app/shared/Models/Episode'
 import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Topic } from 'src/app/shared/Models/Topic'
 
 export const SEARCH_STATE_NAME = 'search'
 
@@ -13,6 +15,10 @@ export interface SearchState {
   searchEpisodes: boolean
   podcastSearchPage: number
   episodeSearchPage: number
+  recommendationsLoading: boolean
+  recommendationsLoaded: boolean
+  topicRecommendations: Topic[]
+  categoryRecommendations: Category[]
 }
 
 export const initiaialSearchState: SearchState = {
@@ -24,5 +30,9 @@ export const initiaialSearchState: SearchState = {
   searchEpisodes: false,
   searchPodcasts: true,
   podcastSearchPage: 0,
-  episodeSearchPage: 0
+  episodeSearchPage: 0,
+  recommendationsLoading: false,
+  recommendationsLoaded: false,
+  topicRecommendations: [],
+  categoryRecommendations: []
 }

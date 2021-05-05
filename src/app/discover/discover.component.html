@@ -56,7 +56,11 @@
           routerLinkActive="active"
           [state]="pod"
         >
-          <img src="{{pod.image}}" alt="{{pod.title}}" />
+          <img
+            src="{{pod.image}}"
+            alt="{{pod.title}}"
+            [ngStyle]="{'box-shadow': '-5px 5px 10px #'+ pod.palette[1]+', 5px -5px 10px#'+ pod.palette[2]}"
+          />
         </a>
         <!-- <div class="title">
           <h2>{{pod.title}}</h2>
@@ -81,7 +85,7 @@
     </div>
   </div>
   <div class="collections">
-    <div class="genres">
+    <div class="categories">
       <div class="header">
         <h2>Categories</h2>
         <span class="spacer"></span>
@@ -106,13 +110,13 @@
         </div>
       </div>
 
-      <div class="genre__boxes">
+      <div class="category__boxes">
         <div
-          class="genre"
-          *ngFor="let genre of (content$| async).genres.slice(0, 9); let i =index"
+          class="category"
+          *ngFor="let category of (content$| async).categories.slice(0, 9); let i =index"
           style.background-color="#{{getColors()[i]}}66"
         >
-          <p>{{genre}}</p>
+          <p>{{category.title}}</p>
         </div>
       </div>
     </div>

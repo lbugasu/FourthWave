@@ -25,7 +25,7 @@ export class DiscoverEffects {
         return DiscoverActions.loadDiscoverSuccess({
           featured: result.getFeatured,
           trending: result.getTrending,
-          genres: result.getGenres,
+          categories: result.getCategories,
           topEpisodes: result.topEpisodes,
           mostPopular: result.getTopPlayed
         })

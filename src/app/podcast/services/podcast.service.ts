@@ -13,11 +13,13 @@ const GET_PODCASTS_QUERY = gql`
       description
       lastRssBuildDate
       slug
-      categories
       palette
+      categories {
+        title
+      }
       topics {
-        type
         name
+        type
       }
     }
   }
@@ -34,11 +36,13 @@ const SINGLE_PODCAST_QUERY = gql`
       description
       lastRssBuildDate
       slug
-      categories
       palette
+      categories {
+        title
+      }
       topics {
-        type
         name
+        type
       }
     }
   }

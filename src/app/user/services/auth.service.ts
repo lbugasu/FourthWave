@@ -22,7 +22,7 @@ export class AuthService {
   signUp (user: NewUser) {
     return this.apollo.mutate<User>({
       mutation: SIGN_UP,
-      variables: { user: user }
+      variables: { ...user }
     })
   }
 

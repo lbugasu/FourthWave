@@ -1,12 +1,7 @@
 <div class="search__bar">
   <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
     <mat-label>Search</mat-label>
-    <input
-      id="search"
-      matInput
-      placeholder="eg. Stuff of Life"
-      value="{{searchTerm$|async}}"
-    />
+    <input id="search" matInput placeholder="eg. Stuff of Life" value="" />
   </mat-form-field>
   <section class="checked">
     <mat-checkbox
@@ -21,7 +16,29 @@
     >
   </section>
 </div>
-<div class="results">
+<div *ngIf="(searchTerm$|async).length<3" class="search__recommendations">
+  <div class="categories">
+    <h4>Categories</h4>
+    <mat-chip-list aria-label="list of topics">
+      <mat-chip
+        [ngStyle]="{'background-color': '#'+getCategoryColors()[i]+'76'}"
+        *ngFor="let category of (categories$|async), let i=index"
+        >{{category.title}}</mat-chip
+      >
+    </mat-chip-list>
+  </div>
+  <div class="topics">
+    <h4>Topics:</h4>
+    <mat-chip-list aria-label="list of topics">
+      <mat-chip
+        [ngStyle]="{'background-color': '#'+getTopicColors()[i]+'66'}"
+        *ngFor="let topic of (topics$|async); let i =index"
+        >{{topic.name}}</mat-chip
+      >
+    </mat-chip-list>
+  </div>
+</div>
+<div *ngIf="(searchTerm$|async).length>2" class="results">
   <div class="pods">
     <h2>Podcasts</h2>
     <div class="pod__list">

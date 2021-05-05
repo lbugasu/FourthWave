@@ -72,6 +72,24 @@ const _playerReducer = createReducer(
       loadedPlayingQueue: false
     }
   }),
+  // Go to the next episode in the queue
+  on(PlayerActions.completeAndPlayNextStart, (state, action) => {
+    return {
+      ...state
+    }
+  }),
+  on(PlayerActions.completeAndPlayNextSuccess, (state, action) => {
+    console.log(action)
+    return {
+      ...state,
+      queue: [...action.queue]
+    }
+  }),
+  on(PlayerActions.completeAndPlayNextFailure, (state, action) => {
+    return {
+      ...state
+    }
+  }),
   on(PlayerActions.playPauseSuccess, (state, action) => {
     return { ...state, playing: action.playing }
   }),

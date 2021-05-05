@@ -12,7 +12,7 @@ const _discoverReducer = createReducer(
       ...state,
       featured: action.featured,
       trending: action.trending,
-      genres: action.genres,
+      categories: action.categories,
       topEpisodes: action.topEpisodes,
       mostPopular: action.mostPopular,
       loading: false,
