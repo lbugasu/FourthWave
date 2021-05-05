@@ -119,10 +119,12 @@ export class PodcastComponent implements OnInit {
   }
 
   podcastPlaying () {
-    const _slug = this.player.currentlyPlaying.episode.slug.split('?')[0]
-    return _slug == this.slug && this.player.player.playing()
-      ? 'pause_circle_filled'
-      : 'play_circle_filled'
+    if (this.player.player) {
+      const _slug = this.player.currentlyPlaying.episode.slug.split('?')[0]
+      return _slug == this.slug && this.player.player.playing()
+        ? 'pause_circle_filled'
+        : 'play_circle_filled'
+    } else return 'play_circle_filled'
   }
 
   loadMoreEpisodes () {
