@@ -1,20 +1,17 @@
-export class Episode{
- 
-  public title!: string;
+export default class Episode {
+  public title!: string
 
-  public datePublished!: Date;
+  public datePublished!: Date
 
+  public description!: string
 
-    public description!: string;
+  public duration!: string
 
-    public duration!: string;
+  public sourceUrl!: string
 
-    public sourceUrl!: string;
+  public image!: string
 
-  
-    public image!: string;
-  
-    public comments!: Comment[];
+  public comments!: Comment[]
 
-    public slug!: string;
+  public slug!: string
 }

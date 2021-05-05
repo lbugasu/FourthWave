@@ -1,6 +1,6 @@
-import { Podcast } from './Podcast'
+import { Podcast } from './'
 
-export class Category {
+export default interface Category {
   title: string
   podcasts: Podcast[]
   slug: string

@@ -1,6 +1,6 @@
-import { Episode } from './Episode'
+import { Episode } from './'
 
-export interface Play {
+export default interface Play {
   episode: Episode
   position: number
   completed: boolean

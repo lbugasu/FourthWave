@@ -1,6 +1,4 @@
-import { Category } from 'src/app/shared/Models/Category'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Podcast, Category, Episode } from 'src/app/shared/Models'
 
 export const DISCOVER_STATE_NAME = 'discover'
 

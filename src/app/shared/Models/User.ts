@@ -1,8 +1,8 @@
-import { Episode } from './Episode'
-import { Play } from './Play'
-import { Podcast } from './Podcast'
+import { Episode } from './'
+import { Play } from './'
+import { Podcast } from './'
 
-export interface User {
+export default interface User {
   firstname: string
   lastname: string
   username: string

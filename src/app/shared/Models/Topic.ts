@@ -1,7 +1,7 @@
-import { Episode } from './Episode'
-import { Podcast } from './Podcast'
+import { Episode } from './'
+import { Podcast } from './'
 
-export class Topic {
+export default class Topic {
   type: string
   name: string
   episodes: Episode[]
