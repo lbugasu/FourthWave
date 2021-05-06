@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { State, Store } from '@ngrx/store'
 import { Howl, Howler } from 'howler'
 import { AppState } from 'src/app/store/app.state'
-import { Play } from '../../Models/Play'
+import { Play } from '../../Models'
 import * as PlayerSelectors from '../store/player.selectors'
 import * as PlayerActions from '../store/player.actions'
 @Injectable({

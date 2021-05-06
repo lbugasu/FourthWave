@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { Podcast } from 'src/app/shared/Models'
 import {
   GlobalPodcastState,
+  initialPodState,
   PodcastState,
   PODCAST_STATE_NAME
 } from './podcast.state'
@@ -19,5 +20,11 @@ export const getPodcastState = createSelector(
 
 export const getPodcast = (slug: string) =>
   createSelector(getPodcastState, (state: GlobalPodcastState) => {
-    return state.podcasts.find((podcast: Podcast) => podcast.slug == slug)
+    const podcastIndex = state.library.findIndex(
+      (pod: Podcast) => pod.slug == slug
+    )
+    // console.log(state.library[podcastIndex])
+    return !!state.library[podcastIndex]
+      ? state.library[podcastIndex]
+      : initialPodState
   })

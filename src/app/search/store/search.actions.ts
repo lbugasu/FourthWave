@@ -1,8 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Category } from 'src/app/shared/Models/Category'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Podcast } from 'src/app/shared/Models/Podcast'
-import { Topic } from 'src/app/shared/Models/Topic'
+import { Category, Episode, Podcast, Topic } from 'src/app/shared/Models'
 
 export const SEARCH_START = 'search start'
 export const SEARCH_SUCCESS = 'search success'

@@ -20,6 +20,7 @@ import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state'
 import { UserModule } from './user/user.module'
 import { GraphQLInterceptor } from './shared/graphql/interceptor.graphql'
+import { PodcastModule } from './podcast/podcast.module'
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -34,6 +35,7 @@ import { GraphQLInterceptor } from './shared/graphql/interceptor.graphql'
     ComponentsModule,
     SharedModule,
     UserModule,
+    PodcastModule,
     InfiniteScrollModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([]),

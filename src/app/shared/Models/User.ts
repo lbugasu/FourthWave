@@ -11,6 +11,7 @@ export default interface User {
   likedPodcasts: Podcast[]
   likedEpisodes: Episode[]
   bookmarkedEpisodes: Episode[]
+  subscribedPodcasts: Podcast[]
   plays: Play[]
   playingSpeed: number
   volume: number

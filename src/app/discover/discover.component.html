@@ -54,7 +54,7 @@
         <a
           [routerLink]="['/podcast', pod.slug]"
           routerLinkActive="active"
-          [state]="pod"
+          [state]="{podcast: pod}"
         >
           <img
             src="{{pod.image}}"
@@ -132,11 +132,10 @@
           <a
             [routerLink]="['/podcast', podcast.slug]"
             routerLinkActive="active"
-            [state]="podcast"
+            [state]="{podcast: podcast}"
           >
             <span class="content">
               <h3 class="number">{{i+1}}.</h3>
-
               <img src="{{podcast.image}}" alt="" />
               <h3>{{podcast.title}}</h3>
             </span>
@@ -189,7 +188,7 @@
     <a
       [routerLink]="['/podcast', podcast.slug]"
       routerLinkActive="active"
-      [state]="podcast"
+      [state]="{podcast: pod}"
     >
       <img src="{{podcast.image}}" alt="" />
       <h2>{{podcast.title}}</h2>

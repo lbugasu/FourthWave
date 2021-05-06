@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.selector'
-import * as UserActions from '../store/actions'
+import { UserActions } from '../store'
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',

@@ -11,7 +11,7 @@ import {
 import { Observable } from 'rxjs/Observable'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.state'
-import * as UserSelectors from '../../user/store/selectors/user.selector'
+import * as UserSelectors from '../../user/store/user.selectors'
 @Injectable()
 export class GraphQLInterceptor implements HttpInterceptor {
   token$: Observable<string>

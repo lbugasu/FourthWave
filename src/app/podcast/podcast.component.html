@@ -26,39 +26,97 @@
           <h3 style.color="#{{ (podcast$ | async)?.palette[2] }}">
             {{ (podcast$|async)?.publisher }}
           </h3>
+          <div class="sound__bars">
+            <div id="bars">
+              <div
+                style.background-color="#{{ (podcast$|async)?.palette[0] }}"
+                [ngClass]="{'animate': podcastPlaying()}"
+                class="bar"
+              ></div>
+              <div
+                style.background-color="#{{ (podcast$|async)?.palette[2] }}"
+                [ngClass]="{'animate': podcastPlaying()}"
+                class="bar animate"
+              ></div>
+              <div
+                style.background-color="#{{ (podcast$|async)?.palette[3] }}"
+                [ngClass]="{'animate': podcastPlaying()}"
+                class="bar"
+              ></div>
+              <div
+                style.background-color="#{{ (podcast$|async)?.palette[5] }}"
+                [ngClass]="{'animate': podcastPlaying()}"
+                class="bar"
+              ></div>
+              <div
+                style.background-color="#{{ (podcast$|async)?.palette[1] }}"
+                [ngClass]="{'animate': podcastPlaying()}"
+                class="bar"
+              ></div>
+            </div>
+          </div>
+          <div class="action__buttons">
+            <ng-container *ngIf="!(subscribed$|async); else subscribedTemplate">
+              <button
+                [ngStyle]="{'color': 'var(--button-primary)'}"
+                mat-raised-button
+                (click)="subscribe()"
+                aria-label="subscribe"
+              >
+                Subscribe
+              </button>
+            </ng-container>
+            <ng-template #subscribedTemplate>
+              <button
+                class="unsubscribe"
+                [ngStyle]="{'color': 'var(--button-primary)'}"
+                mat-raised-button
+                (click)="unsubscribe()"
+                aria-label="unsubscribe"
+                style.background-color="#{{ (podcast$|async)?.palette[1] }}66"
+              >
+                Subscribed{{" "}}<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </button>
+            </ng-template>
+
+            <ng-container *ngIf="(liked$|async); else likedTemplate">
+              <button
+                (click)="like()"
+                mat-icon-button
+                [ngStyle]="{'color': 'var(--gray-like)'}"
+                aria-label="Like this podcast"
+              >
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #likedTemplate>
+              <button
+                (click)="unlike()"
+                mat-icon-button
+                [ngStyle]="{'color': 'var(--pink-like)'}"
+                aria-label="Like this podcast"
+              >
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </ng-template>
+          </div>
         </div>
         <div class="description">
           <p>{{ (podcast$ | async)?.description }}</p>
         </div>
-      </div>
-
-      <div class="container">
-        <button
-          class="play"
-          mat-icon-button
-          color="primary"
-          aria-label="play"
-          disabled
-        >
-          <mat-icon style.color="#{{ (podcast$|async)?.palette[3] }}"
-            >{{podcastPlaying()}}</mat-icon
-          >
-        </button>
-        <span class="action__buttons">
-          <button
-            [ngStyle]="{'color': 'var(--button-primary)'}"
-            mat-raised-button
-          >
-            Subscribe{{" "}}
-          </button>
-          <button
-            mat-icon-button
-            [ngStyle]="{'color': 'var(--gray-like)'}"
-            aria-label="Like this podcast"
-          >
-            <mat-icon>favorite</mat-icon>
-          </button>
-        </span>
       </div>
     </div>
   </div>
@@ -66,7 +124,7 @@
   <div class="content">
     <div
       class="single__episode"
-      *ngFor="let episode of episodes, let i = index"
+      *ngFor="let episode of (podcast$ |async).episodes, let i = index"
     >
       <div class="play">
         <button
@@ -86,6 +144,7 @@
         <p>{{episode.datePublished | date}} | {{ episode.duration | time}}</p>
       </div>
       <mat-divider
+        *ngIf="i<(podcast$ |async).episodes.length-1"
         style.color="#{{(podcast$|async)?.palette[4]}}"
       ></mat-divider>
     </div>

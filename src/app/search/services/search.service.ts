@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Apollo, gql } from 'apollo-angular'
 import { Observable } from 'rxjs'
-import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Podcast } from 'src/app/shared/Models'
 import {
   SEARCH_QUERY,
   SEARH_EPISODES_QUERY,

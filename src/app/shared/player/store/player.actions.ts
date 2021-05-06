@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Play } from '../../Models/Play'
+import { Episode, Play } from 'src/app/shared/Models'
 
 const CHANGE_VOLUME_START = 'change volume start'
 const CHANGE_VOLUME_SUCCESS = 'change volume success'

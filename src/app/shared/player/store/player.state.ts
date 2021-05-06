@@ -1,5 +1,4 @@
-import { Episode } from '../../Models/Episode'
-import { Play } from '../../Models/Play'
+import { Episode, Play } from '../../Models'
 
 export interface PlayerState {
   queue: Play[]

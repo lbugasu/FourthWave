@@ -65,6 +65,47 @@ const PODCAST_EPISODES_QUERY = gql`
     }
   }
 `
+
+const GET_PODCAST_WITH_EPISODES = gql`
+  query GetPodcastWithEpisodes($slug: String!, $page: Float!) {
+    getPodcast(slug: $slug) {
+      title
+      publisher
+      rssFeed
+      link
+      image
+      description
+      lastRssBuildDate
+      slug
+      palette
+      categories {
+        title
+      }
+      topics {
+        name
+        type
+      }
+    }
+    getPodcastEpisodes(page: $page, slug: $slug) {
+      title
+      datePublished
+      description
+      duration
+      sourceUrl
+      image
+      podcast
+      epNo
+      snNo
+      topics {
+        name
+      }
+      categories {
+        title
+      }
+      slug
+    }
+  }
+`
 @Injectable({
   providedIn: 'root'
 })
@@ -82,13 +123,13 @@ export class PodcastService {
     return this.apollo.watchQuery({
       query: SINGLE_PODCAST_QUERY,
       variables: { slug: slug }
-    })
+    }).valueChanges
   }
 
-  getPodcastAndEpisodes (slug: string) {
+  getPodcastAndEpisodes (slug: string, page: number) {
     return this.apollo.watchQuery({
-      query: SINGLE_PODCAST_QUERY,
-      variables: { slug: slug }
+      query: GET_PODCAST_WITH_EPISODES,
+      variables: { slug: slug, page: page }
     }).valueChanges
   }
 

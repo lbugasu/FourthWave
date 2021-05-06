@@ -1,8 +1,4 @@
-import { Category } from 'src/app/shared/Models/Category'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Podcast } from 'src/app/shared/Models/Podcast'
-import { Topic } from 'src/app/shared/Models/Topic'
-
+import { Category, Episode, Podcast, Topic } from 'src/app/shared/Models'
 export const SEARCH_STATE_NAME = 'search'
 
 export interface SearchState {

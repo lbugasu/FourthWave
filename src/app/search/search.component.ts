@@ -8,14 +8,11 @@ import {
   switchMap
 } from 'rxjs/operators'
 import { SearchService } from './services/search.service'
-import { Podcast } from 'src/app/shared/Models/Podcast'
-import { Episode } from 'src/app/shared/Models/Episode'
+import { Podcast, Episode, Topic, Category } from 'src/app/shared/Models'
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import * as SearchActions from './store/search.actions'
 import * as SearchSelectors from './store/search.selectors'
-import { Category } from '../shared/Models/Category'
-import { Topic } from '../shared/Models/Topic'
 const ColorScheme = require('color-scheme')
 
 @Component({
@@ -36,11 +33,7 @@ export class SearchComponent implements OnInit {
   categories$: Observable<Category[]>
   topics$: Observable<Topic[]>
 
-  constructor (
-    private fb: FormBuilder,
-    private searchService: SearchService,
-    private store: Store<AppState>
-  ) {
+  constructor (private fb: FormBuilder, private store: Store<AppState>) {
     this.options = this.fb.group({
       hideRequired: this.hideRequiredControl,
       floatLabel: this.floatLabelControl

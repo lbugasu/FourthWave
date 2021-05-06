@@ -1,8 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
-import { Category } from 'src/app/shared/Models/Category'
-import { Episode } from 'src/app/shared/Models/Episode'
-import { Podcast } from 'src/app/shared/Models/Podcast'
-import { Topic } from 'src/app/shared/Models/Topic'
+import { Category, Episode, Podcast, Topic } from 'src/app/shared/Models'
 import { SearchState, SEARCH_STATE_NAME } from './search.state'
 
 const getSearchState = createFeatureSelector<SearchState>(SEARCH_STATE_NAME)

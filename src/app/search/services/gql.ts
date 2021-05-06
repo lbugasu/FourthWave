@@ -11,6 +11,7 @@ export const SEARCH_QUERY = gql`
       description
       lastRssBuildDate
       slug
+      palette
       categories {
         title
       }
@@ -35,6 +36,7 @@ export const SEARH_EPISODES_QUERY = gql`
       epNo
       snNo
       slug
+      podcast
     }
   }
 `
@@ -68,6 +70,7 @@ export const SEARCH_PODCASTS_AND_EPISODES = gql`
       palette
       lastRssBuildDate
       slug
+      palette
       categories {
         title
       }

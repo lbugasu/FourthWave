@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { AppState } from 'src/app/store/app.state'
-import { Play } from '../Models/Play'
+import { Play } from '../Models'
 
 import * as PlayerSelectors from './store/player.selectors'
 import * as PlayerActions from './store/player.actions'

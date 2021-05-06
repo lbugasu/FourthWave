@@ -16,8 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'podcast/:slug',
-    loadChildren: () =>
-      import('./podcast/podcast.module').then(m => m.PodcastModule)
+    component: PodcastComponent
   },
   {
     path: 'discover',

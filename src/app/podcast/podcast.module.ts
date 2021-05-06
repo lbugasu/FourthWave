@@ -24,10 +24,10 @@ const routes = [
     CommonModule,
     Material,
     InfiniteScrollModule,
-    StoreModule.forFeature(PODCAST_STATE_NAME, podcastReducer),
-    EffectsModule.forFeature([PodcastEffects]),
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(PODCAST_STATE_NAME, podcastReducer),
+    EffectsModule.forFeature([PodcastEffects])
   ]
 })
 export class PodcastModule {}

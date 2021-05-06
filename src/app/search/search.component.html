@@ -1,67 +1,86 @@
-<div class="search__bar">
-  <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-    <mat-label>Search</mat-label>
-    <input id="search" matInput placeholder="eg. Stuff of Life" value="" />
-  </mat-form-field>
-  <section class="checked">
-    <mat-checkbox
-      [checked]="checkPodcasts$|async"
-      (change)="checkPodcasts($event.checked)"
-      >Podcasts</mat-checkbox
-    >
-    <mat-checkbox
-      [checked]="checkEpisodes$ |async"
-      (change)="checkEpisodes($event.checked)"
-      >Episodes</mat-checkbox
-    >
-  </section>
-</div>
-<div *ngIf="(searchTerm$|async).length<3" class="search__recommendations">
-  <div class="categories">
-    <h4>Categories</h4>
-    <mat-chip-list aria-label="list of topics">
-      <mat-chip
-        [ngStyle]="{'background-color': '#'+getCategoryColors()[i]+'76'}"
-        *ngFor="let category of (categories$|async), let i=index"
-        >{{category.title}}</mat-chip
-      >
-    </mat-chip-list>
-  </div>
-  <div class="topics">
-    <h4>Topics:</h4>
-    <mat-chip-list aria-label="list of topics">
-      <mat-chip
-        [ngStyle]="{'background-color': '#'+getTopicColors()[i]+'66'}"
-        *ngFor="let topic of (topics$|async); let i =index"
-        >{{topic.name}}</mat-chip
-      >
-    </mat-chip-list>
-  </div>
-</div>
-<div *ngIf="(searchTerm$|async).length>2" class="results">
-  <div class="pods">
-    <h2>Podcasts</h2>
-    <div class="pod__list">
-      <div *ngFor="let pod of (podcasts$ | async)" class="podcast">
-        <a
-          [routerLink]="['/podcast', pod.slug]"
-          routerLinkActive="active"
-          [state]="pod"
+<div class="page">
+  <div class="search__bar">
+    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+      <mat-label>Search</mat-label>
+      <input
+        id="search"
+        matInput
+        placeholder="eg. Stuff of Life"
+        value=""
+        type="text"
+        aria-label="Search"
+        matInput
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of podcasts$ | async"
+          [value]="option.title"
         >
-          <img src="{{pod.image}}" alt="" />
-          <h2>{{pod.title}}</h2>
-        </a>
-      </div>
+          {{option.title}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <section class="checked">
+      <mat-checkbox
+        [checked]="checkPodcasts$|async"
+        (change)="checkPodcasts($event.checked)"
+        >Podcasts</mat-checkbox
+      >
+      <mat-checkbox
+        [checked]="checkEpisodes$ |async"
+        (change)="checkEpisodes($event.checked)"
+        >Episodes</mat-checkbox
+      >
+    </section>
+  </div>
+  <div *ngIf="(searchTerm$|async).length<3" class="search__recommendations">
+    <div class="categories">
+      <h4>Categories</h4>
+      <mat-chip-list aria-label="list of topics">
+        <mat-chip
+          [ngStyle]="{'background-color': '#'+getCategoryColors()[i]+'76'}"
+          *ngFor="let category of (categories$|async), let i=index"
+          >{{category.title}}</mat-chip
+        >
+      </mat-chip-list>
+    </div>
+    <div class="topics">
+      <h4>Topics:</h4>
+      <mat-chip-list aria-label="list of topics">
+        <mat-chip
+          [ngStyle]="{'background-color': '#'+getTopicColors()[i]+'66'}"
+          *ngFor="let topic of (topics$|async); let i =index"
+          >{{topic.name}}</mat-chip
+        >
+      </mat-chip-list>
     </div>
   </div>
-  <div class="episodes">
-    <h2>Episodes</h2>
-    <div class="eps__list">
-      <div *ngFor="let episode of (episodes$ | async )" class="episode">
-        <img src="{{episode.image}}" alt="{{episode.title}}" />
-        <h3>
-          {{episode.title}}
-        </h3>
+  <div *ngIf="(searchTerm$|async).length>2" class="results">
+    <div class="pods">
+      <h2>Podcasts</h2>
+      <div class="pod__list">
+        <div *ngFor="let pod of (podcasts$ | async)" class="podcast">
+          <a
+            [routerLink]="['/podcast', pod.slug]"
+            routerLinkActive="active"
+            [state]="{podcast: pod}"
+          >
+            <img src="{{pod.image}}" alt="" />
+            <h2>{{pod.title}}</h2>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="episodes">
+      <h2>Episodes</h2>
+      <div class="eps__list">
+        <div *ngFor="let episode of (episodes$ | async )" class="episode">
+          <img src="{{episode.image}}" alt="{{episode.title}}" />
+          <h3>
+            {{episode.title}}
+          </h3>
+        </div>
       </div>
     </div>
   </div>

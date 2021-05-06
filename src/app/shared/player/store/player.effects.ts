@@ -5,19 +5,16 @@ import { Store } from '@ngrx/store'
 
 import {
   catchError,
-  debounceTime,
   exhaustMap,
   map,
   pluck,
-  tap,
   throttleTime
 } from 'rxjs/operators'
 import { PlayerService } from '../services/player.service'
-import { Play } from '../../Models/Play'
+import { Play, Episode } from '../../Models'
 import { AppState } from 'src/app/store/app.state'
 import * as PlayerActions from './player.actions'
 import * as PlayerSelectors from './player.selectors'
-import { Episode } from '../../Models/Episode'
 import { asyncScheduler } from 'rxjs'
 
 @Injectable()

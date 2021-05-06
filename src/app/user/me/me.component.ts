@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
-import * as UserSelectors from '../store/selectors/user.selector'
-import * as UserActions from '../store/actions/user.actions'
-import { User } from 'src/app/shared/Models/User'
+import * as UserSelectors from '../store/user.selectors'
+import * as UserActions from '../store/user.actions'
+import { User } from 'src/app/shared/Models'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.state'
 @Component({

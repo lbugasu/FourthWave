@@ -11,7 +11,7 @@ import {
   ADD_TO_BEGINNING_OF_QUEUE,
   COMPLETE_AND_GO_TO_NEXT
 } from './gql'
-import { Play } from '../../Models/Play'
+import { Play } from '../../Models'
 
 @Injectable({
   providedIn: 'root'

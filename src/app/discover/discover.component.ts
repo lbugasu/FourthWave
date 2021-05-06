@@ -1,7 +1,7 @@
 import { DiscoverState, DISCOVER_STATE_NAME } from './store/discover.state'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs'
-import { Podcast } from 'src/app/shared/Models/Podcast'
+import { Podcast } from 'src/app/shared/Models'
 import { pluck, switchMap, tap } from 'rxjs/operators'
 import { PodcastService } from '../podcast/services/podcast.service'
 import * as DiscoverSelectors from './store/discover.selectors'

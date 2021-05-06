@@ -4,8 +4,8 @@ import { FormControl, Validators } from '@angular/forms'
 import { FormGroup } from '@angular/forms'
 import { AppState } from 'src/app/store/app.selector'
 import { Store } from '@ngrx/store'
-import * as UserSelectors from '../store/selectors/user.selector'
-import * as UserActions from '../store/actions/user.actions'
+import * as UserSelectors from '../store/user.selectors'
+import * as UserActions from '../store/user.actions'
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',

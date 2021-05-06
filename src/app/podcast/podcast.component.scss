@@ -32,6 +32,37 @@ div.header {
         flex-direction: column;
         height: 100%;
         justify-content: center;
+        div.sound__bars {
+          height: 30%;
+          width: 30%;
+        }
+        div.action__buttons {
+          height: 20%;
+          height: fit-content;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          width: fit-content;
+
+          button.play {
+            mat-icon {
+              font-size: 30pt;
+            }
+          }
+          button.unsubscribe {
+            svg {
+              width: 15px;
+            }
+          }
+          div.action__buttons {
+            width: 100%;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: fit-content;
+          }
+        }
       }
       div.description {
         width: 70%;
@@ -43,27 +74,6 @@ div.header {
           font-size: 16pt;
           padding-top: 2%;
         }
-      }
-    }
-
-    div.container {
-      height: 20%;
-      height: fit-content;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-
-      button.play {
-        mat-icon {
-          font-size: 30pt;
-        }
-      }
-      span.action__buttons {
-        width: fit-content;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: fit-content;
       }
     }
   }
@@ -91,4 +101,57 @@ div.content {
     }
     padding: 1% 2.5% 1% 2.5%;
   }
+}
+
+// Sound bars animation
+#bars {
+  height: 30px;
+  left: 50%;
+  margin: -30px 0 0 -20px;
+  position: relative;
+  top: 50%;
+  width: 40px;
+}
+
+.bar {
+  background: #666;
+  bottom: 1px;
+  height: 3px;
+  position: absolute;
+  width: 3px;
+  // animation: sound 0ms -800ms linear infinite alternate;
+}
+.animate {
+  animation: sound 0ms -800ms linear infinite alternate;
+}
+@keyframes sound {
+  0% {
+    opacity: 0.35;
+    height: 3px;
+  }
+  100% {
+    opacity: 1;
+    height: 28px;
+  }
+}
+
+.bar:nth-child(1) {
+  left: 1px;
+  animation-duration: 474ms;
+}
+.bar:nth-child(2) {
+  left: 5px;
+  animation-duration: 433ms;
+}
+.bar:nth-child(3) {
+  left: 9px;
+  animation-duration: 407ms;
+}
+.bar:nth-child(4) {
+  left: 13px;
+  animation-duration: 458ms;
+}
+.bar:nth-child(5) {
+  left: 17px;
+  animation-duration: 400ms;
 }

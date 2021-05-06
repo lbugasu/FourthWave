@@ -2,7 +2,7 @@
 
 import { Podcast } from 'src/app/shared/Models'
 
-export const PODCAST_STATE_NAME = 'podcast'
+export const PODCAST_STATE_NAME = 'podcasts'
 // load from the store
 export interface PodcastState extends Podcast {
   loaded: boolean
@@ -11,8 +11,25 @@ export interface PodcastState extends Podcast {
 }
 
 export interface GlobalPodcastState {
-  podcasts: PodcastState[]
+  library: PodcastState[]
 }
 export const initialPodcastState: GlobalPodcastState = {
-  podcasts: []
+  library: []
+}
+
+export const initialPodState = {
+  loading: true,
+  loaded: false,
+  slug: '',
+  title: 'sss',
+  publisher: '',
+  image: '',
+  link: '',
+  lastRssBuildDate: new Date(),
+  categories: [],
+  episodes: [],
+  palette: [],
+  page: 0,
+  rssFeed: '',
+  description: ''
 }
