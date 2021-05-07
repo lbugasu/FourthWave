@@ -76,13 +76,13 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   scrollThrough (direction: string) {
-    const element = <HTMLElement>document.querySelector('div.featured__list')
+    const element = document.querySelector<HTMLElement>('div.featured__list')
     this.sideScroll(element, direction, 10, 300, 10)
 
     console.log(element.scrollLeft)
   }
   show (position: boolean) {
-    const element = <HTMLElement>document.querySelector('div.featured__list')
+    const element = document.querySelector<HTMLElement>('div.featured__list')
     const width = element.scrollWidth
     const left = element.scrollLeft
 

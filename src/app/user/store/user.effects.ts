@@ -188,7 +188,7 @@ export class UserEffects {
       })
     )
     const response$ = request$.pipe(
-      pluck('data', 'likeEpisode'),
+      pluck('data', 'bookmarkEpisode'),
       map((episode: Episode) => {
         return UserActions.bookmarkEpisodeSuccess({ episode: episode })
       }),
@@ -268,7 +268,7 @@ export class UserEffects {
       })
     )
     const response$ = request$.pipe(
-      pluck('data', 'unlikeEpisode'),
+      pluck('data', 'unbookmarkEpisode'),
       map((episode: Episode) => {
         return UserActions.unbookmarkEpisodeSuccess({ episode: episode })
       }),

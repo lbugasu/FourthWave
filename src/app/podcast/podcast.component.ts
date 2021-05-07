@@ -9,8 +9,7 @@ const colors = require('nice-color-palettes')
 
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
-import * as PlayerSelectors from '../shared/player/store/player.selectors'
-import * as PlayerActions from '../shared/player/store/player.actions'
+import { PlayerActions, PlayerSelectors } from '../shared/player/store'
 import { PodcastActions, PodcastSelectors } from './store'
 import { ActivatedRoute, Router } from '@angular/router'
 import { UserActions, UserSelectors } from '../user/store'
@@ -145,8 +144,44 @@ export class PodcastComponent implements OnInit {
   like () {
     this.store.dispatch(UserActions.likePodcastStart({ slug: this.slug }))
   }
+  likeEpisode (slug: string) {
+    this.store.dispatch(UserActions.likeEpisodeStart({ slug: slug }))
+  }
+  unlikeEpisode (slug: string) {
+    this.store.dispatch(UserActions.unlikeEpisodeStart({ slug: slug }))
+  }
   unlike () {
     this.store.dispatch(UserActions.unlikePodcastStart({ slug: this.slug }))
+  }
+  bookmarkEpisode (slug: string) {
+    this.store.dispatch(UserActions.bookmarkEpisodeStart({ slug: slug }))
+  }
+
+  unbookmarkEpisode (slug: string) {
+    this.store.dispatch(UserActions.unbookmarkEpisodeStart({ slug: slug }))
+  }
+  expand ($event: MouseEvent, slug: string) {
+    const element = document.getElementsByClassName(`${slug}`)[0] as HTMLElement
+    element.classList.toggle('active')
+    if (element.style.maxHeight) {
+      element.style.maxHeight = null
+    } else {
+      element.style.maxHeight = element.scrollHeight + 'px'
+    }
+  }
+  state (slug: string) {
+    const element = document.getElementsByClassName(`${slug}`)[0]
+    if (!element) return 'arrow_drop_down'
+
+    return element.classList.contains('active')
+      ? 'arrow_drop_up'
+      : 'arrow_drop_down'
+  }
+  checkLikedEpisode (slug: string) {
+    return this.store.select(UserSelectors.checkLikedEpisode(slug))
+  }
+  checkBookmarkedEpisode (slug: string) {
+    return this.store.select(UserSelectors.checkBookmarkedEpisode(slug))
   }
   ngOnDestroy (): void {}
 }

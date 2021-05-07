@@ -23,10 +23,22 @@ export const getPodcastSubscriptions = createSelector(getUser, state => {
 export const getLikedPodcasts = createSelector(getUser, state => {
   return state.likedPodcasts
 })
-
+export const getBookmarkedEpisodes = createSelector(getUser, state => {
+  return state.bookmarkedEpisodes
+})
 export const getLikedEpisodes = createSelector(getUser, state => {
   return state.likedEpisodes
 })
+export const checkLikedEpisode = (slug: string) =>
+  createSelector(getLikedEpisodes, state => {
+    const indx = state.findIndex(ep => ep.slug === slug)
+    return indx >= 0
+  })
+export const checkBookmarkedEpisode = (slug: string) =>
+  createSelector(getBookmarkedEpisodes, state => {
+    const indx = state.findIndex(ep => ep.slug === slug)
+    return indx >= 0
+  })
 
 export const checkSubscribedPodcast = (slug: string) =>
   createSelector(getPodcastSubscriptions, state => {

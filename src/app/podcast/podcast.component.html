@@ -126,22 +126,94 @@
       class="single__episode"
       *ngFor="let episode of (podcast$ |async).episodes, let i = index"
     >
-      <div class="play">
-        <button
-          mat-icon-button
-          color="primary"
-          aria-label="Example icon button with a home icon"
-        >
-          <mat-icon
-            (click)="play(episode)"
-            style.color="#{{(podcast$|async)?.palette[4]}}"
-            >{{amPlaying(episode)}}</mat-icon
+      <div class="episode__body">
+        <div class="episode__details">
+          <div class="play">
+            <button mat-icon-button color="primary" aria-label="play">
+              <mat-icon
+                (click)="play(episode)"
+                style.color="#{{(podcast$|async)?.palette[4]}}"
+                >{{amPlaying(episode)}}</mat-icon
+              >
+            </button>
+          </div>
+          <div class="episode__metadata">
+            <h3>{{episode.title}}</h3>
+            <p>
+              {{episode.datePublished | date}} | {{ episode.duration | time}}
+            </p>
+          </div>
+        </div>
+
+        <div class="episode__options">
+          <button mat-icon-button aria-label="add to a playlist">
+            <mat-icon>playlist_add</mat-icon>
+          </button>
+
+          <ng-container
+            *ngIf="!(checkLikedEpisode(episode.slug)|async); else unlikeEpisodeTemplate"
           >
-        </button>
+            <button
+              (click)="likeEpisode(episode.slug)"
+              mat-icon-button
+              [ngStyle]="{'color': 'var(--gray-like-muted)'}"
+              aria-label="like episode"
+            >
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #unlikeEpisodeTemplate>
+            <button
+              (click)="unlikeEpisode(episode.slug)"
+              mat-icon-button
+              [ngStyle]="{'color': 'var(--pink-like-muted)'}"
+              aria-label="like episode"
+            >
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </ng-template>
+
+          <ng-container
+            *ngIf="!(checkBookmarkedEpisode(episode.slug)|async); else bookmarkedEpisode"
+          >
+            <button
+              mat-icon-button
+              (click)="bookmarkEpisode(episode.slug)"
+              aria-label="bookmark episode"
+              [ngStyle]="{'color': 'var(--gray-like)'}"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #bookmarkedEpisode>
+            <button
+              mat-icon-button
+              (click)="unbookmarkEpisode(episode.slug)"
+              aria-label="bookmark episode"
+              [ngStyle]="{'color': 'var(--bookmarked)'}"
+            >
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </ng-template>
+
+          <button
+            (click)="expand($event, episode.slug)"
+            mat-icon-button
+            aria-label="expand episode for description"
+          >
+            <mat-icon>{{state(episode.slug)}}</mat-icon>
+          </button>
+        </div>
       </div>
-      <div class="episode__details">
-        <h3>{{episode.title}}</h3>
-        <p>{{episode.datePublished | date}} | {{ episode.duration | time}}</p>
+      <div
+        style.background-color="#{{ (podcast$|async)?.palette[0] }}26"
+        class="expanded__episode__content {{episode.slug}}"
+        #element
+      >
+        <div class="more__stuff">
+          <h3>Show Notes:</h3>
+          <p [innerHTML]="episode.description"></p>
+        </div>
       </div>
       <mat-divider
         *ngIf="i<(podcast$ |async).episodes.length-1"
