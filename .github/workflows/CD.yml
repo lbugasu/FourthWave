@@ -10,7 +10,8 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Start 🏁
+        uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
@@ -18,8 +19,9 @@ jobs:
       - name: Install packages 🧟
         run: npm install
       - name: Build 😈
-        run: npm run build 👯
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+        run: npm run build
+      - name: deploy 👯
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONTHISTOPIC }}'
