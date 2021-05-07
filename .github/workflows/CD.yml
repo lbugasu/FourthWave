@@ -19,7 +19,7 @@ jobs:
       - name: Install packages 🧟
         run: npm install
       - name: Build 😈
-        run: ng build --prod
+        run: npm run build
       - name: deploy 👯
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
