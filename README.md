@@ -1,5 +1,8 @@
 ![https://github.com/lbugasu/eycho/actions/workflows/CI.yml/badge.svg](https://github.com/lbugasu/eycho/actions/workflows/CI.yml/badge.svg)
 ![https://github.com/lbugasu/eycho/actions/workflows/CD.yml/badge.svg](https://github.com/lbugasu/eycho/actions/workflows/CD.yml/badge.svg)
+## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![HitCount](http://hits.dwyl.com/lbugasu/eycho.svg)](http://hits.dwyl.com/lbugasu/eycho)
+
 
 # Eycho
 
