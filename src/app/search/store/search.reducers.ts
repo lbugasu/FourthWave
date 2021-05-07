@@ -83,6 +83,9 @@ const _searchReducer = createReducer(
       recommendationsLoaded: false,
       recommendationsLoading: false
     }
+  }),
+  on(SearchActions.clearSearchState, state => {
+    return { ...initiaialSearchState }
   })
 )
 

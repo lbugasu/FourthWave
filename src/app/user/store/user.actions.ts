@@ -13,7 +13,7 @@ export const SIGN_UP_START = 'sign up start'
 export const SIGN_UP_SUCCESS = 'sign up success'
 export const SIGN_UP_FAILURE = 'sign up failure'
 
-export const SIGN_OUT_START = 'sign up start'
+export const SIGN_OUT_START = 'sign out start'
 export const SIGN_OUT_SUCCESS = 'sign out success'
 export const SIGN_OUT_FAILURE = 'sign out failure'
 
@@ -44,10 +44,7 @@ export const signInWithTokenFailure = createAction(SIGN_IN_WITH_TOKEN_FAILURE)
 
 export const signUpFailure = createAction(SIGN_UP_FAILURE)
 
-export const signOutStart = createAction(
-  SIGN_OUT_START,
-  props<{ token: string }>()
-)
+export const signOutStart = createAction(SIGN_OUT_START)
 export const signOutSuccess = createAction(SIGN_OUT_SUCCESS)
 
 export const signOutFailure = createAction(SIGN_OUT_FAILURE)
@@ -169,3 +166,6 @@ export const unbookmarkEpisodeSuccess = createAction(
   props<{ episode: Episode }>()
 )
 export const unbookmarkEpisodeFailure = createAction(UNBOOKMARK_EPISODE_FAILURE)
+
+const CLEAR_USER_STATE = 'clear user state'
+export const clearUserState = createAction(CLEAR_USER_STATE)

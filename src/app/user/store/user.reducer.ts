@@ -324,6 +324,11 @@ const _userReducer = createReducer(
       unbookmarkEpisodeInProgress: true,
       unbookmarkEpisodeDone: false
     }
+  }),
+  on(UserActions.clearUserState, state => {
+    return {
+      ...initialUserState
+    }
   })
 )
 

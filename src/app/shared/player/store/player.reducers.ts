@@ -94,13 +94,10 @@ const _playerReducer = createReducer(
     return { ...state, playing: action.playing }
   }),
   on(PlayerActions.playPauseFailure, (state, action) => {
-    return { ...state }
-  }),
-  on(PlayerActions.pauseStart, state => {
-    return { ...state }
+    return { ...state, playing: false }
   }),
   on(PlayerActions.stopStart, state => {
-    return { ...state }
+    return { ...state, playing: false }
   }),
   on(PlayerActions.nextStart, state => {
     return { ...state }
@@ -116,6 +113,9 @@ const _playerReducer = createReducer(
   }),
   on(PlayerActions.toggleMiniPlayer, state => {
     return { ...state, mini: !state.mini }
+  }),
+  on(PlayerActions.clearPlayerState, state => {
+    return { ...initialPlayerState }
   })
 )
 export function playerReducer (state, action) {

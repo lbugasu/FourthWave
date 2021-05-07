@@ -57,3 +57,6 @@ export const loadSearchRecommendationsSuccess = createAction(
 export const loadSearchRecommendationsFailure = createAction(
   LOAD_SEARCH_RECOMMENDATIONS_FAILURE
 )
+
+const CLEAR_SEARCH_STATE = 'clear search state'
+export const clearSearchState = createAction(CLEAR_SEARCH_STATE)

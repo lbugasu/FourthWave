@@ -217,6 +217,32 @@ div.page {
 
     div.top__episodes {
       width: 30%;
+      div.episode__list {
+        display: flex;
+        flex-direction: column;
+        div.episode {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          height: fit-content;
+          div.controls {
+            width: 5%;
+            height: auto;
+          }
+          div.image {
+            width: 10%;
+            img {
+              width: 100%;
+            }
+            height: auto;
+          }
+          div.title {
+            width: 80%;
+            height: auto;
+          }
+        }
+      }
     }
   }
 }

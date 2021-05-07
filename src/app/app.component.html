@@ -8,9 +8,39 @@
   </button>
   <div class="eycho"><h1>Eycho</h1></div>
   <span class="spacer"></span>
-  <button mat-mini-fab aria-label="User Icon" (click)="signIn()">
-    <mat-icon>account_circle</mat-icon>
-  </button>
+
+  <ng-container *ngIf="!(loggedIn$ | async ); else userSettingsTemplate">
+    <button
+      style="color:var(--background-medium-gray); background-color:var(--accent-light)"
+      mat-button
+      color="accent"
+      (click)="signIn()"
+    >
+      sign In
+    </button>
+  </ng-container>
+  <ng-template #userSettingsTemplate>
+    <button
+      mat-mini-fab
+      aria-label="User Icon"
+      [matMenuTriggerFor]="menu"
+      aria-label="User menu options"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button (click)="router.navigateByUrl('me')" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+
+        <span>Settings</span>
+      </button>
+      <button (click)="signOut()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign Out</span>
+      </button>
+    </mat-menu>
+  </ng-template>
 </mat-toolbar>
 <mat-drawer-container
   [ngStyle]="{height: player.active&& !(mini$|async)?'84vh':'93vh'}"

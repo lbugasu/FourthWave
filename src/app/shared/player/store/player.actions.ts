@@ -197,3 +197,6 @@ export const completeAndPlayNextSuccess = createAction(
 export const completeAndPlayNextFailure = createAction(
   COMPLETE_AND_PLAY_NEXT_FAILURE
 )
+
+const CLEAR_PLAYER_STATE = 'clear player state'
+export const clearPlayerState = createAction(CLEAR_PLAYER_STATE)

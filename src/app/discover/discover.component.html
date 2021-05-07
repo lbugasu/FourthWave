@@ -151,47 +151,19 @@
       <h2>
         Top Episodes
       </h2>
+      <div class="episode__list">
+        <div
+          *ngFor="let episode of (content$ |async).topEpisodes; let i =index"
+          class="episode"
+        >
+          <div class="controls">{{i+1}}</div>
+          <div class="image"><img src="{{episode.image}}" alt="" /></div>
+          <div class="title">{{episode.title}}</div>
+          <mat-divider
+            *ngIf="i+1!=(content$| async).topEpisodes.length"
+          ></mat-divider>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button (click)="changeView(2)" mat-menu-item>
-      <mat-icon>list</mat-icon>
-      <span>Compact list</span>
-    </button>
-    <button (click)="changeView(2)" mat-menu-item>
-      <mat-icon>view_list</mat-icon>
-      <span>List</span>
-    </button>
-    <button (click)="changeView(2)" mat-menu-item>
-      <mat-icon>apps</mat-icon>
-      <span>Tiled</span>
-    </button>
-  </mat-menu> -->
-
-<!-- 
-<div
-  id="content"
-  class="content"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  [infiniteScrollUpDistance]="1.5 "
-  [scrollWindow]="false"
-  (scrolled)="onScroll()"
->
-  <div *ngFor="let podcast of podcasts" class="podcast">
-    <a
-      [routerLink]="['/podcast', podcast.slug]"
-      routerLinkActive="active"
-      [state]="{podcast: pod}"
-    >
-      <img src="{{podcast.image}}" alt="" />
-      <h2>{{podcast.title}}</h2>
-    </a>
-  </div>
-</div> -->

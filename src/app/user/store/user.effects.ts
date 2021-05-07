@@ -7,17 +7,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, exhaustMap, map, pluck, tap } from 'rxjs/operators'
 
 import { UserActions } from './'
-import * as PlayerActions from '../../shared/player/store/player.actions'
+import { PlayerActions } from '../../shared/player/store'
+import { SearchActions } from '../../search/store/'
 import { Episode, Podcast, User } from 'src/app/shared/Models'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.state'
+import { AudioPlayer } from 'src/app/shared/player/audio/audio.player'
 @Injectable()
 export class UserEffects {
   constructor (
     private actions$: Actions,
     private userService: UserService,
     private store: Store<AppState>,
-    private apollo: Apollo,
+    private player: AudioPlayer,
     private router: Router
   ) {}
 
@@ -88,6 +90,18 @@ export class UserEffects {
         return this.userService.signOut().pipe(
           pluck('data', 'signout'),
           map((result: boolean) => {
+            // clear local storage
+            localStorage.clear()
+
+            // clear search  state
+            this.store.dispatch(SearchActions.clearSearchState())
+            // clear player state
+            this.store.dispatch(PlayerActions.clearPlayerState())
+            this.player.player.stop()
+            this.player.active = false
+            //clear user state
+            this.store.dispatch(UserActions.clearUserState())
+
             return UserActions.signOutSuccess()
           }),
           catchError(error => {
@@ -110,6 +124,7 @@ export class UserEffects {
     const result$ = request$.pipe(
       pluck('data', 'signup'),
       map((result: User) => {
+        localStorage.setItem('token', result.authtoken)
         return UserActions.signUpSuccess({ user: result })
       }),
       catchError(error => {

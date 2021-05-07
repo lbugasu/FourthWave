@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { getUserLoggedInStatus } from './user/store/user.selectors'
-import * as UserActions from './user/store/user.actions'
+import { UserActions } from './user/store'
 import { AppState } from './store/app.state'
-import * as PlayerSelectors from './shared/player/store/player.selectors'
+import { PlayerSelectors } from './shared/player/store'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,10 +17,10 @@ export class AppComponent implements OnInit {
   somethingPlaying: boolean = true
   mini = false
   playing: boolean = false
-  loggedIn = false
+  loggedIn$: Observable<boolean>
   mini$: Observable<boolean>
   constructor (
-    private router: Router,
+    public router: Router,
     private store: Store<{ player: AppState }>,
     public player: AudioPlayer
   ) {}
@@ -37,9 +37,8 @@ export class AppComponent implements OnInit {
     }
 
     // Logged in Status
-    this.store
-      .select(getUserLoggedInStatus)
-      .subscribe(state => (this.loggedIn = state))
+    this.loggedIn$ = this.store.select(getUserLoggedInStatus)
+
     this.mini$ = this.store.select(PlayerSelectors.getMini)
   }
   getWindowWidth () {
@@ -49,10 +48,10 @@ export class AppComponent implements OnInit {
   getUser () {}
 
   signIn () {
-    if (this.loggedIn) {
-      this.router.navigateByUrl('me')
-    } else {
-      this.router.navigateByUrl('me/signin')
-    }
+    this.router.navigateByUrl('me/signin')
+  }
+  signOut () {
+    this.store.dispatch(UserActions.signOutStart())
+    this.router.navigateByUrl('discover')
   }
 }
