@@ -137,10 +137,16 @@ export class PodcastComponent implements OnInit {
       UserActions.subscribeToPodcastStart({ slug: this.slug })
     )
   }
-  unsubscribe () {}
+  unsubscribe () {
+    this.store.dispatch(
+      UserActions.unsubscribeToPodcastStart({ slug: this.slug })
+    )
+  }
   like () {
     this.store.dispatch(UserActions.likePodcastStart({ slug: this.slug }))
   }
-  unlike () {}
+  unlike () {
+    this.store.dispatch(UserActions.unlikePodcastStart({ slug: this.slug }))
+  }
   ngOnDestroy (): void {}
 }

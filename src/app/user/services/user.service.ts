@@ -9,7 +9,11 @@ import {
   SIGN_IN_WITH_TOKEN,
   SIGN_OUT,
   SIGN_UP,
-  SUBSCRIBE_TO_PODCAST
+  SUBSCRIBE_TO_PODCAST,
+  UNBOOKMARK_EPISODE,
+  UNLIKE_EPISODE,
+  UNLIKE_PODCAST,
+  UNSUBSCRIBE_TO_PODCAST
 } from './gql'
 
 @Injectable({
@@ -65,6 +69,31 @@ export class UserService {
   bookmarkEpisode (slug: string) {
     return this.apollo.mutate({
       mutation: BOOKMARK_EPISODE,
+      variables: { slug: slug }
+    })
+  }
+
+  unlikePodcast (slug: string) {
+    return this.apollo.mutate({
+      mutation: UNLIKE_PODCAST,
+      variables: { slug: slug }
+    })
+  }
+  unlikeEpisode (slug: string) {
+    return this.apollo.mutate({
+      mutation: UNLIKE_EPISODE,
+      variables: { slug: slug }
+    })
+  }
+  unsubscribeToPodcast (slug: string) {
+    return this.apollo.mutate({
+      mutation: UNSUBSCRIBE_TO_PODCAST,
+      variables: { slug: slug }
+    })
+  }
+  unbookmarkEpisode (slug: string) {
+    return this.apollo.mutate({
+      mutation: UNBOOKMARK_EPISODE,
       variables: { slug: slug }
     })
   }

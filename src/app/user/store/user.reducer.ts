@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import { initialUserState, UserState } from './user.state'
 import { UserActions } from './'
+import { Episode, Podcast } from 'src/app/shared/Models'
 const _userReducer = createReducer(
   initialUserState,
   on(UserActions.signInStart, state => {
@@ -97,7 +98,7 @@ const _userReducer = createReducer(
     }
   }),
   /**
-   * On Likeing a podcast
+   * On Liking a podcast
    *
    */
   on(UserActions.likePodcastStart, (state, action) => {
@@ -178,6 +179,150 @@ const _userReducer = createReducer(
       ...state,
       bookmarkEpisodeInProgress: true,
       bookmarkEpisodeDone: false
+    }
+  }),
+  /******************************************************* */
+  /** On UNDOING an action to a podcast or episode
+   *
+   */
+  on(UserActions.unsubscribeToPodcastStart, (state, action) => {
+    return {
+      ...state,
+      unsubscribeInProgress: true,
+      unsubscribeDone: false
+    }
+  }),
+  /** Removethe podcast to the user's subscribed podcasts
+   */
+  on(UserActions.unsubscribeToPodcastSuccess, (state, action) => {
+    const _subscribed = [...state.subscribedPodcasts]
+
+    const indx = _subscribed.findIndex((podcast: Podcast) => {
+      return podcast.slug == action.podcast.slug
+    })
+
+    _subscribed.splice(indx, 1)
+
+    return {
+      ...state,
+      subscribedPodcasts: [..._subscribed],
+      unsubscribeInProgress: false,
+      unsubscribeDone: true
+    }
+  }),
+  on(UserActions.unsubscribeToPodcastFailure, (state, action) => {
+    return {
+      ...state,
+      unsubscribeInProgress: false,
+      unsubscribeDone: false
+    }
+  }),
+  /**
+   * On UNLiking a podcast
+   *
+   */
+  on(UserActions.unlikePodcastStart, (state, action) => {
+    return {
+      ...state,
+      unlikePodcastInProgress: true,
+      unlikePodcastDone: false
+    }
+  }),
+  /** Remove the podcast to the user's subscribed podcasts
+   */
+  on(UserActions.unlikePodcastSuccess, (state, action) => {
+    const _liked = [...state.likedPodcasts]
+
+    const indx = _liked.findIndex((podcast: Podcast) => {
+      return podcast.slug == action.podcast.slug
+    })
+
+    _liked.splice(indx, 1)
+
+    return {
+      ...state,
+      likedPodcasts: [..._liked],
+      unlikePodcastInProgress: false,
+      unlikePodcastDone: true
+    }
+  }),
+  on(UserActions.unlikePodcastFailure, (state, action) => {
+    return {
+      ...state,
+      unlikePodcastInProgress: true,
+      unlikePodcastDone: false
+    }
+  }),
+  /**
+   * On UNLiking a podcast episode
+   *
+   */
+  on(UserActions.unlikeEpisodeStart, (state, action) => {
+    return {
+      ...state,
+      unlikeEpisodeInProgress: true,
+      unlikeEpisodeDone: false
+    }
+  }),
+  /** Removes podcast to the user's subscribed podcasts
+   */
+  on(UserActions.unlikeEpisodeSuccess, (state, action) => {
+    const _likedEpisodes = [...state.likedEpisodes]
+
+    const indx = _likedEpisodes.findIndex((episode: Episode) => {
+      return episode.slug == action.episode.slug
+    })
+
+    _likedEpisodes.splice(indx, 1)
+
+    return {
+      ...state,
+      likedEpisodes: [..._likedEpisodes],
+      unlikeEpisodeInProgress: false,
+      unlikeEpisodeDone: true
+    }
+  }),
+  on(UserActions.unlikeEpisodeFailure, (state, action) => {
+    return {
+      ...state,
+      unlikeEpisodeInProgress: true,
+      unlikeEpisodeDone: false
+    }
+  }),
+  /**
+   * On UNbookmarking podcast episode
+   *
+   */
+  on(UserActions.unbookmarkEpisodeStart, (state, action) => {
+    return {
+      ...state,
+      unbookmarkEpisodeInProgress: true,
+      unbookmarkEpisodeDone: false
+    }
+  }),
+  /** Removes podcast to the user's subscribed podcasts
+   */
+  on(UserActions.unbookmarkEpisodeSuccess, (state, action) => {
+    const _bookmarkedEpisodes = [...state.bookmarkedEpisodes]
+
+    const indx = _bookmarkedEpisodes.findIndex((episode: Episode) => {
+      return episode.slug == action.episode.slug
+    })
+
+    _bookmarkedEpisodes.splice(indx, 1)
+
+    return {
+      ...state,
+      bookmarkedEpisodes: [..._bookmarkedEpisodes],
+      unbookmarkEpisodeInProgress: false,
+      unbookmarkEpisodeDone: true
+    }
+  }),
+  on(UserActions.unbookmarkEpisodeFailure, (state, action) => {
+    return {
+      ...state,
+      unbookmarkEpisodeInProgress: true,
+      unbookmarkEpisodeDone: false
     }
   })
 )

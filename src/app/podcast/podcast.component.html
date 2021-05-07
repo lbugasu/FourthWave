@@ -92,7 +92,7 @@
               </button>
             </ng-template>
 
-            <ng-container *ngIf="(liked$|async); else likedTemplate">
+            <ng-container *ngIf="!(liked$|async); else likedTemplate">
               <button
                 (click)="like()"
                 mat-icon-button
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="description">
-          <p>{{ (podcast$ | async)?.description }}</p>
+          <p [innerHTML]="(podcast$ | async)?.description"></p>
         </div>
       </div>
     </div>

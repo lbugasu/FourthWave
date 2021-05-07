@@ -109,3 +109,63 @@ export const bookmarkEpisodeSuccess = createAction(
   props<{ episode: Episode }>()
 )
 export const bookmarkEpisodeFailure = createAction(BOOKMARK_EPISODE_FAILURE)
+
+/************************************ */
+
+const UNSUBSCRIBE_TO_PODCAST_START = 'unsubscribe to podcast start'
+const UNSUBSCRIBE_TO_PODCAST_FAILURE = 'unsubscribe to podcast failure'
+const UNSUBSCRIBE_TO_PODCAST_SUCCESS = 'unsubscribe to podcast success'
+
+export const unsubscribeToPodcastStart = createAction(
+  UNSUBSCRIBE_TO_PODCAST_START,
+  props<{ slug: string }>()
+)
+export const unsubscribeToPodcastSuccess = createAction(
+  UNSUBSCRIBE_TO_PODCAST_SUCCESS,
+  props<{ podcast: Podcast }>()
+)
+export const unsubscribeToPodcastFailure = createAction(
+  SUBSCRIBE_TO_PODCAST_FAILURE
+)
+
+const UNLIKE_PODCAST_START = 'unlike podcast start'
+const UNLIKE_PODCAST_SUCCESS = 'unlike podcast success'
+const UNLIKE_PODCAST_FAILURE = 'unlike podcast failure'
+
+export const unlikePodcastStart = createAction(
+  UNLIKE_PODCAST_START,
+  props<{ slug: string }>()
+)
+export const unlikePodcastSuccess = createAction(
+  UNLIKE_PODCAST_SUCCESS,
+  props<{ podcast: Podcast }>()
+)
+export const unlikePodcastFailure = createAction(UNLIKE_PODCAST_FAILURE)
+
+const UNLIKE_EPISODE_START = 'unlike episode start'
+const UNLIKE_EPISODE_FAILURE = 'unlike episode failure'
+const UNLIKE_EPISODE_SUCCESS = 'unlike episode success'
+
+export const unlikeEpisodeStart = createAction(
+  UNLIKE_EPISODE_START,
+  props<{ slug: string }>()
+)
+export const unlikeEpisodeSuccess = createAction(
+  UNLIKE_EPISODE_SUCCESS,
+  props<{ episode: Episode }>()
+)
+export const unlikeEpisodeFailure = createAction(UNLIKE_EPISODE_FAILURE)
+
+const UNBOOKMARK_EPISODE_START = 'unbookmark episode start'
+const UNBOOKMARK_EPISODE_FAILURE = 'unbookmark episode failure'
+const UNBOOKMARK_EPISODE_SUCCESS = 'unbookmark episode success'
+
+export const unbookmarkEpisodeStart = createAction(
+  UNBOOKMARK_EPISODE_START,
+  props<{ slug: string }>()
+)
+export const unbookmarkEpisodeSuccess = createAction(
+  UNBOOKMARK_EPISODE_SUCCESS,
+  props<{ episode: Episode }>()
+)
+export const unbookmarkEpisodeFailure = createAction(UNBOOKMARK_EPISODE_FAILURE)

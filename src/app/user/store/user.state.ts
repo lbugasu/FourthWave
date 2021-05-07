@@ -7,6 +7,22 @@ export interface UserState extends User {
   loggedIn: boolean
   subscribeInProgress: boolean
   subscribeDone: boolean
+  likePodcastInProgress: boolean
+  likePodcastDone: boolean
+  likeEpisodeInProgress: boolean
+  likeEpisodeDone: boolean
+  bookmarkEpisodeInProgress: boolean
+  bookmarkEpisodeDone: boolean
+
+  // UNDO ACTION
+  unsubscribeInProgress: boolean
+  unsubscribeDone: boolean
+  unlikePodcastInProgress: boolean
+  unlikePodcastDone: boolean
+  unlikeEpisodeInProgress: boolean
+  unlikeEpisodeDone: boolean
+  unbookmarkEpisodeInProgress: boolean
+  unbookmarkEpisodeDone: boolean
 }
 
 export const initialUserState: UserState = {
@@ -27,6 +43,22 @@ export const initialUserState: UserState = {
   authtoken: null,
   loggedIn: false,
   queue: [],
+
   subscribeInProgress: false,
-  subscribeDone: false
+  subscribeDone: false,
+  likePodcastInProgress: false,
+  likePodcastDone: false,
+  likeEpisodeInProgress: false,
+  likeEpisodeDone: false,
+  bookmarkEpisodeInProgress: false,
+  bookmarkEpisodeDone: false,
+  //UNDO an action
+  unsubscribeInProgress: false,
+  unsubscribeDone: false,
+  unlikePodcastInProgress: false,
+  unlikePodcastDone: false,
+  unlikeEpisodeInProgress: false,
+  unlikeEpisodeDone: false,
+  unbookmarkEpisodeInProgress: true,
+  unbookmarkEpisodeDone: false
 }

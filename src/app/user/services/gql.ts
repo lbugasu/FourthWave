@@ -366,3 +366,91 @@ export const SUBSCRIBE_TO_PODCAST = gql`
     }
   }
 `
+export const UNLIKE_PODCAST = gql`
+  mutation UnlikePodcast($slug: String!) {
+    unlikePodcast(slug: $slug) {
+      title
+      publisher
+      rssFeed
+      link
+      image
+      description
+      lastRssBuildDate
+      slug
+      palette
+      categories {
+        title
+      }
+      topics {
+        name
+        type
+      }
+    }
+  }
+`
+export const UNLIKE_EPISODE = gql`
+  mutation UnlikEpisode($slug: String!) {
+    unlikeEpisode(slug: $slug) {
+      title
+      datePublished
+      description
+      duration
+      sourceUrl
+      image
+      podcast
+      epNo
+      snNo
+      topics {
+        name
+      }
+      categories {
+        title
+      }
+      slug
+    }
+  }
+`
+export const UNBOOKMARK_EPISODE = gql`
+  mutation UnbookmarkEpisode($slug: String!) {
+    unbookmarkEpisode(slug: $slug) {
+      title
+      datePublished
+      description
+      duration
+      sourceUrl
+      image
+      podcast
+      epNo
+      snNo
+      topics {
+        name
+      }
+      categories {
+        title
+      }
+      slug
+    }
+  }
+`
+export const UNSUBSCRIBE_TO_PODCAST = gql`
+  mutation UnsubscribeToPodcast($slug: String!) {
+    unsubscribeToPodcast(slug: $slug) {
+      title
+      publisher
+      rssFeed
+      link
+      image
+      description
+      lastRssBuildDate
+      slug
+      palette
+      categories {
+        title
+      }
+      topics {
+        name
+        type
+      }
+    }
+  }
+`

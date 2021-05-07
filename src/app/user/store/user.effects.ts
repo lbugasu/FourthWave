@@ -199,4 +199,84 @@ export class UserEffects {
     )
     return response$
   })
+
+  unsubscribeToPodcast$ = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(UserActions.unsubscribeToPodcastStart),
+      exhaustMap(action => {
+        return this.userService.unsubscribeToPodcast(action.slug)
+      })
+    )
+    const response$ = request$.pipe(
+      pluck('data', 'unsubscribeToPodcast'),
+      map((podcast: Podcast) => {
+        return UserActions.unsubscribeToPodcastSuccess({ podcast: podcast })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [UserActions.unsubscribeToPodcastFailure()]
+      })
+    )
+    return response$
+  })
+
+  unlikePodcast$ = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(UserActions.unlikePodcastStart),
+      exhaustMap(action => {
+        return this.userService.unlikePodcast(action.slug)
+      })
+    )
+    const response$ = request$.pipe(
+      pluck('data', 'unlikePodcast'),
+      map((podcast: Podcast) => {
+        return UserActions.unlikePodcastSuccess({ podcast: podcast })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [UserActions.unlikePodcastFailure()]
+      })
+    )
+    return response$
+  })
+
+  unlikeEpisode$ = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(UserActions.unlikeEpisodeStart),
+      exhaustMap(action => {
+        return this.userService.unlikeEpisode(action.slug)
+      })
+    )
+    const response$ = request$.pipe(
+      pluck('data', 'unlikeEpisode'),
+      map((episode: Episode) => {
+        return UserActions.unlikeEpisodeSuccess({ episode: episode })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [UserActions.unlikeEpisodeFailure()]
+      })
+    )
+    return response$
+  })
+
+  unbookmarkEpisode$ = createEffect(() => {
+    const request$ = this.actions$.pipe(
+      ofType(UserActions.unbookmarkEpisodeStart),
+      exhaustMap(action => {
+        return this.userService.unbookmarkEpisode(action.slug)
+      })
+    )
+    const response$ = request$.pipe(
+      pluck('data', 'unlikeEpisode'),
+      map((episode: Episode) => {
+        return UserActions.unbookmarkEpisodeSuccess({ episode: episode })
+      }),
+      catchError((error: Error) => {
+        console.log(error.message)
+        return [UserActions.unbookmarkEpisodeFailure()]
+      })
+    )
+    return response$
+  })
 }
