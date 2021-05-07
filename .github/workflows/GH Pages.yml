@@ -19,13 +19,9 @@ jobs:
       - name: Install packages 🧟
         run: npm install
       - name: Build 😈
-        run: ng build --prod
-      - name: deploy 👯
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        run: ng build --prod --base-href "https://lbugasu.github.io/eycho/"
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONTHISTOPIC }}'
-          channelId: live
-          projectId: onthistopic
-        env:
-          FIREBASE_CLI_PREVIEWS: hostingchannels
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs/eycho
