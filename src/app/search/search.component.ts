@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms'
 import { fromEvent, Observable } from 'rxjs'
 import {
@@ -13,6 +13,8 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import * as SearchActions from './store/search.actions'
 import * as SearchSelectors from './store/search.selectors'
+import { SimpleChanges } from '@angular/core'
+import { OnChanges } from '@angular/core'
 const ColorScheme = require('color-scheme')
 
 @Component({
@@ -24,10 +26,10 @@ export class SearchComponent implements OnInit {
   options: FormGroup
   hideRequiredControl = new FormControl(false)
   floatLabelControl = new FormControl('auto')
-
   podcasts$: Observable<Podcast[]>
   episodes$: Observable<Episode[]>
   searchTerm$: Observable<string>
+  @Input() searchBoxValue = ''
   checkPodcasts$: Observable<boolean>
   checkEpisodes$: Observable<boolean>
   categories$: Observable<Category[]>
@@ -42,7 +44,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit (): void {
     const inputElement = document.getElementById('search') || document
-    const input$ = fromEvent(inputElement, 'keyup')
+    const input$ = fromEvent(inputElement, 'keydown')
 
     const search$ = input$.pipe(
       pluck('target', 'value'),

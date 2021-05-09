@@ -24,8 +24,6 @@
     <div class="description">
       <p [innerHTML]="podcast.description | wordcount"></p>
     </div>
-    <!-- <span class="spacer"></span> -->
-
     <div class="cover">
       <img src="{{podcast.image}}" alt="" />
     </div>
@@ -156,7 +154,9 @@
           *ngFor="let episode of (content$ |async).topEpisodes; let i =index"
           class="episode"
         >
-          <div class="controls">{{i+1}}</div>
+          <div class="controls">
+            {{i+1}}
+          </div>
           <div class="image"><img src="{{episode.image}}" alt="" /></div>
           <div class="title">{{episode.title}}</div>
           <mat-divider

@@ -21,7 +21,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   viewState = 3
   pageNo = 0
   page = new BehaviorSubject<number>(this.pageNo)
-
+  showPlay = false
   content$: Observable<DiscoverState>
   constructor (
     private podcastService: PodcastService,
