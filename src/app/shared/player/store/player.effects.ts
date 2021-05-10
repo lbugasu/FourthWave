@@ -186,10 +186,6 @@ export class PlayerEffects {
       concatLatestFrom(action =>
         this.store.select(PlayerSelectors.getCurrentlyPlayingItem)
       ),
-      throttleTime(1000 * 10, asyncScheduler, {
-        leading: false,
-        trailing: true
-      }),
       exhaustMap(([action, playerState]) => {
         return this.playerService.updatePlayPosition(
           action.position,

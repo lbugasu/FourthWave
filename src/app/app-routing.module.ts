@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () =>
       import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
+    path: 'topics',
+    loadChildren: () => import('./topic/topic.module').then(m => m.TopicModule)
   }
 ]
 

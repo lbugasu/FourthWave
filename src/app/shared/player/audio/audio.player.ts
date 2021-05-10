@@ -6,6 +6,8 @@ import { AppState } from 'src/app/store/app.state'
 import { Play } from '../../Models'
 import * as PlayerSelectors from '../store/player.selectors'
 import * as PlayerActions from '../store/player.actions'
+import { asyncScheduler, Subject } from 'rxjs'
+import { throttleTime } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +18,7 @@ export class AudioPlayer {
   totalDuration = 0
   currentTime = 0
   trackProgress = 0
+  trackProgress$ = new Subject<number>()
   volume = 0.5
   currentlyPlaying: Play
 
@@ -33,6 +36,25 @@ export class AudioPlayer {
       if (!!this.player) this.player.volume(volume)
       this.volume = volume
     })
+
+    this.trackProgress$
+      .asObservable()
+      .pipe(
+        throttleTime(1000 * 10, asyncScheduler, {
+          leading: false,
+          trailing: true
+        })
+      )
+      .subscribe(() => {
+        if (this.player.playing()) {
+          this.store.dispatch(
+            PlayerActions.updatePlayPositionStart({
+              position: this.currentTime,
+              item: this.queue.length > 0 ? this.queue[0] : null
+            })
+          )
+        }
+      })
   }
 
   changeVolume (volume: number) {
@@ -81,14 +103,7 @@ export class AudioPlayer {
     this.totalDuration = Math.floor(this.player.duration())
     this.currentTime = Math.floor(this.player.seek() as number)
 
-    if (this.player.playing()) {
-      this.store.dispatch(
-        PlayerActions.updatePlayPositionStart({
-          position: this.currentTime,
-          item: this.queue.length > 0 ? this.queue[0] : null
-        })
-      )
-    }
+    this.trackProgress$.next(this.currentTime)
 
     requestAnimationFrame(this.step)
   }
