@@ -1,0 +1,45 @@
+<main>
+  <div class="header">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="changeView('list')" mat-menu-item>
+        <mat-icon>list</mat-icon>
+        <span>List</span>
+      </button>
+      <button (click)="changeView('stacked')" mat-menu-item>
+        <mat-icon>view_module</mat-icon>
+        <span>Stacked</span>
+      </button>
+      <button (click)="changeView('compact')" mat-menu-item>
+        <mat-icon>view_comfy</mat-icon>
+        <span>compact</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="content {{view}}">
+    <mat-card
+      class="podcast"
+      *ngFor="let podcast of (podcasts$ | async); let i = index"
+      style.background-color="#{{podcast.palette[0]}}36"
+    >
+      <a
+        [routerLink]="['/podcast', podcast.slug]"
+        routerLinkActive="active"
+        [state]="{podcast: podcast}"
+      >
+        <div class="image">
+          <img src="{{podcast.image}}" alt="" />
+        </div>
+        <div class="title">
+          <h3>{{podcast.title}}</h3>
+        </div>
+      </a>
+    </mat-card>
+  </div>
+</main>
