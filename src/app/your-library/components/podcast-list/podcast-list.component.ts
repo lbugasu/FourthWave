@@ -1,5 +1,5 @@
 import { AppState } from 'src/app/store/app.state'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
 import { Component, OnInit } from '@angular/core'
 import { Podcast } from 'src/app/shared/Models'
 import { Store } from '@ngrx/store'

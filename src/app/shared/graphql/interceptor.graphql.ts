@@ -8,7 +8,7 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from 'src/app/store/app.state'
 import * as UserSelectors from '../../user/store/user.selectors'
