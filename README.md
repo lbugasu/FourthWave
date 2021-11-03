@@ -24,6 +24,9 @@ This project began as a class project a few years back and has gone through thre
 - Add favourite Podcasts and podcast episodes
 - Minify player
 
+
+> Find development notes [here](https://aeolian-lynx-ed9.notion.site/Project-Eycho-b38e561eaa1e4e648abd2d5ea7df6dd2)
+
 ## Packages Utilized
 - [NGX Audio Player](https://vmudigal.github.io/ngx-audio-player/guide/getting-started)
 - [Angular Material](https://material.angular.io/)
