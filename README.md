@@ -5,6 +5,25 @@
 
 # Eycho
 
+This project began as a class project a few years back and has gone through three different iterations all different stacks: 
+
+| TimeLine          | Tech Stack   |   Repository(-ies)| Active/Inactive |
+| ----------------- | ----------- | ----------- | ----------- |
+| v1 (Spring 2020)  | Homebrew, Node.js, Express, MongoDB | [Entire Project ↗](https://github.com/lbugasu/onthistopic-old)| <span style="color: red">Inactive</span>  |
+| v1 (Fall 2020)    | React, Node.js, Express        | [Entire Project ↗](https://github.com/lbugasu/on-this-topic) | <span style="color: red">Inactive</span>|
+| v3 ( Spring 2021) | Angular, Node.js, Express, MongoDB        | [UI↗](https://github.com/lbugasu/eycho) and  [API ↗](https://github.com/lbugasu/onthistopic-backend) |  <span style="color: green">Inactive</span> |
+
+> This repository contains the most recent UI of the project (which is no longer in development).
+
+![wireframe](./design/eycho2.png)
+
+
+# Features
+- Create your own account
+- Save playback position
+- Add favourite Podcasts and podcast episodes
+- Minify player
+
 ## Packages Utilized
 - [NGX Audio Player](https://vmudigal.github.io/ngx-audio-player/guide/getting-started)
 - [Angular Material](https://material.angular.io/)
