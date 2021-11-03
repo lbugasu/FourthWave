@@ -11,7 +11,7 @@ This project began as a class project a few years back and has gone through thre
 | ----------------- | ----------- | ----------- | ----------- |
 | v1 (Spring 2020)  | Homebrew, Node.js, Express, MongoDB | [Entire Project ↗](https://github.com/lbugasu/onthistopic-old)| <span style="color: red">Inactive</span>  |
 | v1 (Fall 2020)    | React, Node.js, Express        | [Entire Project ↗](https://github.com/lbugasu/on-this-topic) | <span style="color: red">Inactive</span>|
-| v3 ( Spring 2021) | Angular, Node.js, Express, MongoDB        | [UI↗](https://github.com/lbugasu/eycho) and  [API ↗](https://github.com/lbugasu/onthistopic-backend) |  <span style="color: green">Inactive</span> |
+| v3 ( Spring 2021) | Angular, Node.js, Express, MongoDB        | [UI↗](https://github.com/lbugasu/eycho) and  [API ↗](https://github.com/lbugasu/onthistopic-backend) |  <span style="color: green">Active</span> |
 
 > This repository contains the most recent UI of the project (which is no longer in development).
 
