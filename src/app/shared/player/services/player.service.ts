@@ -1,5 +1,5 @@
 import { Apollo } from 'apollo-angular'
-import { Injectable } from '@angular/core'
+import { Injectable, Optional } from '@angular/core'
 import {
   SET_VOLUME,
   GET_USER_PLAYING_QUEUE,
@@ -17,7 +17,7 @@ import { Play } from '../../Models'
   providedIn: 'root'
 })
 export class PlayerService {
-  constructor (private apollo: Apollo) {}
+  constructor (@Optional() private apollo: Apollo) {}
 
   setUserVolume (volume: number) {
     return this.apollo.mutate({

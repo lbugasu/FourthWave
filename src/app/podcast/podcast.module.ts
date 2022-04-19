@@ -27,7 +27,7 @@ const routes = [
     SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(PODCAST_STATE_NAME, podcastReducer),
-    EffectsModule.forFeature([PodcastEffects])
+    // EffectsModule.forFeature([PodcastEffects])
   ]
 })
 export class PodcastModule {}

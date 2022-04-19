@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Optional } from '@angular/core'
 import { Apollo, gql } from 'apollo-angular'
 import { Episode } from '../../shared/Models'
 
@@ -110,7 +110,7 @@ const GET_PODCAST_WITH_EPISODES = gql`
   providedIn: 'root'
 })
 export class PodcastService {
-  constructor (private apollo: Apollo) {}
+  constructor (@Optional() private apollo: Apollo) {}
 
   getPodcasts (page: number) {
     return this.apollo.watchQuery({

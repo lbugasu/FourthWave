@@ -12,6 +12,7 @@ import { WordcountPipe } from './pipes/wordcount/wordcount.pipe'
 import { StoreModule } from '@ngrx/store'
 import { playerReducer } from './player/store/player.reducers'
 import { AudioPlayer } from './player/audio/audio.player'
+import { GraphQLModule } from './graphql/graphql.module'
 
 @NgModule({
   declarations: [PlayerComponent, TimePipe, DatePipe, WordcountPipe],
@@ -19,8 +20,9 @@ import { AudioPlayer } from './player/audio/audio.player'
     CommonModule,
     Material,
     FormsModule,
+    GraphQLModule,
     ReactiveFormsModule,
-    EffectsModule.forFeature([PlayerEffects]),
+    // EffectsModule.forFeature([PlayerEffects]),
     StoreModule.forFeature(PLAYER_STATE_NAME, playerReducer)
   ],
   exports: [PlayerComponent, TimePipe, DatePipe, WordcountPipe]

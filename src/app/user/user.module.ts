@@ -30,7 +30,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([UserEffects]),
+    // EffectsModule.forFeature([UserEffects]),
     StoreModule.forFeature(USER_STATE_NAME, userReducer)
   ],
   exports: [CommonModule, RouterModule]

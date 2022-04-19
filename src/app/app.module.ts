@@ -30,6 +30,7 @@ import { PodcastModule } from './podcast/podcast.module'
     ReactiveFormsModule,
     Material,
     RouterModule,
+    EffectsModule.forRoot([]),
     GraphQLModule,
     HttpClientModule,
     ComponentsModule,
@@ -38,7 +39,6 @@ import { PodcastModule } from './podcast/podcast.module'
     PodcastModule,
     InfiniteScrollModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production

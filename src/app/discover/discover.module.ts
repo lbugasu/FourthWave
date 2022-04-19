@@ -25,7 +25,7 @@ const routes = [
     InfiniteScrollModule,
     Material,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([DiscoverEffects]),
+    // EffectsModule.forFeature([DiscoverEffects]),
     StoreModule.forFeature(DISCOVER_STATE_NAME, discoverReducer),
     SharedModule
   ],
