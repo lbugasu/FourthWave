@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  api: 'http://localhost:6500'
+    production: false,
+    // api: 'http://localhost:6500',
+    api: 'https://fourthwave-api.herokuapp.com',
 }
 
 /*

@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  api: 'https://eycho-api.herokuapp.com'
+    production: true,
+    api: 'https://fourthwave-api.herokuapp.com',
 }
