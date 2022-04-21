@@ -13,18 +13,19 @@ import { StoreModule } from '@ngrx/store'
 import { playerReducer } from './player/store/player.reducers'
 import { AudioPlayer } from './player/audio/audio.player'
 import { GraphQLModule } from './graphql/graphql.module'
+import { LocalStorageService } from '../core/localstorage.service'
 
 @NgModule({
-  declarations: [PlayerComponent, TimePipe, DatePipe, WordcountPipe],
-  imports: [
-    CommonModule,
-    Material,
-    FormsModule,
-    GraphQLModule,
-    ReactiveFormsModule,
-    // EffectsModule.forFeature([PlayerEffects]),
-    StoreModule.forFeature(PLAYER_STATE_NAME, playerReducer)
-  ],
-  exports: [PlayerComponent, TimePipe, DatePipe, WordcountPipe]
+    declarations: [PlayerComponent, TimePipe, DatePipe, WordcountPipe],
+    imports: [
+        CommonModule,
+        Material,
+        FormsModule,
+        GraphQLModule,
+        ReactiveFormsModule,
+        // EffectsModule.forFeature([PlayerEffects]),
+        StoreModule.forFeature(PLAYER_STATE_NAME, playerReducer),
+    ],
+    exports: [PlayerComponent, TimePipe, DatePipe, WordcountPipe],
 })
 export class SharedModule {}

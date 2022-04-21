@@ -7,6 +7,10 @@ import { getUserLoggedInStatus } from './user/store/user.selectors'
 import { UserActions } from './user/store'
 import { AppState } from './store/app.state'
 import { PlayerSelectors } from './shared/player/store'
+import { LocalStorageService } from './core/localstorage.service'
+import { AngularFireAuth } from '@angular/fire/compat/auth'
+import firebase from 'firebase/compat/app'
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -17,9 +21,21 @@ export class AppComponent implements OnInit {
     somethingPlaying: boolean = true
     mini = false
     playing: boolean = false
-    loggedIn$: Observable<boolean>
     mini$: Observable<boolean>
-    constructor(public router: Router, private store: Store<{ player: AppState }>, public player: AudioPlayer) {}
+
+    constructor(
+        public router: Router,
+        private store: Store<{ player: AppState }>,
+        public player: AudioPlayer,
+        public localStorage: LocalStorageService,
+        public auth: AngularFireAuth,
+    ) {
+        this.auth.user.subscribe((u) => {
+            u.getIdToken().then((token) => {
+                console.log(token)
+            })
+        })
+    }
     navigate(path: string) {
         this.router.navigateByUrl(path)
     }
@@ -33,8 +49,6 @@ export class AppComponent implements OnInit {
         }
 
         // Logged in Status
-        this.loggedIn$ = this.store.select(getUserLoggedInStatus)
-
         this.mini$ = this.store.select(PlayerSelectors.getMini)
     }
     getWindowWidth() {
@@ -44,10 +58,11 @@ export class AppComponent implements OnInit {
     getUser() {}
 
     signIn() {
-        this.router.navigateByUrl('me/signin')
+        this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((v) => {
+            console.log(v)
+        })
     }
     signOut() {
-        this.store.dispatch(UserActions.signOutStart())
-        this.router.navigateByUrl('discover')
+        this.auth.signOut()
     }
 }

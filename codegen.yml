@@ -1,11 +1,12 @@
 overwrite: true
-schema: "https://raw.githubusercontent.com/podcast-data-lab/FourthWaveBackend/main/schema.graphql"
+schema: 'https://raw.githubusercontent.com/podcast-data-lab/FourthWaveBackend/main/schema.graphql'
+documents: './src/**/*.gql'
 generates:
-  src/app/core/graphql/graphql.ts:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-apollo-angular"
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+    src/app/core/graphql/graphql.ts:
+        plugins:
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-apollo-angular'
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'

@@ -1,0 +1,20 @@
+query GetPodcasts($page: Float!) {
+    getPodcasts(page: $page) {
+        title
+        publisher
+        rssFeed
+        link
+        image
+        description
+        lastRssBuildDate
+        slug
+        palette
+        categories {
+            title
+        }
+        topics {
+            name
+            type
+        }
+    }
+}

@@ -21,36 +21,38 @@ import { appReducer } from './store/app.state'
 import { UserModule } from './user/user.module'
 import { GraphQLInterceptor } from './shared/graphql/interceptor.graphql'
 import { PodcastModule } from './podcast/podcast.module'
+import { CoreModule } from './core/core.module'
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    Material,
-    RouterModule,
-    EffectsModule.forRoot([]),
-    GraphQLModule,
-    HttpClientModule,
-    ComponentsModule,
-    SharedModule,
-    UserModule,
-    PodcastModule,
-    InfiniteScrollModule,
-    StoreModule.forRoot(appReducer),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    })
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: GraphQLInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        CoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        Material,
+        RouterModule,
+        EffectsModule.forRoot([]),
+        GraphQLModule,
+        HttpClientModule,
+        ComponentsModule,
+        SharedModule,
+        UserModule,
+        PodcastModule,
+        InfiniteScrollModule,
+        StoreModule.forRoot(appReducer),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production,
+        }),
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: GraphQLInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
