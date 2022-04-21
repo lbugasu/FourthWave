@@ -128,15 +128,6 @@
     ora "5.4.1"
     rxjs "6.6.7"
 
-"@angular-slider/ngx-slider@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.npmjs.org/@angular-slider/ngx-slider/-/ngx-slider-2.0.4.tgz"
-  integrity sha512-EccMcGlb2bJJWikXZBjRwdWgRiYYmWd3UCgf8l3KAlyqPAxPVgxI73wqipp4/nZwidq53a9s3OB+KC79enfM2A==
-  dependencies:
-    detect-passive-events "^2.0.3"
-    rxjs "^6.5.2"
-    tslib "^1.9.0"
-
 "@angular/animations@^13.3.3":
   version "13.3.3"
   resolved "https://registry.npmjs.org/@angular/animations/-/animations-13.3.3.tgz"
@@ -4870,11 +4861,6 @@ detect-indent@^6.0.0:
   resolved "https://registry.npmjs.org/detect-indent/-/detect-indent-6.1.0.tgz"
   integrity sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==
 
-detect-it@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/detect-it/-/detect-it-4.0.1.tgz"
-  integrity sha512-dg5YBTJYvogK1+dA2mBUDKzOWfYZtHVba89SyZUhc4+e3i2tzgjANFg5lDRCd3UOtRcw00vUTMK8LELcMdicug==
-
 detect-newline@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/detect-newline/-/detect-newline-3.1.0.tgz"
@@ -4884,13 +4870,6 @@ detect-node@^2.0.4:
   version "2.1.0"
   resolved "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz"
   integrity sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==
-
-detect-passive-events@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/detect-passive-events/-/detect-passive-events-2.0.3.tgz"
-  integrity sha512-QN/1X65Axis6a9D8qg8Py9cwY/fkWAmAH/edTbmLMcv4m5dboLJ7LcAi8CfaCON2tjk904KwKX/HTdsHC6yeRg==
-  dependencies:
-    detect-it "^4.0.1"
 
 detective@^5.2.0:
   version "5.2.0"
@@ -10308,7 +10287,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@6.6.7, rxjs@^6.3.3, rxjs@^6.4.0, rxjs@^6.5.2, rxjs@^6.5.3:
+rxjs@6.6.7, rxjs@^6.3.3, rxjs@^6.4.0, rxjs@^6.5.3:
   version "6.6.7"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.6.7.tgz"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
