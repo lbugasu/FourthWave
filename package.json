@@ -44,7 +44,6 @@
         "howler": "^2.2.3",
         "image-to-base64": "^2.2.0",
         "image2colors": "^2.0.7",
-        "ngx-image-cropper": "^6.1.0",
         "ngx-infinite-scroll": "^13.0.1",
         "nice-color-palettes": "^3.0.0",
         "path": "^0.12.7",
