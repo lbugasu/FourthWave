@@ -1,91 +1,79 @@
 <mat-toolbar>
-  <button
-    mat-mini-fab
-    aria-label="Menu toggle button"
-    (click)="drawer.toggle()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <div class="eycho"><h1>Eycho</h1></div>
-  <span class="spacer"></span>
-
-  <ng-container *ngIf="!(loggedIn$ | async ); else userSettingsTemplate">
-    <button
-      style="color:var(--background-medium-gray); background-color:var(--accent-light)"
-      mat-button
-      color="accent"
-      (click)="signIn()"
-    >
-      sign In
+    <button mat-mini-fab aria-label="Menu toggle button" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
     </button>
-  </ng-container>
-  <ng-template #userSettingsTemplate>
-    <button
-      mat-mini-fab
-      aria-label="User Icon"
-      [matMenuTriggerFor]="menu"
-      aria-label="User menu options"
-    >
-      <mat-icon>account_circle</mat-icon>
-    </button>
+    <div class="fourthwave"><h1>fourthwave</h1></div>
+    <span class="spacer"></span>
 
-    <mat-menu #menu="matMenu">
-      <button (click)="router.navigateByUrl('me')" mat-menu-item>
-        <mat-icon>settings</mat-icon>
+    <ng-container *ngIf="!(loggedIn$ | async); else userSettingsTemplate">
+        <button
+            style="color: var(--background-medium-gray); background-color: var(--accent-light)"
+            mat-button
+            color="accent"
+            (click)="signIn()"
+        >
+            sign In
+        </button>
+    </ng-container>
+    <ng-template #userSettingsTemplate>
+        <button mat-mini-fab aria-label="User Icon" [matMenuTriggerFor]="menu" aria-label="User menu options">
+            <mat-icon>account_circle</mat-icon>
+        </button>
 
-        <span>Settings</span>
-      </button>
-      <button (click)="signOut()" mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Sign Out</span>
-      </button>
-    </mat-menu>
-  </ng-template>
+        <mat-menu #menu="matMenu">
+            <button (click)="router.navigateByUrl('me')" mat-menu-item>
+                <mat-icon>settings</mat-icon>
+
+                <span>Settings</span>
+            </button>
+            <button (click)="signOut()" mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Sign Out</span>
+            </button>
+        </mat-menu>
+    </ng-template>
 </mat-toolbar>
-<mat-drawer-container
-  [ngStyle]="{height: player.active&& !(mini$|async)?'84vh':'93vh'}"
-  class="example-container"
->
-  <mat-drawer #drawer mode="side" opened>
-    <div class="menu__item">
-      <button mat-button (click)="navigate('')">
-        {{getWindowWidth()>1200?'Home':''}}
+<mat-drawer-container [ngStyle]="{ height: player.active && !(mini$ | async) ? '84vh' : '93vh' }" class="example-container">
+    <mat-drawer #drawer mode="side" opened>
+        <div class="menu__item">
+            <button mat-button (click)="navigate('')">
+                {{ getWindowWidth() > 1200 ? 'Home' : '' }}
 
-        <mat-icon>home</mat-icon>
-      </button>
-    </div>
-    <div class="menu__item">
-      <button mat-button (click)="navigate('search')">
-        {{getWindowWidth()>1200?'Search':''}}
+                <mat-icon>home</mat-icon>
+            </button>
+        </div>
+        <div class="menu__item">
+            <button mat-button (click)="navigate('search')">
+                {{ getWindowWidth() > 1200 ? 'Search' : '' }}
 
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
 
-    <div class="menu__item">
-      <button mat-button (click)="navigate('discover')">
-        {{getWindowWidth()>1200?'Discover':''}}
+        <div class="menu__item">
+            <button mat-button (click)="navigate('discover')">
+                {{ getWindowWidth() > 1200 ? 'Discover' : '' }}
 
-        <mat-icon>explore</mat-icon>
-      </button>
-    </div>
+                <mat-icon>explore</mat-icon>
+            </button>
+        </div>
 
-    <div class="menu__item">
-      <button mat-button (click)="navigate('playlist')">
-        {{getWindowWidth()>1200?'Playlists':''}}
-        <mat-icon>playlist_play</mat-icon>
-      </button>
-    </div>
+        <div class="menu__item">
+            <button mat-button (click)="navigate('playlist')">
+                {{ getWindowWidth() > 1200 ? 'Playlists' : '' }}
+                <mat-icon>playlist_play</mat-icon>
+            </button>
+        </div>
 
-    <div class="menu__item">
-      <button mat-button (click)="navigate('library')">
-        {{getWindowWidth()>1200?'Library':''}}
-        <mat-icon>library_music</mat-icon>
-      </button>
-    </div>
-  </mat-drawer>
-  <mat-drawer-content>
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
+        <div class="menu__item">
+            <button mat-button (click)="navigate('library')">
+                {{ getWindowWidth() > 1200 ? 'Library' : '' }}
+                <mat-icon>library_music</mat-icon>
+            </button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
 </mat-drawer-container>
 <app-player></app-player>
