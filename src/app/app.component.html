@@ -1,11 +1,8 @@
 <mat-toolbar>
-    <button mat-mini-fab aria-label="Menu toggle button" (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <div class="fourthwave"><h1>fourthwave</h1></div>
+    <div class="fourthwave"><h1>4th~Wave</h1></div>
     <span class="spacer"></span>
 
-    <ng-container *ngIf="!(loggedIn$ | async); else userSettingsTemplate">
+    <ng-container *ngIf="!(auth.user | async); else userSettingsTemplate">
         <button
             style="color: var(--background-medium-gray); background-color: var(--accent-light)"
             mat-button
@@ -21,7 +18,7 @@
         </button>
 
         <mat-menu #menu="matMenu">
-            <button (click)="router.navigateByUrl('me')" mat-menu-item>
+            <button (click)="navigate('me')" mat-menu-item>
                 <mat-icon>settings</mat-icon>
 
                 <span>Settings</span>
@@ -33,46 +30,52 @@
         </mat-menu>
     </ng-template>
 </mat-toolbar>
-<mat-drawer-container [ngStyle]="{ height: player.active && !(mini$ | async) ? '84vh' : '93vh' }" class="example-container">
-    <mat-drawer #drawer mode="side" opened>
-        <div class="menu__item">
-            <button mat-button (click)="navigate('')">
-                {{ getWindowWidth() > 1200 ? 'Home' : '' }}
+<mat-drawer-container [ngStyle]="{ height: player.active && !(mini$ | async) ? '84vh' : '93vh' }">
+    <mat-drawer #drawer mode="side" opened [ngClass]="{ collapsed: localStorage.preferences.collapsed }">
+        <span class="icons">
+            <div class="menu__item">
+                <button mat-button (click)="navigate('')">
+                    <mat-icon>home</mat-icon>
+                    {{ !localStorage.preferences.collapsed ? 'Home' : '' }}
+                </button>
+            </div>
+            <div class="menu__item">
+                <button mat-button (click)="navigate('search')">
+                    <mat-icon>search</mat-icon>
+                    {{ !localStorage.preferences.collapsed ? 'Search' : '' }}
+                </button>
+            </div>
 
-                <mat-icon>home</mat-icon>
-            </button>
-        </div>
-        <div class="menu__item">
-            <button mat-button (click)="navigate('search')">
-                {{ getWindowWidth() > 1200 ? 'Search' : '' }}
+            <div class="menu__item">
+                <button mat-button (click)="navigate('discover')">
+                    <mat-icon>explore</mat-icon>
+                    {{ !localStorage.preferences.collapsed ? 'Discover' : '' }}
+                </button>
+            </div>
 
-                <mat-icon>search</mat-icon>
-            </button>
-        </div>
+            <div class="menu__item">
+                <button mat-button (click)="navigate('playlist')">
+                    <mat-icon>playlist_play</mat-icon>
+                    {{ !localStorage.preferences.collapsed ? 'Playlists' : '' }}
+                </button>
+            </div>
 
-        <div class="menu__item">
-            <button mat-button (click)="navigate('discover')">
-                {{ getWindowWidth() > 1200 ? 'Discover' : '' }}
+            <div class="menu__item">
+                <button mat-button (click)="navigate('library')">
+                    <mat-icon>library_music</mat-icon>
+                    {{ !localStorage.preferences.collapsed ? 'Library' : '' }}
+                </button>
+            </div>
+        </span>
 
-                <mat-icon>explore</mat-icon>
-            </button>
-        </div>
-
-        <div class="menu__item">
-            <button mat-button (click)="navigate('playlist')">
-                {{ getWindowWidth() > 1200 ? 'Playlists' : '' }}
-                <mat-icon>playlist_play</mat-icon>
-            </button>
-        </div>
-
-        <div class="menu__item">
-            <button mat-button (click)="navigate('library')">
-                {{ getWindowWidth() > 1200 ? 'Library' : '' }}
-                <mat-icon>library_music</mat-icon>
+        <div class="menu__item collapse_button">
+            <button mat-button (click)="localStorage.toggleCollapse()">
+                <mat-icon>{{ localStorage.preferences.collapsed ? 'arrow_forward' : 'keyboard_backspace' }}</mat-icon>
+                {{ !localStorage.preferences.collapsed ? 'Collapse' : '' }}
             </button>
         </div>
     </mat-drawer>
-    <mat-drawer-content>
+    <mat-drawer-content [ngClass]="{ collapsed: localStorage.preferences.collapsed }">
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
